@@ -1,20 +1,61 @@
 ---
 title: |
-  | Universidade Federal do Amazonas
-  | Departamento de Estatística
-  | Curso: Introdução à Ciência de Dados
-  | Professor: Leonardo Nascimento
-  | Versão 1.0
-output: pdf_document
+  <center> Universidade Federal do Amazonas </center>
+  <center> Departamento de Estatística </center>
+  
+subtitle: |  
+  <center> Curso: Introdução à Ciência de Dados </center>
+  <center> Professor: Leonardo Nascimento </center>
+  <center> 05/12/2023
+  <center> Versão 1.0 </center>
+output: 
+  html_vignette:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+
+vignette: >
+  %\VignetteIndexEntry{Teste}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r, echo=FALSE}
+htmltools::img(src = knitr::image_uri("C:/Users/Leonardo_Nascimento/Documents/GitHub/Introducao_Ciencias_de_Dados/Cadernos/Figuras/DE.jpg"), 
+               alt = 'logo', 
+                width = 180, height = 180,
+               style = 'position:absolute; top:10px; right:400px; padding:10px;')
+```
+
+```{r, echo=FALSE}
+htmltools::img(src = knitr::image_uri("C:/Users/Leonardo_Nascimento/Documents/GitHub/Introducao_Ciencias_de_Dados/Cadernos/Figuras/ufam.png"), 
+               alt = 'logo', 
+               width = 180, height = 180,
+               style = 'position:absolute; top:10px; left:400px; padding:10px; "margin: -100px;')
+```
+
+```{css, echo=FALSE}
+.watch-out {
+  border: 3px solid gray;
+  font-weight: bold;
+}
+
+```
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment  = "#>",
+  class.source = "watch-out",
+  fig.height = 3, 
+  fig.width = 3, 
+  fig.align = "center"
+)
 ```
 
 Este material é para o cuso de Introdução à Ciência de Dados.
 
-## O que é Ciência de dados?
+# O que é Ciência de dados?
 
 -   De forma geral, a ciência de dados é um campo interdisciplinar que envolve métodos científicos para analisar dados com objetivo de descobrir padrões, tendências, relações e informações úteis que possam ser usadas para tomar decisões.
 
@@ -22,7 +63,7 @@ Este material é para o cuso de Introdução à Ciência de Dados.
 
 -   Importante observar que o domínio em assuntos específicos são necessário de acordo com o conjunto de dados analisados.
 
-## Etapas da Ciência de dados
+# Etapas da Ciência de dados
 
 -   **Importar (*Import*)**: Obtenção dos dados armazenados em um arquivo, banco de dados ou *application programming interface (API)* da web e os carrega em um *data frame* por exemplo.
 
@@ -38,11 +79,11 @@ Este material é para o cuso de Introdução à Ciência de Dados.
 
 -   **Programação (*Program*):** Ao redor de todas essas ferramentas está **a programação**. A programação é uma ferramenta transversal que você usa em todas as partes do projeto.
 
-    ![Ciclo da Ciência de Dados](Figuras/ciclo_cd.png){alt="Ciclo da Ciência de Dados" width="400"}
+    ![Ciclo da Ciência de Dados](Figuras/ciclo_cd.png){width="400"}
 
 -   *Observação*: Geralmente, o processo de coleta, organização e transformação dos dados é denominado de ***Data wrangling***. Nesse caso, o processo de *Data wrangling* é crucial para garantir que os dados estejam em boas condições para análise estatística, modelagem ou visualização.
 
-## Instalação do R e RStudio
+# Instalação do R e RStudio
 
 -   A seguir é apresentado os passos para instalação do R para o sistema operacional Windows. Para outros sistemas operacionais, clique [[aqui]{.underline}](https://livro.curso-r.com/1-1-instalacao-do-r.html)
 
@@ -64,15 +105,15 @@ Este material é para o cuso de Introdução à Ciência de Dados.
 
     3.  Execute o instalador e siga as instruções para completar a instalação.
 
-## Apresentação do RStudio
+# Apresentação do RStudio
 
 -   O RStudio é uma interface de desenvolvimento integrada (IDE) popular para a linguagem de programação R.
 
-### Telas
+## Telas
 
 -   Ele oferece várias telas e painéis para facilitar o desenvolvimento, análise de dados e criação de visualizações.
 
-![](Figuras/panel_2.png)
+![](Figuras/panel_2.png){width="100%"}
 
 -   Segue uma breve explicação das telas principais do RStudio.
 
@@ -124,7 +165,7 @@ Este material é para o cuso de Introdução à Ciência de Dados.
 
     -   Um terminal embutido para execução de comandos do sistema operacional.
 
-### Cheatsheets
+## Cheatsheets
 
 -   As "cheatsheets" (folhas de dicas) no RStudio são recursos visuais e resumidos que fornecem informações rápidas e úteis sobre tópicos específicos relacionados à linguagem de programação R, ao ambiente RStudio e a pacotes específicos do R.
 
@@ -132,7 +173,7 @@ Este material é para o cuso de Introdução à Ciência de Dados.
 
 -   Também pode ser acessada cliclando em Help -\> Cheat Sheets
 
-### Configuração
+## Configuração
 
 -   Basicamente, podemos definir uma **pesquisa reproduzível** como uma pesquisa que documenta todas as etapas entre os dados brutos e os resultados de uma forma que possa ser verificada.
 
@@ -150,7 +191,7 @@ Este material é para o cuso de Introdução à Ciência de Dados.
 
 ![](Figuras/options.png)
 
-### Pacotes
+## Pacotes
 
 -   Em R, os pacotes são conjuntos de funções, dados e documentação que estendem as capacidades básicas da linguagem.
 
@@ -166,21 +207,9 @@ Este material é para o cuso de Introdução à Ciência de Dados.
 
 -   Os pacotes são atualizados periodicamente pelos seus desenvolvedores. Os usuários podem atualizar pacotes instalados usando a função **`update.packages()`**.
 
+# Caminhos e Diretório de trabalho
 
-
-
-
-
-
-
-
-
-
-
-
-## Caminhos e **Diretório de trabalho**
-
-### **Caminhos**
+## Caminhos
 
 -   Entende-se por **caminho** o endereço do arquivo no computador
 
@@ -188,24 +217,24 @@ Este material é para o cuso de Introdução à Ciência de Dados.
 
 -   O **caminho absoluto** especifica o local exato de um arquivo desde a raiz do sistema de arquivo
 
-```{r}
+```{r class.source="watch-out"}
 getwd()
 ```
 
 -   Observe que o local de referência é a pasta "*caderno*", pois este é o caminho absoluto para a pasta onde esse aula foi produzida. Vamos voltar para a pasta "*Introducao_Ciencias_de_Dados*" utilizando o conceito de caminho relativo.
 
--   O **caminho relativo** é especificado em relação ao diretório de trabalho atual ou a outro local de referência. Assim, se você quiser acessar alguma base de dados na pasta "*dados"* partindo da pasta "*caderno",* o caminho seria*:* `../dados/base_de_dados.formato`.
+-   O **caminho relativo** é especificado em relação ao diretório de trabalho atual ou a outro local de referência. Assim, se você quiser acessar alguma base de dados na pasta "*dados"* partindo da pasta"*caderno",* o caminho seria*:* `../dados/base_de_dados.formato`.
 
 -   Nesse caso, `../` é o comando para voltar uma pasta dentro do caminho.
 
--   Caso você queira trocar o local referência da pasta "*caderno"* para a pasta "*Introducao_Ciencias_de_Dados*", use o seguinte código:
+-   Caso você queira trocar o local referência da pasta "*caderno"* para a pasta"*Introducao_Ciencias_de_Dados*", use o seguinte código:
 
 ```{r}
 setwd("..") # trocando local referência ou diretório de trabalho
 getwd()
 ```
 
-### **Diretório de trabalho**
+## Diretório de trabalho
 
 -   Basicamente, diretório de trabalho refere-se a uma pasta específica no sistema de arquivos do computador em que um programa está atualmente operando ou onde ele procura por arquivos para ler e salvar por padrão.
 
@@ -223,7 +252,7 @@ getwd()
 
     função `setwd("colocar_o_caminho").`
 
-### **Observações**
+## Observações
 
 -   Caminhos e diretórios são um pouco complicados porque existem dois estilos básicos de caminhos: Mac/Linux e Windows. Existem três maneiras principais pelas quais eles diferem
 
@@ -237,7 +266,7 @@ getwd()
 
 -   Crie um diretório onde você possa colocar todos os programas/projetos em R
 
-## Projetos
+# Projetos
 
 -   Projetos no RStudio são uma maneira organizada e estruturada de trabalhar em análises de dados e programação em R ou em qualquer linguagem de programação suportada pelo RStudio.
 
@@ -273,7 +302,7 @@ getwd()
 
     -   No canto superior direito do RStudio, clique em "File" (Arquivo) e selecione "New Project" (Novo Projeto).
 
-![](Figuras/proj_1.png)
+![](Figuras/proj_1.png){width="100%"}
 
 -   **Passo 3**: Escolha o Tipo de Projeto
 
@@ -293,7 +322,7 @@ getwd()
 
     -   Dê um nome ao seu projeto e escolha o local onde o diretório do projeto será armazenado.
 
-![](Figuras/proj_4.png){width="500"}
+![](Figuras/proj_4.png){width="132mm"}
 
 -   **Passo 6**: Clique em "Create Project"
 
@@ -307,7 +336,7 @@ getwd()
 
 -   ao reabrir o RStudio
 
-## Fluxo de Trabalho
+# Fluxo de Trabalho
 
 -   Aqui será apresentado um fluxo de trabalho básico que pode incrementado no decorrer do curso.
 
@@ -333,13 +362,13 @@ getwd()
 
     -   Disponibilize seu código e dados em um repositório público (por exemplo, GitHub) ou em um formato acessível.
 
-## Git e GitHub
+# Git e GitHub
 
 -   Git é um sistema de controle de versão que permite rastrear as alterações no código durante o desenvolvimento de uma análise/software.
 
 -   Git é usado para gerenciar projetos de análise/software, controlar as versões do código e facilitar o trabalho colaborativo entre desenvolvedores.
 
--    Cada cópia do repositório Git contém todo o histórico de revisões.
+-   Cada cópia do repositório Git contém todo o histórico de revisões.
 
 -   Permite a criação de ramificações independentes para o desenvolvimento de novos recursos e a fusão posterior dessas ramificações.
 
@@ -349,7 +378,7 @@ getwd()
 
 -   Desenvolvedores usam o GitHub para compartilhar código, colaborar em projetos e contribuir para repositórios de código aberto.
 
-![Ideia geral do funcionamento do Git](Figuras/git_ideia.png)
+![Ideia geral do funcionamento do Git](Figuras/git_ideia.png){width="100%"}
 
 -   Na prática, a utilização do Git e do GitHub tem dois principais benefícios:
 
@@ -357,7 +386,7 @@ getwd()
 
     -   Eliminar a preocupação de perder seus projetos devido a falhas no seu computador.
 
-## Atividade
+# Atividade
 
 1.  Crie uma conta no [[Github]{.underline}](https://github.com/)
 
@@ -367,7 +396,7 @@ getwd()
 
 4.  Irei mostrar na próxima aula como fazer a integração do projeto ICD_SeuNome e Git. Porém, tentem fazer.
 
-## Referêcias
+# Referências
 
 -   [[Advanced R]{.underline}](https://adv-r.hadley.nz/names-values.html)
 
