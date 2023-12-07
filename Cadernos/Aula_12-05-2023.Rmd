@@ -21,14 +21,14 @@ vignette: >
 ---
 
 ```{r, echo=FALSE}
-htmltools::img(src = knitr::image_uri("C:/Users/Leonardo_Nascimento/Documents/GitHub/Introducao_Ciencias_de_Dados/Cadernos/Figuras/DE.jpg"), 
+htmltools::img(src = knitr::image_uri("~/GitHub/Introducao_Ciencias_de_Dados/Cadernos/Figuras/DE.jpg"), 
                alt = 'logo', 
                 width = 180, height = 180,
                style = 'position:absolute; top:10px; right:400px; padding:10px;')
 ```
 
 ```{r, echo=FALSE}
-htmltools::img(src = knitr::image_uri("C:/Users/Leonardo_Nascimento/Documents/GitHub/Introducao_Ciencias_de_Dados/Cadernos/Figuras/ufam.png"), 
+htmltools::img(src = knitr::image_uri("~/GitHub/Introducao_Ciencias_de_Dados/Cadernos/Figuras/ufam.png"), 
                alt = 'logo', 
                width = 180, height = 180,
                style = 'position:absolute; top:10px; left:400px; padding:10px; "margin: -100px;')
