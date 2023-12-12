@@ -599,6 +599,12 @@ saveRDS(exemplo_rds ,"~/GitHub/Introducao_Ciencias_de_Dados/dados/exemplo_rds.rd
 
     -   Se estiver usando caminhos no Windows, pode ser necessário usar barras invertidas duplas (**`\\`**) ou uma única barra invertida (**`\`**) para especificar o caminho.
 
+<!-- # Atividades -->
+
+<!-- -   [01-criacao_classes.R](https://github.com/leonardobfn/Introducao_Ciencias_de_Dados/blob/master/Atividades/01-criacao_classes.R) -->
+
+<!-- -   [02-atributos_data_frames.R](https://github.com/leonardobfn/Introducao_Ciencias_de_Dados/blob/master/Atividades/02-atributos_data_frames.R) -->
+
 # Referências
 
 -   [[Advanced R]{.underline}](https://adv-r.hadley.nz/index.html)
