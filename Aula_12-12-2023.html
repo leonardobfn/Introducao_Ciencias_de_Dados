@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Leonardo_Nascimento" />
+
+<meta name="date" content="2023-12-12" />
+
+<title>Aula_12-12-2023.knit</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore"><center>
+Universidade Federal do Amazonas
+</center>
+<center>
+Departamento de Estatística
+</center></h1>
+<h3 class="subtitle"><center>
+Curso: Introdução à Ciência de Dados
+</center>
+<center>
+Professor: Leonardo Nascimento
+</center>
+<center>
+12/12/2023
+<center>
+Versão 1.0
+</center></h3>
+<h4 class="author">Leonardo_Nascimento</h4>
+<h4 class="date">2023-12-12</h4>
+
+
+<div id="TOC">
+<ul>
+<li><a href="#objetos" id="toc-objetos"><span class="toc-section-number">1</span> Objetos</a></li>
+<li><a href="#vetores" id="toc-vetores"><span class="toc-section-number">2</span> Vetores</a>
+<ul>
+<li><a href="#vetores-atômicos" id="toc-vetores-atômicos"><span class="toc-section-number">2.1</span> Vetores atômicos</a>
+<ul>
+<li><a href="#lógico" id="toc-lógico"><span class="toc-section-number">2.1.1</span> Lógico</a></li>
+<li><a href="#double" id="toc-double"><span class="toc-section-number">2.1.2</span> Double</a></li>
+<li><a href="#inteiro" id="toc-inteiro"><span class="toc-section-number">2.1.3</span> Inteiro</a></li>
+<li><a href="#caractere-string" id="toc-caractere-string"><span class="toc-section-number">2.1.4</span> Caractere (string)</a></li>
+<li><a href="#observações" id="toc-observações"><span class="toc-section-number">2.1.5</span> Observações</a></li>
+<li><a href="#coerção" id="toc-coerção"><span class="toc-section-number">2.1.6</span> Coerção</a></li>
+</ul></li>
+<li><a href="#listas" id="toc-listas"><span class="toc-section-number">2.2</span> Listas</a></li>
+</ul></li>
+<li><a href="#matrizes" id="toc-matrizes"><span class="toc-section-number">3</span> Matrizes</a></li>
+<li><a href="#array" id="toc-array"><span class="toc-section-number">4</span> Array</a></li>
+<li><a href="#data-frame" id="toc-data-frame"><span class="toc-section-number">5</span> Data frame</a></li>
+<li><a href="#atributos" id="toc-atributos"><span class="toc-section-number">6</span> Atributos</a>
+<ul>
+<li><a href="#nomes" id="toc-nomes"><span class="toc-section-number">6.1</span> Nomes</a></li>
+<li><a href="#dimensão" id="toc-dimensão"><span class="toc-section-number">6.2</span> Dimensão</a></li>
+<li><a href="#classe" id="toc-classe"><span class="toc-section-number">6.3</span> Classe</a></li>
+<li><a href="#exemplo" id="toc-exemplo"><span class="toc-section-number">6.4</span> Exemplo</a></li>
+</ul></li>
+<li><a href="#importaçãoexportação-de-dados" id="toc-importaçãoexportação-de-dados"><span class="toc-section-number">7</span> Importação/Exportação de dados</a>
+<ul>
+<li><a href="#csv" id="toc-csv"><span class="toc-section-number">7.1</span> .CSV</a></li>
+<li><a href="#txt" id="toc-txt"><span class="toc-section-number">7.2</span> .TXT</a></li>
+<li><a href="#rds" id="toc-rds"><span class="toc-section-number">7.3</span> .RDS</a></li>
+<li><a href="#observações-1" id="toc-observações-1"><span class="toc-section-number">7.4</span> Observações</a></li>
+</ul></li>
+</ul>
+</div>
+
+<!-- ```{r, echo=FALSE} -->
+<!-- htmltools::img(src = knitr::image_uri("C:/Users/Leonardo_Nascimento/Documents/GitHub/Introducao_Ciencias_de_Dados/Cadernos/Figuras/DE.jpg"),  -->
+<!--                alt = 'logo',  -->
+<!--                 width = 180, height = 180, -->
+<!--                style = 'position:absolute; top:10px; right:400px; padding:10px;') -->
+<!-- ``` -->
+<!-- ```{r, echo=FALSE} -->
+<!-- htmltools::img(src = knitr::image_uri("C:/Users/Leonardo_Nascimento/Documents/GitHub/Introducao_Ciencias_de_Dados/Cadernos/Figuras/ufam.png"),  -->
+<!--                alt = 'logo',  -->
+<!--                width = 180, height = 180, -->
+<!--                style = 'position:absolute; top:10px; left:400px; padding:10px; "margin: -100px;') -->
+<!-- ``` -->
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## .watch-out {</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="do">##   border: 3px solid gray;</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="do">##   font-weight: bold;</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="do">## }</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="do">## </span></span></code></pre></div>
+<ul>
+<li>No contexto da linguagem de programação R, objetos e vetores são
+conceitos fundamentais relacionados à manipulação de dados;</li>
+</ul>
+<div id="objetos" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Objetos</h1>
+<ul>
+<li><p>Um objeto é simplesmente um <strong>nome</strong> que guarda um
+valor;</p></li>
+<li><p>O R permite salvar valores dentro de
+um <strong>objeto</strong></p></li>
+<li><p>Para criar um objeto, escolha um <strong>nome</strong> e use
+<code>&lt;-</code> ou <code>=</code> para guardar a informação dentro do
+objeto</p></li>
+<li><p>Considere os exemplos abaixo</p></li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>a <span class="ot">=</span> <span class="dv">2</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="fu">print</span>(a)</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co">#&gt; [1] 2</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">print</span>(b)</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co">#&gt; [1] 1 2 3 4 5 6</span></span></code></pre></div>
+<ul>
+<li><p>Observação: quando o objeto for criado, ele aparecerá no painel
+<em>Environment</em></p></li>
+<li><p>Ao escolher nomes para objetos em R, é importante seguir algumas
+regras e boas práticas para garantir a clareza, consistência e evitar
+conflitos com palavras reservadas.</p></li>
+<li><p>Aqui estão algumas restrições para nomear objetos em R:</p>
+<ul>
+<li><p><strong>Sintaxe básica:</strong></p>
+<ul>
+<li><p>Os nomes de objetos devem começar com uma letra.</p></li>
+<li><p>Podem conter letras, números e pontos (.), mas <strong>não podem
+começar com um número ou conter espaços</strong>.</p></li>
+<li><p>Evite o uso de caracteres especiais, como @, $, %, &amp;,
+etc.</p></li>
+</ul></li>
+<li><p><strong>Palavras reservadas:</strong></p>
+<ul>
+<li>Evite usar nomes que são palavras reservadas em R, pois isso pode
+causar conflitos. Alguns exemplos de palavras reservadas incluem
+<strong><code>if</code></strong>, <strong><code>else</code></strong>,
+<strong><code>while</code></strong>,
+<strong><code>function</code></strong>,
+<strong><code>for</code></strong>, <strong><code>in</code></strong>,
+<strong><code>TRUE</code></strong>, <strong><code>FALSE</code></strong>,
+entre outras.</li>
+</ul></li>
+<li><p><strong>Observação</strong>:</p>
+<ul>
+<li><p>O R <strong>diferencia letras maiúsculas e minúsculas</strong>,
+isto é, <code>a</code> é considerado um objeto diferente
+de <code>A</code></p></li>
+<li><p>Escolha nomes descritivos que forneçam informações sobre o
+propósito ou conteúdo do objeto.</p></li>
+<li><p>No R, uma base de dados é representada por objetos chamados
+de <em>data frames</em></p></li>
+<li><p>Exemplos de nomes aceitáveis: <code>idade</code>,
+<code>nomeVariavel</code>, <code>meuVetor</code>,
+<code>resultado_final</code> e <code>dados_do_paciente</code></p></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="vetores" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Vetores</h1>
+<ul>
+<li><p>Um vetor é uma estrutura de dados unidimensional que pode conter
+ou não elementos de um único tipo</p></li>
+<li><p>Os vetores podem ser subdivididos em : <strong>vetores
+atômicos</strong> e <strong>listas</strong></p></li>
+<li><p>Eles diferem quanto aos tipos de seus elementos:</p>
+<ul>
+<li><p>para <strong>vetores atômicos</strong>, todos os elementos devem
+ter o mesmo tipo; </p></li>
+<li><p><strong>para listas</strong>, os elementos podem ter tipos
+diferentes.</p></li>
+</ul></li>
+<li><p>Os elementos de um vetor são acessados por índices.</p></li>
+</ul>
+<p><img src="Figuras/atomic_lists.png" width="437" /></p>
+<div id="vetores-atômicos" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Vetores atômicos</h2>
+<ul>
+<li><p>Existem quatro tipos principais de vetores atômicos: lógico,
+inteiro, <em>double</em> e caractere (que contém strings);</p></li>
+<li><p>Vetores inteiros e <em>double</em> são conhecidos como vetores
+numéricos;</p></li>
+</ul>
+<!-- -->
+<ul>
+<li><p>Para criar vetores use a função <code>c()</code>
+(<em>combine</em>)</p></li>
+<li><p>Para saber o tipo de vetor, você pode utilizar a funcão
+<code>typeof()</code>. Para saber seu comprimento a função
+<code>length()</code>.</p></li>
+<li><p>Você pode <strong>testar</strong> se um vetor é de um determinado
+tipo com uma função <code>is.*()</code></p></li>
+</ul>
+<div id="lógico" class="section level3" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Lógico</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>lgl_var <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>)<span class="co"># lógico</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>lgl_var <span class="ot">&lt;-</span> <span class="fu">c</span>(T, F)<span class="co"># lógico</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="fu">typeof</span>(lgl_var)<span class="co"># verificar o tipo</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co">#&gt; [1] &quot;logical&quot;</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="fu">is.logical</span>(lgl_var) <span class="co"># testar se o vetor é do tipo lógico</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt; [1] TRUE</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="fu">is.integer</span>(lgl_var)</span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt; [1] FALSE</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="fu">length</span>(lgl_var)</span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">#&gt; [1] 2</span></span></code></pre></div>
+</div>
+<div id="double" class="section level3" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> Double</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>dbl_var <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">2.5</span>, <span class="fl">4.5</span>)<span class="co">#forma decimal </span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>dbl_var <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.23e4</span>)<span class="do">##forma científica </span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="fu">typeof</span>(dbl_var) </span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co">#&gt; [1] &quot;double&quot;</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="fu">is.double</span>(dbl_var) <span class="co"># testar se o vetor é do tipo Double </span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co">#&gt; [1] TRUE</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="fu">is.character</span>(lgl_var)</span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="co">#&gt; [1] FALSE</span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="fu">length</span>(dbl_var)</span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="co">#&gt; [1] 1</span></span></code></pre></div>
+<ul>
+<li>Existem três valores especiais exclusivos para Double: Inf, -Inf e
+NaN (Not a Number)</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>dbl_var <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">Inf</span>,<span class="sc">-</span><span class="cn">Inf</span>,<span class="cn">NaN</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="fu">typeof</span>(dbl_var)</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">#&gt; [1] &quot;double&quot;</span></span></code></pre></div>
+</div>
+<div id="inteiro" class="section level3" number="2.1.3">
+<h3><span class="header-section-number">2.1.3</span> Inteiro</h3>
+<ul>
+<li>Os inteiros são escritos de forma semelhante aos Double, mas devem
+ser seguidos por L</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>int_var <span class="ot">&lt;-</span> <span class="fu">c</span>(1L, 6L, 10L)<span class="co"># inteiro</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="fu">typeof</span>(int_var)</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="co">#&gt; [1] &quot;integer&quot;</span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="fu">is.integer</span>(int_var)</span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="co">#&gt; [1] TRUE</span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="fu">is.character</span>(int_var)</span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co">#&gt; [1] FALSE</span></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="fu">length</span>(int_var)</span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="co">#&gt; [1] 3</span></span></code></pre></div>
+</div>
+<div id="caractere-string" class="section level3" number="2.1.4">
+<h3><span class="header-section-number">2.1.4</span> Caractere
+(string)</h3>
+<ul>
+<li>As strings são colocados entre ” ”</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>chr_var <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Leonardo&quot;</span>, <span class="st">&quot;Nascimento&quot;</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>chr_var <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Ótimo&quot;</span>, <span class="st">&quot;Bom&quot;</span>,<span class="st">&quot;Ruim&quot;</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>chr_var <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Masculino&quot;</span>, <span class="st">&quot;Feminino&quot;</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="fu">is.character</span>(chr_var)</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co">#&gt; [1] TRUE</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="fu">typeof</span>(chr_var)</span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co">#&gt; [1] &quot;character&quot;</span></span></code></pre></div>
+</div>
+<div id="observações" class="section level3" number="2.1.5">
+<h3><span class="header-section-number">2.1.5</span> Observações</h3>
+<ul>
+<li><p>Em um vetor, cada valor ocupa uma posição específica determinada
+pela ordem em que os elementos foram adicionados durante a criação do
+vetor.</p></li>
+<li><p>Essa ordem é crucial para acessar cada valor de maneira
+individual dentro do vetor.</p></li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>meu_vetor <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">10</span>,<span class="dv">4</span>,<span class="dv">5</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>meu_vetor[<span class="dv">3</span>]</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="co">#&gt; [1] 10</span></span></code></pre></div>
+<div id="null" class="section level4" number="2.1.5.1">
+<h4><span class="header-section-number">2.1.5.1</span> NULL</h4>
+<ul>
+<li>Embora não seja um vetor, <code>NULL</code>está intimamente
+relacionado aos vetores e geralmente desempenha a função de um vetor
+genérico de comprimento zero.</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>vetor_null <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">NULL</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>vetor_null</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="co">#&gt; NULL</span></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="fu">typeof</span>(vetor_null)</span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co">#&gt; [1] &quot;NULL&quot;</span></span></code></pre></div>
+</div>
+<div id="na" class="section level4" number="2.1.5.2">
+<h4><span class="header-section-number">2.1.5.2</span> NA</h4>
+<ul>
+<li><p>Em R, “NA” (<em>Not Available</em>) é usado para representar
+valores ausentes ou desconhecidos.</p></li>
+<li><p>A maioria dos cálculos envolvendo um valor faltante retornará
+outro valor faltante.</p></li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>meu_vetor <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="cn">NA</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span>meu_vetor</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="co">#&gt; [1] 20 NA</span></span></code></pre></div>
+<ul>
+<li>Para verificar se um valor é “NA”, você pode usar a função
+<strong><code>is.na()</code></strong>.</li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>,<span class="dv">3</span>,<span class="cn">NA</span>, <span class="dv">5</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="fu">is.na</span>(x)</span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="co">#&gt; [1] FALSE FALSE FALSE  TRUE FALSE</span></span></code></pre></div>
+<ul>
+<li>Muitas funções em R têm maneiras para lidar com valores ausentes.
+Por exemplo, algumas funções têm argumentos como
+<strong><code>na.rm</code></strong> para remover NAs durante
+cálculos</li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>notas_alunos <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">7</span>, <span class="cn">NA</span>, <span class="dv">8</span>, <span class="fl">8.5</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="fu">mean</span>(notas_alunos, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="co"># média</span></span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="co">#&gt; [1] 8.375</span></span></code></pre></div>
+<ul>
+<li>Você pode substituir valores NA por outros valores usando a função
+<strong><code>is.na()</code></strong> e indexação</li>
+</ul>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>meu_vetor <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>,<span class="dv">3</span>, <span class="dv">4</span>, <span class="cn">NA</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>meu_vetor[<span class="fu">is.na</span>(meu_vetor)] <span class="ot">&lt;-</span> <span class="dv">0</span></span></code></pre></div>
+</div>
+</div>
+<div id="coerção" class="section level3" number="2.1.6">
+<h3><span class="header-section-number">2.1.6</span> Coerção</h3>
+<ul>
+<li><p>Para vetores atômicos, o tipo é uma propriedade de todo o
+vetor</p></li>
+<li><p>Todos os elementos devem ser do mesmo tipo.</p></li>
+<li><p>Quando você tenta combinar tipos diferentes, eles serão forçados
+em uma ordem fixa: caractere → double → inteiro → lógico.</p></li>
+</ul>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> <span class="fu">c</span>(1L,<span class="st">&quot;leonardo&quot;</span>) <span class="co"># inteiro, character</span></span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>y1</span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a><span class="co">#&gt; [1] &quot;1&quot;        &quot;leonardo&quot;</span></span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a><span class="fu">typeof</span>(y1)</span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a><span class="co">#&gt; [1] &quot;character&quot;</span></span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>y2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">5.5</span>,10L) <span class="co"># double, inteiro</span></span>
+<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a>y2</span>
+<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a><span class="co">#&gt; [1]  5.5 10.0</span></span>
+<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a><span class="fu">typeof</span>(y2)</span>
+<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a><span class="co">#&gt; [1] &quot;double&quot;</span></span></code></pre></div>
+</div>
+</div>
+<div id="listas" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Listas</h2>
+<ul>
+<li><p>As listas são um avanço em complexidade em relação aos vetores
+atômicos: cada elemento pode ser de qualquer tipo</p></li>
+<li><p>Você constrói listas com a função <code>list()</code></p></li>
+</ul>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>l1 <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>  <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, </span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>  <span class="st">&quot;a&quot;</span>, </span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>  <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>), </span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a>  <span class="fu">c</span>(<span class="fl">2.3</span>, <span class="fl">5.9</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a>)</span>
+<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a><span class="fu">print</span>(l1)</span>
+<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a><span class="co">#&gt; [[1]]</span></span>
+<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a><span class="co">#&gt; [1] 1 2 3</span></span>
+<span id="cb16-10"><a href="#cb16-10" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb16-11"><a href="#cb16-11" tabindex="-1"></a><span class="co">#&gt; [[2]]</span></span>
+<span id="cb16-12"><a href="#cb16-12" tabindex="-1"></a><span class="co">#&gt; [1] &quot;a&quot;</span></span>
+<span id="cb16-13"><a href="#cb16-13" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb16-14"><a href="#cb16-14" tabindex="-1"></a><span class="co">#&gt; [[3]]</span></span>
+<span id="cb16-15"><a href="#cb16-15" tabindex="-1"></a><span class="co">#&gt; [1]  TRUE FALSE  TRUE</span></span>
+<span id="cb16-16"><a href="#cb16-16" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb16-17"><a href="#cb16-17" tabindex="-1"></a><span class="co">#&gt; [[4]]</span></span>
+<span id="cb16-18"><a href="#cb16-18" tabindex="-1"></a><span class="co">#&gt; [1] 2.3 5.9</span></span>
+<span id="cb16-19"><a href="#cb16-19" tabindex="-1"></a><span class="fu">typeof</span>(l1)</span>
+<span id="cb16-20"><a href="#cb16-20" tabindex="-1"></a><span class="co">#&gt; [1] &quot;list&quot;</span></span></code></pre></div>
+<ul>
+<li>Para acessa um elemento da lista usamos <code>[[ ]]</code></li>
+</ul>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>l1 <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>  <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, </span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>  <span class="st">&quot;a&quot;</span>, </span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a>  <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>), </span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a>  <span class="fu">c</span>(<span class="fl">2.3</span>, <span class="fl">5.9</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a>)</span>
+<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a>l1[[<span class="dv">4</span>]]</span>
+<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a><span class="co">#&gt; [1] 2.3 5.9</span></span>
+<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a>l1[[<span class="dv">4</span>]][<span class="dv">1</span>]</span>
+<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a><span class="co">#&gt; [1] 2.3</span></span></code></pre></div>
+<ul>
+<li>Você pode testar uma lista com <code>is.list()</code> e forçar uma
+lista com <code>as.list()</code></li>
+</ul>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a>minha_lista <span class="ot">=</span> <span class="fu">list</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a><span class="fu">print</span>(minha_lista)</span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a><span class="co">#&gt; [[1]]</span></span>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a><span class="co">#&gt; [1] 1 2 3</span></span>
+<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a><span class="fu">is.list</span>(minha_lista)</span>
+<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a><span class="co">#&gt; [1] TRUE</span></span>
+<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span>
+<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a><span class="fu">is.list</span>(vec)</span>
+<span id="cb18-9"><a href="#cb18-9" tabindex="-1"></a><span class="co">#&gt; [1] FALSE</span></span>
+<span id="cb18-10"><a href="#cb18-10" tabindex="-1"></a><span class="fu">as.list</span>(vec)</span>
+<span id="cb18-11"><a href="#cb18-11" tabindex="-1"></a><span class="co">#&gt; [[1]]</span></span>
+<span id="cb18-12"><a href="#cb18-12" tabindex="-1"></a><span class="co">#&gt; [1] 1</span></span>
+<span id="cb18-13"><a href="#cb18-13" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb18-14"><a href="#cb18-14" tabindex="-1"></a><span class="co">#&gt; [[2]]</span></span>
+<span id="cb18-15"><a href="#cb18-15" tabindex="-1"></a><span class="co">#&gt; [1] 2</span></span>
+<span id="cb18-16"><a href="#cb18-16" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb18-17"><a href="#cb18-17" tabindex="-1"></a><span class="co">#&gt; [[3]]</span></span>
+<span id="cb18-18"><a href="#cb18-18" tabindex="-1"></a><span class="co">#&gt; [1] 3</span></span></code></pre></div>
+<p>Você pode transformar uma lista em um vetor atômico
+com <code>unlist()</code>.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>minha_lista <span class="ot">=</span> <span class="fu">list</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,<span class="dv">4</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a><span class="fu">print</span>(minha_lista)</span>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a><span class="co">#&gt; [[1]]</span></span>
+<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a><span class="co">#&gt; [1] 1 2 3</span></span>
+<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a><span class="co">#&gt; [[2]]</span></span>
+<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a><span class="co">#&gt; [1]  4  5  6  7  8  9 10</span></span>
+<span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a><span class="fu">unlist</span>(minha_lista)</span>
+<span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a><span class="co">#&gt;  [1]  1  2  3  4  5  6  7  8  9 10</span></span></code></pre></div>
+<ul>
+<li>As regras para o tipo resultante são complexas, não estão bem
+documentadas e nem sempre são equivalentes ao que você obteria com
+<code>c().</code></li>
+</ul>
+</div>
+</div>
+<div id="matrizes" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Matrizes</h1>
+<ul>
+<li><p>Uma matriz em R é uma estrutura bidimensional que pode armazenar
+dados de um único tipo.</p></li>
+<li><p>Isso significa que todos os elementos de uma matriz devem ser do
+mesmo tipo, como números inteiros, <em>double</em> ou
+caracteres.</p></li>
+<li><p>Você pode criar uma matriz usando a função
+<strong><code>matrix()</code></strong>. Especifique os dados e o número
+de linhas e colunas.</p></li>
+</ul>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="co"># Criando uma matriz 2x2</span></span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>vec1 <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a>vec2 <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">4</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a>minha_matriz <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(vec1,vec2), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a>minha_matriz</span>
+<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a><span class="co">#&gt;      [,1] [,2]</span></span>
+<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a><span class="co">#&gt; [1,]    1    3</span></span>
+<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a><span class="co">#&gt; [2,]    2    4</span></span>
+<span id="cb20-9"><a href="#cb20-9" tabindex="-1"></a><span class="fu">is.matrix</span>(minha_matriz)</span>
+<span id="cb20-10"><a href="#cb20-10" tabindex="-1"></a><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>vec1 <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>vec2 <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">4</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>minha_matriz <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(vec1,vec2), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>,<span class="at">byrow =</span> T)</span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a>minha_matriz</span>
+<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a><span class="co">#&gt;      [,1] [,2]</span></span>
+<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a><span class="co">#&gt; [1,]    1    2</span></span>
+<span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a><span class="co">#&gt; [2,]    3    4</span></span>
+<span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a><span class="fu">dim</span>(minha_matriz)</span>
+<span id="cb21-9"><a href="#cb21-9" tabindex="-1"></a><span class="co">#&gt; [1] 2 2</span></span>
+<span id="cb21-10"><a href="#cb21-10" tabindex="-1"></a><span class="fu">ncol</span>(minha_matriz)</span>
+<span id="cb21-11"><a href="#cb21-11" tabindex="-1"></a><span class="co">#&gt; [1] 2</span></span>
+<span id="cb21-12"><a href="#cb21-12" tabindex="-1"></a><span class="fu">nrow</span>(minha_matriz)</span>
+<span id="cb21-13"><a href="#cb21-13" tabindex="-1"></a><span class="co">#&gt; [1] 2</span></span></code></pre></div>
+<ul>
+<li>Os elementos de uma matriz podem ser acessados usando índices de
+linha e coluna.</li>
+</ul>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a>minha_matriz[<span class="dv">1</span>,<span class="dv">2</span>] <span class="co"># Acessando o elemento na primeira linha e segunda coluna</span></span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a><span class="co">#&gt; [1] 2</span></span></code></pre></div>
+</div>
+<div id="array" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Array</h1>
+<ul>
+<li><p>Um array em R é uma estrutura de dados multidimensional que pode
+conter elementos de um único tipo. Diferentemente das matrizes, os
+arrays podem ter mais de duas dimensões.</p></li>
+<li><p>Você pode criar um array usando a função
+<strong><code>array()</code></strong>. Especifique os dados e as
+dimensões.</p></li>
+</ul>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="co"># Criando um array 2x3x2 - linhas X colunas X camadas</span></span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>vec1 <span class="ot">=</span> <span class="fu">c</span>(1L,2L,3L,4L)</span>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a>vec2 <span class="ot">=</span> <span class="fu">c</span>(5L,6L,7L,8L)</span>
+<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a>vec2 <span class="ot">=</span> <span class="fu">c</span>(5L,6L,7L,8L)</span>
+<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a>meu_array <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="fu">c</span>(vec1,vec2), <span class="at">dim =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>))</span>
+<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a>meu_array</span>
+<span id="cb23-7"><a href="#cb23-7" tabindex="-1"></a><span class="co">#&gt; , , 1</span></span>
+<span id="cb23-8"><a href="#cb23-8" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb23-9"><a href="#cb23-9" tabindex="-1"></a><span class="co">#&gt;      [,1] [,2]</span></span>
+<span id="cb23-10"><a href="#cb23-10" tabindex="-1"></a><span class="co">#&gt; [1,]    1    3</span></span>
+<span id="cb23-11"><a href="#cb23-11" tabindex="-1"></a><span class="co">#&gt; [2,]    2    4</span></span>
+<span id="cb23-12"><a href="#cb23-12" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb23-13"><a href="#cb23-13" tabindex="-1"></a><span class="co">#&gt; , , 2</span></span>
+<span id="cb23-14"><a href="#cb23-14" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb23-15"><a href="#cb23-15" tabindex="-1"></a><span class="co">#&gt;      [,1] [,2]</span></span>
+<span id="cb23-16"><a href="#cb23-16" tabindex="-1"></a><span class="co">#&gt; [1,]    5    7</span></span>
+<span id="cb23-17"><a href="#cb23-17" tabindex="-1"></a><span class="co">#&gt; [2,]    6    8</span></span>
+<span id="cb23-18"><a href="#cb23-18" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb23-19"><a href="#cb23-19" tabindex="-1"></a><span class="co">#&gt; , , 3</span></span>
+<span id="cb23-20"><a href="#cb23-20" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb23-21"><a href="#cb23-21" tabindex="-1"></a><span class="co">#&gt;      [,1] [,2]</span></span>
+<span id="cb23-22"><a href="#cb23-22" tabindex="-1"></a><span class="co">#&gt; [1,]    1    3</span></span>
+<span id="cb23-23"><a href="#cb23-23" tabindex="-1"></a><span class="co">#&gt; [2,]    2    4</span></span>
+<span id="cb23-24"><a href="#cb23-24" tabindex="-1"></a><span class="fu">typeof</span>(meu_array)</span>
+<span id="cb23-25"><a href="#cb23-25" tabindex="-1"></a><span class="co">#&gt; [1] &quot;integer&quot;</span></span></code></pre></div>
+<ul>
+<li>Os elementos de um array são acessados usando índices
+correspondentes às dimensões.</li>
+</ul>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a>meu_array[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>]<span class="co"># linhas X colunas X camadas</span></span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a><span class="co">#&gt; [1] 7</span></span>
+<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a>meu_array[,,<span class="dv">1</span>] <span class="co"># acessando a matriz da primeira camada</span></span>
+<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a><span class="co">#&gt;      [,1] [,2]</span></span>
+<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a><span class="co">#&gt; [1,]    1    3</span></span>
+<span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a><span class="co">#&gt; [2,]    2    4</span></span>
+<span id="cb24-7"><a href="#cb24-7" tabindex="-1"></a>meu_array[,,<span class="dv">2</span>]<span class="co"># acessando a matriz da segunda camada</span></span>
+<span id="cb24-8"><a href="#cb24-8" tabindex="-1"></a><span class="co">#&gt;      [,1] [,2]</span></span>
+<span id="cb24-9"><a href="#cb24-9" tabindex="-1"></a><span class="co">#&gt; [1,]    5    7</span></span>
+<span id="cb24-10"><a href="#cb24-10" tabindex="-1"></a><span class="co">#&gt; [2,]    6    8</span></span></code></pre></div>
+</div>
+<div id="data-frame" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Data frame</h1>
+<ul>
+<li><p>No R, um data frame é uma estrutura de dados bidimensional
+semelhante a uma tabela em um banco de dados relacional ou a uma
+planilha.</p></li>
+<li><p>Cada coluna em um data frame pode conter dados de diferentes
+tipos, tornando-os especialmente úteis para representar conjuntos de
+dados complexos.</p></li>
+<li><p>Você pode criar um data frame manualmente usando a função
+<strong><code>data.frame()</code></strong>.</p></li>
+</ul>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a>meu_data_frame <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a>  <span class="at">Nome =</span> <span class="fu">c</span>(<span class="st">&quot;Alice&quot;</span>,<span class="st">&quot;Leo&quot;</span>,<span class="st">&quot;Vitor&quot;</span>),</span>
+<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a>  <span class="at">Idade =</span> <span class="fu">c</span>(<span class="dv">25</span>,<span class="dv">30</span>,<span class="dv">22</span>),</span>
+<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a>  <span class="at">Nota =</span> <span class="fu">c</span>(<span class="dv">85</span>, <span class="dv">92</span>, <span class="dv">78</span>)</span>
+<span id="cb25-5"><a href="#cb25-5" tabindex="-1"></a>)</span>
+<span id="cb25-6"><a href="#cb25-6" tabindex="-1"></a>meu_data_frame</span>
+<span id="cb25-7"><a href="#cb25-7" tabindex="-1"></a><span class="co">#&gt;    Nome Idade Nota</span></span>
+<span id="cb25-8"><a href="#cb25-8" tabindex="-1"></a><span class="co">#&gt; 1 Alice    25   85</span></span>
+<span id="cb25-9"><a href="#cb25-9" tabindex="-1"></a><span class="co">#&gt; 2   Leo    30   92</span></span>
+<span id="cb25-10"><a href="#cb25-10" tabindex="-1"></a><span class="co">#&gt; 3 Vitor    22   78</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a>dados_climaticos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a>  <span class="at">Dia =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2023-01-01&quot;</span>), <span class="at">by =</span> <span class="st">&quot;days&quot;</span>, <span class="at">length.out =</span> <span class="dv">5</span>),</span>
+<span id="cb26-3"><a href="#cb26-3" tabindex="-1"></a>  <span class="at">Temperatura =</span> <span class="fu">c</span>(<span class="fl">25.3</span>, <span class="fl">24.5</span>, <span class="fl">22.0</span>, <span class="fl">26.8</span>, <span class="fl">23.5</span>),</span>
+<span id="cb26-4"><a href="#cb26-4" tabindex="-1"></a>  <span class="at">Umidade =</span> <span class="fu">c</span>(<span class="dv">65</span>, <span class="dv">70</span>, <span class="dv">75</span>, <span class="dv">60</span>, <span class="dv">80</span>),</span>
+<span id="cb26-5"><a href="#cb26-5" tabindex="-1"></a>  <span class="at">VelocidadeVento =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">12</span>, <span class="dv">8</span>, <span class="dv">15</span>, <span class="dv">9</span>)</span>
+<span id="cb26-6"><a href="#cb26-6" tabindex="-1"></a>)</span>
+<span id="cb26-7"><a href="#cb26-7" tabindex="-1"></a></span>
+<span id="cb26-8"><a href="#cb26-8" tabindex="-1"></a><span class="co"># Exibindo o data frame</span></span>
+<span id="cb26-9"><a href="#cb26-9" tabindex="-1"></a><span class="fu">print</span>(dados_climaticos)</span>
+<span id="cb26-10"><a href="#cb26-10" tabindex="-1"></a><span class="co">#&gt;          Dia Temperatura Umidade VelocidadeVento</span></span>
+<span id="cb26-11"><a href="#cb26-11" tabindex="-1"></a><span class="co">#&gt; 1 2023-01-01        25.3      65              10</span></span>
+<span id="cb26-12"><a href="#cb26-12" tabindex="-1"></a><span class="co">#&gt; 2 2023-01-02        24.5      70              12</span></span>
+<span id="cb26-13"><a href="#cb26-13" tabindex="-1"></a><span class="co">#&gt; 3 2023-01-03        22.0      75               8</span></span>
+<span id="cb26-14"><a href="#cb26-14" tabindex="-1"></a><span class="co">#&gt; 4 2023-01-04        26.8      60              15</span></span>
+<span id="cb26-15"><a href="#cb26-15" tabindex="-1"></a><span class="co">#&gt; 5 2023-01-05        23.5      80               9</span></span>
+<span id="cb26-16"><a href="#cb26-16" tabindex="-1"></a><span class="fu">head</span>(dados_climaticos,<span class="dv">3</span>)</span>
+<span id="cb26-17"><a href="#cb26-17" tabindex="-1"></a><span class="co">#&gt;          Dia Temperatura Umidade VelocidadeVento</span></span>
+<span id="cb26-18"><a href="#cb26-18" tabindex="-1"></a><span class="co">#&gt; 1 2023-01-01        25.3      65              10</span></span>
+<span id="cb26-19"><a href="#cb26-19" tabindex="-1"></a><span class="co">#&gt; 2 2023-01-02        24.5      70              12</span></span>
+<span id="cb26-20"><a href="#cb26-20" tabindex="-1"></a><span class="co">#&gt; 3 2023-01-03        22.0      75               8</span></span></code></pre></div>
+<ul>
+<li><p>Você pode acessar uma coluna específica usando o nome da
+coluna.</p></li>
+<li><p>Você também pode acessar elementos por índices de linha e
+coluna</p></li>
+</ul>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a>dados_climaticos<span class="sc">$</span>Temperatura</span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a><span class="co">#&gt; [1] 25.3 24.5 22.0 26.8 23.5</span></span>
+<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a>dados_climaticos[,<span class="dv">2</span>]</span>
+<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a><span class="co">#&gt; [1] 25.3 24.5 22.0 26.8 23.5</span></span></code></pre></div>
+</div>
+<div id="atributos" class="section level1" number="6">
+<h1><span class="header-section-number">6</span> Atributos</h1>
+<ul>
+<li>Além dos próprios elementos, os vetores podem ter atributos que
+fornecem informações adicionais sobre os dados</li>
+</ul>
+<div id="nomes" class="section level2" number="6.1">
+<h2><span class="header-section-number">6.1</span> Nomes</h2>
+<ul>
+<li>Você pode atribuir nomes a cada elemento do vetor usando a função
+<strong><code>names()</code></strong>. Isso facilita a referência a
+elementos específicos pelo nome.</li>
+</ul>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a>meu_vetor <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a><span class="fu">names</span>(meu_vetor) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;primeiro&quot;</span>, <span class="st">&quot;segundo&quot;</span>, <span class="st">&quot;terceiro&quot;</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a>meu_vetor</span>
+<span id="cb28-4"><a href="#cb28-4" tabindex="-1"></a><span class="co">#&gt; primeiro  segundo terceiro </span></span>
+<span id="cb28-5"><a href="#cb28-5" tabindex="-1"></a><span class="co">#&gt;        1        2        3</span></span>
+<span id="cb28-6"><a href="#cb28-6" tabindex="-1"></a><span class="fu">attributes</span>(meu_vetor)</span>
+<span id="cb28-7"><a href="#cb28-7" tabindex="-1"></a><span class="co">#&gt; $names</span></span>
+<span id="cb28-8"><a href="#cb28-8" tabindex="-1"></a><span class="co">#&gt; [1] &quot;primeiro&quot; &quot;segundo&quot;  &quot;terceiro&quot;</span></span></code></pre></div>
+<ul>
+<li>Formas alternativas para nomear um vetor</li>
+</ul>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">a =</span> <span class="dv">1</span>, <span class="at">b =</span> <span class="dv">2</span>, <span class="at">c =</span> <span class="dv">3</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a>x1</span>
+<span id="cb29-3"><a href="#cb29-3" tabindex="-1"></a><span class="co">#&gt; a b c </span></span>
+<span id="cb29-4"><a href="#cb29-4" tabindex="-1"></a><span class="co">#&gt; 1 2 3</span></span>
+<span id="cb29-5"><a href="#cb29-5" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> <span class="fu">setNames</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>))</span>
+<span id="cb29-7"><a href="#cb29-7" tabindex="-1"></a>x2</span>
+<span id="cb29-8"><a href="#cb29-8" tabindex="-1"></a><span class="co">#&gt; a b c </span></span>
+<span id="cb29-9"><a href="#cb29-9" tabindex="-1"></a><span class="co">#&gt; 1 2 3</span></span></code></pre></div>
+</div>
+<div id="dimensão" class="section level2" number="6.2">
+<h2><span class="header-section-number">6.2</span> Dimensão</h2>
+<ul>
+<li>Em R, vetores podem ter atributos de dimensão, que são comumente
+associados a matrizes.</li>
+</ul>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a>meu_vetor <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
+<span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a>meu_vetor</span>
+<span id="cb30-3"><a href="#cb30-3" tabindex="-1"></a><span class="co">#&gt; [1] 1 2 3 4 5</span></span>
+<span id="cb30-4"><a href="#cb30-4" tabindex="-1"></a><span class="fu">dim</span>(meu_vetor) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">1</span>) <span class="co"># linha x coluna</span></span>
+<span id="cb30-5"><a href="#cb30-5" tabindex="-1"></a>meu_vetor</span>
+<span id="cb30-6"><a href="#cb30-6" tabindex="-1"></a><span class="co">#&gt;      [,1]</span></span>
+<span id="cb30-7"><a href="#cb30-7" tabindex="-1"></a><span class="co">#&gt; [1,]    1</span></span>
+<span id="cb30-8"><a href="#cb30-8" tabindex="-1"></a><span class="co">#&gt; [2,]    2</span></span>
+<span id="cb30-9"><a href="#cb30-9" tabindex="-1"></a><span class="co">#&gt; [3,]    3</span></span>
+<span id="cb30-10"><a href="#cb30-10" tabindex="-1"></a><span class="co">#&gt; [4,]    4</span></span>
+<span id="cb30-11"><a href="#cb30-11" tabindex="-1"></a><span class="co">#&gt; [5,]    5</span></span>
+<span id="cb30-12"><a href="#cb30-12" tabindex="-1"></a><span class="fu">attributes</span>(meu_vetor)</span>
+<span id="cb30-13"><a href="#cb30-13" tabindex="-1"></a><span class="co">#&gt; $dim</span></span>
+<span id="cb30-14"><a href="#cb30-14" tabindex="-1"></a><span class="co">#&gt; [1] 5 1</span></span></code></pre></div>
+</div>
+<div id="classe" class="section level2" number="6.3">
+<h2><span class="header-section-number">6.3</span> Classe</h2>
+<ul>
+<li><p>A classe de um objeto é uma propriedade que indica a natureza ou
+tipo do objeto em termos de programação orientada a objetos</p></li>
+<li><p>A classe é uma parte fundamental em R, pois determina como o
+objeto será tratado em operações específicas e quais métodos (funções
+associadas) podem ser aplicados a ele.</p></li>
+<li><p>Aqui estão algumas das classes mais comuns em R:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>numeric:</strong> Números reais
+(<em>double</em>).</p></li>
+<li><p><strong>integer:</strong> Números inteiros.</p></li>
+<li><p><strong>logical:</strong> Valores lógicos (TRUE ou
+FALSE).</p></li>
+<li><p><strong>character:</strong> Strings de caracteres.</p></li>
+<li><p><strong>factor:</strong> Fatores, usados para representar
+variáveis categóricas com níveis</p></li>
+<li><p><strong>Date:</strong> Representação de datas.</p></li>
+<li><p><strong>POSIXct e POSIXlt:</strong> Representação de datas e
+horas.</p></li>
+<li><p><strong>data.frame:</strong> Uma estrutura bidimensional que pode
+conter colunas de diferentes classes.</p></li>
+<li><p><strong>matrix:</strong> Uma estrutura bidimensional que contém
+elementos de uma única classe.</p></li>
+<li><p><strong>array:</strong> Uma estrutura de dados multidimensional
+que pode conter elementos de uma única classe.</p></li>
+<li><p><strong>list:</strong> Uma estrutura que pode conter elementos de
+diferentes classes e até outras listas.</p></li>
+<li><p><strong>function:</strong> Funções.</p></li>
+</ol></li>
+<li><p>Em R, a função <strong><code>class()</code></strong> é usada para
+obter a classe de um objeto</p></li>
+</ul>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a>vec1 <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a>vec2 <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">4</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" tabindex="-1"></a><span class="fu">class</span>(vec1)</span>
+<span id="cb31-4"><a href="#cb31-4" tabindex="-1"></a><span class="co">#&gt; [1] &quot;numeric&quot;</span></span>
+<span id="cb31-5"><a href="#cb31-5" tabindex="-1"></a>minha_matriz <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(vec1,vec2), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb31-6"><a href="#cb31-6" tabindex="-1"></a>minha_matriz</span>
+<span id="cb31-7"><a href="#cb31-7" tabindex="-1"></a><span class="co">#&gt;      [,1] [,2]</span></span>
+<span id="cb31-8"><a href="#cb31-8" tabindex="-1"></a><span class="co">#&gt; [1,]    1    3</span></span>
+<span id="cb31-9"><a href="#cb31-9" tabindex="-1"></a><span class="co">#&gt; [2,]    2    4</span></span>
+<span id="cb31-10"><a href="#cb31-10" tabindex="-1"></a><span class="fu">class</span>(minha_matriz)</span>
+<span id="cb31-11"><a href="#cb31-11" tabindex="-1"></a><span class="co">#&gt; [1] &quot;matrix&quot; &quot;array&quot;</span></span></code></pre></div>
+<ul>
+<li>Você pode atribuir uma classe a um vetor usando a função
+<strong><code>class()</code></strong>. Isso é comumente usado em
+programação orientada a objetos em R.</li>
+</ul>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a><span class="fu">class</span>(vec)</span>
+<span id="cb32-3"><a href="#cb32-3" tabindex="-1"></a><span class="co">#&gt; [1] &quot;numeric&quot;</span></span>
+<span id="cb32-4"><a href="#cb32-4" tabindex="-1"></a><span class="fu">class</span>(vec)<span class="ot">&lt;-</span> <span class="st">&quot;minha_classe&quot;</span></span>
+<span id="cb32-5"><a href="#cb32-5" tabindex="-1"></a><span class="fu">class</span>(vec)</span>
+<span id="cb32-6"><a href="#cb32-6" tabindex="-1"></a><span class="co">#&gt; [1] &quot;minha_classe&quot;</span></span></code></pre></div>
+</div>
+<div id="exemplo" class="section level2" number="6.4">
+<h2><span class="header-section-number">6.4</span> Exemplo</h2>
+<ul>
+<li>Criando um objeto da classe Pessoa</li>
+</ul>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a></span>
+<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a>pessoa1 <span class="ot">&lt;-</span> <span class="fu">structure</span>(</span>
+<span id="cb33-3"><a href="#cb33-3" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Leonardo&quot;</span>), </span>
+<span id="cb33-4"><a href="#cb33-4" tabindex="-1"></a>  <span class="at">idade =</span> <span class="dv">31</span>,</span>
+<span id="cb33-5"><a href="#cb33-5" tabindex="-1"></a>  <span class="at">last_name =</span> <span class="st">&quot;Nascimento&quot;</span>,</span>
+<span id="cb33-6"><a href="#cb33-6" tabindex="-1"></a>  <span class="at">class =</span> <span class="st">&quot;Pessoa&quot;</span>,</span>
+<span id="cb33-7"><a href="#cb33-7" tabindex="-1"></a>  <span class="at">names =</span> <span class="fu">c</span>(<span class="st">&quot;nome_pessoa&quot;</span>)</span>
+<span id="cb33-8"><a href="#cb33-8" tabindex="-1"></a>)</span>
+<span id="cb33-9"><a href="#cb33-9" tabindex="-1"></a>pessoa1</span>
+<span id="cb33-10"><a href="#cb33-10" tabindex="-1"></a><span class="co">#&gt; nome_pessoa </span></span>
+<span id="cb33-11"><a href="#cb33-11" tabindex="-1"></a><span class="co">#&gt;  &quot;Leonardo&quot; </span></span>
+<span id="cb33-12"><a href="#cb33-12" tabindex="-1"></a><span class="co">#&gt; attr(,&quot;idade&quot;)</span></span>
+<span id="cb33-13"><a href="#cb33-13" tabindex="-1"></a><span class="co">#&gt; [1] 31</span></span>
+<span id="cb33-14"><a href="#cb33-14" tabindex="-1"></a><span class="co">#&gt; attr(,&quot;last_name&quot;)</span></span>
+<span id="cb33-15"><a href="#cb33-15" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Nascimento&quot;</span></span>
+<span id="cb33-16"><a href="#cb33-16" tabindex="-1"></a><span class="co">#&gt; attr(,&quot;class&quot;)</span></span>
+<span id="cb33-17"><a href="#cb33-17" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Pessoa&quot;</span></span>
+<span id="cb33-18"><a href="#cb33-18" tabindex="-1"></a><span class="fu">class</span>(a)</span>
+<span id="cb33-19"><a href="#cb33-19" tabindex="-1"></a><span class="co">#&gt; [1] &quot;numeric&quot;</span></span>
+<span id="cb33-20"><a href="#cb33-20" tabindex="-1"></a><span class="fu">attr</span>(a,<span class="st">&quot;idade&quot;</span>) <span class="co"># selecionado o atributo idade</span></span>
+<span id="cb33-21"><a href="#cb33-21" tabindex="-1"></a><span class="co">#&gt; NULL</span></span>
+<span id="cb33-22"><a href="#cb33-22" tabindex="-1"></a><span class="fu">names</span>(pessoa1)</span>
+<span id="cb33-23"><a href="#cb33-23" tabindex="-1"></a><span class="co">#&gt; [1] &quot;nome_pessoa&quot;</span></span></code></pre></div>
+</div>
+</div>
+<div id="importaçãoexportação-de-dados" class="section level1" number="7">
+<h1><span class="header-section-number">7</span> Importação/Exportação
+de dados</h1>
+<ul>
+<li>Em R, você pode usar várias funções para importar e exportar dados
+em diferentes formatos, incluindo CSV, TXT e RDS. Abaixo estão exemplos
+de como realizar essas operações.</li>
+</ul>
+<div id="csv" class="section level2" number="7.1">
+<h2><span class="header-section-number">7.1</span> .CSV</h2>
+<ul>
+<li>Importação</li>
+</ul>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a>dados_sexo_curso <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;~/GitHub/Introducao_Ciencias_de_Dados/dados/tab_sexo_curso.csv&quot;</span>)</span>
+<span id="cb34-2"><a href="#cb34-2" tabindex="-1"></a><span class="fu">head</span>(dados_sexo_curso)</span>
+<span id="cb34-3"><a href="#cb34-3" tabindex="-1"></a><span class="co">#&gt;   sexo curso</span></span>
+<span id="cb34-4"><a href="#cb34-4" tabindex="-1"></a><span class="co">#&gt; 1  Mas   Fís</span></span>
+<span id="cb34-5"><a href="#cb34-5" tabindex="-1"></a><span class="co">#&gt; 2  Mas   Fís</span></span>
+<span id="cb34-6"><a href="#cb34-6" tabindex="-1"></a><span class="co">#&gt; 3  Mas   Fís</span></span>
+<span id="cb34-7"><a href="#cb34-7" tabindex="-1"></a><span class="co">#&gt; 4  Mas   Fís</span></span>
+<span id="cb34-8"><a href="#cb34-8" tabindex="-1"></a><span class="co">#&gt; 5  Mas   Fís</span></span>
+<span id="cb34-9"><a href="#cb34-9" tabindex="-1"></a><span class="co">#&gt; 6  Mas   Fís</span></span></code></pre></div>
+<ul>
+<li>Exportação</li>
+</ul>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a>exemplo_csv <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">Pessoa =</span> <span class="fu">c</span>(<span class="st">&quot;Leo&quot;</span>,<span class="st">&quot;Lennon&quot;</span>),<span class="at">Idade=</span><span class="fu">c</span>(<span class="dv">30</span>,<span class="dv">29</span>))</span>
+<span id="cb35-2"><a href="#cb35-2" tabindex="-1"></a><span class="fu">write.csv</span>(exemplo_csv ,<span class="st">&quot;~/GitHub/Introducao_Ciencias_de_Dados/dados/exemplo_csv.csv&quot;</span>)</span></code></pre></div>
+</div>
+<div id="txt" class="section level2" number="7.2">
+<h2><span class="header-section-number">7.2</span> .TXT</h2>
+<ul>
+<li>Importação</li>
+</ul>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a>dados_temperatura <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;~/GitHub/Introducao_Ciencias_de_Dados/dados/temperatura.txt&quot;</span>) </span>
+<span id="cb36-2"><a href="#cb36-2" tabindex="-1"></a><span class="fu">head</span>(dados_temperatura)</span>
+<span id="cb36-3"><a href="#cb36-3" tabindex="-1"></a><span class="co">#&gt;   temperatura</span></span>
+<span id="cb36-4"><a href="#cb36-4" tabindex="-1"></a><span class="co">#&gt; 1      23.545</span></span>
+<span id="cb36-5"><a href="#cb36-5" tabindex="-1"></a><span class="co">#&gt; 2      26.878</span></span>
+<span id="cb36-6"><a href="#cb36-6" tabindex="-1"></a><span class="co">#&gt; 3      33.807</span></span>
+<span id="cb36-7"><a href="#cb36-7" tabindex="-1"></a><span class="co">#&gt; 4      26.860</span></span>
+<span id="cb36-8"><a href="#cb36-8" tabindex="-1"></a><span class="co">#&gt; 5      24.675</span></span>
+<span id="cb36-9"><a href="#cb36-9" tabindex="-1"></a><span class="co">#&gt; 6      27.256</span></span></code></pre></div>
+<ul>
+<li>Exportação</li>
+</ul>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" tabindex="-1"></a>exemplo_txt <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">Pessoa =</span> <span class="fu">c</span>(<span class="st">&quot;Leo&quot;</span>,<span class="st">&quot;Lennon&quot;</span>),<span class="at">Idade=</span><span class="fu">c</span>(<span class="dv">30</span>,<span class="dv">29</span>)) </span>
+<span id="cb37-2"><a href="#cb37-2" tabindex="-1"></a><span class="fu">write.table</span>(exemplo_txt ,<span class="st">&quot;~/GitHub/Introducao_Ciencias_de_Dados/dados/exemplo_txt.txt&quot;</span>)</span></code></pre></div>
+</div>
+<div id="rds" class="section level2" number="7.3">
+<h2><span class="header-section-number">7.3</span> .RDS</h2>
+<ul>
+<li>Importação</li>
+</ul>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;~/GitHub/Introducao_Ciencias_de_Dados/dados/tempo_exercicio_perda_peso.rds&quot;</span>) </span>
+<span id="cb38-2"><a href="#cb38-2" tabindex="-1"></a><span class="fu">head</span>(dados)</span>
+<span id="cb38-3"><a href="#cb38-3" tabindex="-1"></a><span class="co">#&gt;   tempo_exercicio perda_peso</span></span>
+<span id="cb38-4"><a href="#cb38-4" tabindex="-1"></a><span class="co">#&gt; 1        3.696831   5.978045</span></span>
+<span id="cb38-5"><a href="#cb38-5" tabindex="-1"></a><span class="co">#&gt; 2        6.242891  10.833239</span></span>
+<span id="cb38-6"><a href="#cb38-6" tabindex="-1"></a><span class="co">#&gt; 3        7.764007  10.846056</span></span>
+<span id="cb38-7"><a href="#cb38-7" tabindex="-1"></a><span class="co">#&gt; 4        5.703023   8.170098</span></span>
+<span id="cb38-8"><a href="#cb38-8" tabindex="-1"></a><span class="co">#&gt; 5        3.695822   4.126396</span></span>
+<span id="cb38-9"><a href="#cb38-9" tabindex="-1"></a><span class="co">#&gt; 6        1.597858   3.247096</span></span></code></pre></div>
+<ul>
+<li>Exportação</li>
+</ul>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" tabindex="-1"></a>exemplo_rds <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">Pessoa =</span> <span class="fu">c</span>(<span class="st">&quot;Leo&quot;</span>,<span class="st">&quot;Lennon&quot;</span>),<span class="at">Idade=</span><span class="fu">c</span>(<span class="dv">30</span>,<span class="dv">29</span>))  </span>
+<span id="cb39-2"><a href="#cb39-2" tabindex="-1"></a><span class="fu">saveRDS</span>(exemplo_rds ,<span class="st">&quot;~/GitHub/Introducao_Ciencias_de_Dados/dados/exemplo_rds.rds&quot;</span>)</span></code></pre></div>
+</div>
+<div id="observações-1" class="section level2" number="7.4">
+<h2><span class="header-section-number">7.4</span> Observações</h2>
+<ol style="list-style-type: decimal">
+<li><p><strong>Separadores e Delimitadores:</strong></p>
+<ul>
+<li>Certifique-se de usar o argumento <strong><code>sep</code></strong>
+para especificar o separador ou delimitador correto, dependendo do
+formato do seu arquivo (vírgula, ponto e vírgula, tabulação, etc.).</li>
+</ul></li>
+<li><p><strong>Encodings:</strong></p>
+<ul>
+<li>Se você estiver trabalhando com arquivos que contêm caracteres
+especiais, pode ser necessário especificar o encoding usando o argumento
+<strong><code>fileEncoding</code></strong>.</li>
+</ul></li>
+<li><p><strong>Cabeçalho:</strong></p>
+<ul>
+<li>Utilize o argumento <strong><code>header</code></strong> para
+indicar se o arquivo contém um cabeçalho ou não
+(<strong><code>header = TRUE</code></strong> para sim,
+<strong><code>header = FALSE</code></strong> para não).</li>
+</ul></li>
+<li><p><strong>Path:</strong></p>
+<ul>
+<li>Se estiver usando caminhos no Windows, pode ser necessário usar
+barras invertidas duplas (<strong><code>\\</code></strong>) ou uma única
+barra invertida (<strong><code>\</code></strong>) para especificar o
+caminho.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
