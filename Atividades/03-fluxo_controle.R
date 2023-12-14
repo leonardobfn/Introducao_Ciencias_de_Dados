@@ -39,6 +39,6 @@ while (resultado_dado!=numero_escolhido) {
 #' Considere a média 30 e desvio padrão 5
 #' calcule o valor do desvio padrão da amostra
 #' calcule a razão entre o valor do desvio padrão da amostra e 5
-#' Se a a diferença abs entre a razão obtida e 1 erro for menor que 10^(-3), pare
+#' Se a a diferença abs entre a razão obtida e 1 for menor que 10^(-3), pare
 #' Comece com n=2 e incremente 
 #' Dica: use repeat
