@@ -20,7 +20,7 @@ while (resultado_dado!=numero_escolhido) {
 #' Considere a média 30 e desvio padrão 5
 #' calcule o valor do desvio padrão da amostra
 #' calcule o erro abs entre o valor do desvio padrão da amostra e 5
-#' Se o erro for menor que 10^(-3), aumente o valor do n
+#' Se o erro for menor que 10^(-3), pare
 #' Comece com n=2 e incremente 
 #' Dica: use repeat
 
@@ -31,3 +31,14 @@ while (resultado_dado!=numero_escolhido) {
 #' loop 1:10
 #' Se a posição da coluna for par, considere amostra com média 50 e desvio padrão 2 
 #' Se a posição da coluna for ímpar, considere amostra com média 10 e desvio padrão 2 
+
+
+# Questão 4 ---------------------------------------------------------------
+
+#' Gere uma amostra da distribuição normal
+#' Considere a média 30 e desvio padrão 5
+#' calcule o valor do desvio padrão da amostra
+#' calcule a razão entre o valor do desvio padrão da amostra e 5
+#' Se a a diferença abs entre a razão obtida e 1 erro for menor que 10^(-3), pare
+#' Comece com n=2 e incremente 
+#' Dica: use repeat
