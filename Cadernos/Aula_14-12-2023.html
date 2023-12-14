@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Aula_14-12-2023.knit</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } code span.at { color: #7d9029; } code span.bn { color: #40a070; } code span.bu { color: #008000; } code span.cf { color: #007020; font-weight: bold; } code span.ch { color: #4070a0; } code span.cn { color: #880000; } code span.co { color: #60a0b0; font-style: italic; } code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } code span.do { color: #ba2121; font-style: italic; } code span.dt { color: #902000; } code span.dv { color: #40a070; } code span.er { color: #ff0000; font-weight: bold; } code span.ex { } code span.fl { color: #40a070; } code span.fu { color: #06287e; } code span.im { color: #008000; font-weight: bold; } code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } code span.kw { color: #007020; font-weight: bold; } code span.op { color: #666666; } code span.ot { color: #007020; } code span.pp { color: #bc7a00; } code span.sc { color: #4070a0; } code span.ss { color: #bb6688; } code span.st { color: #4070a0; } code span.va { color: #19177c; } code span.vs { color: #4070a0; } code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } </style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; }
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+code > span.kw { color: #555; font-weight: bold; } code > span.dt { color: #902000; } code > span.dv { color: #40a070; } code > span.bn { color: #d14; } code > span.fl { color: #d14; } code > span.ch { color: #d14; } code > span.st { color: #d14; } code > span.co { color: #888888; font-style: italic; } code > span.ot { color: #007020; } code > span.al { color: #ff0000; font-weight: bold; } code > span.fu { color: #900; font-weight: bold; } code > span.er { color: #a61717; background-color: #e3d2d2; } </style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore"><center>
+Universidade Federal do Amazonas
+</center>
+<center>
+Departamento de Estatística
+</center></h1>
+<h3 class="subtitle"><center>
+Curso: Introdução à Ciência de Dados
+</center>
+<center>
+Professor: Leonardo Nascimento
+</center>
+<center>
+14/12/2023
+<center>
+Versão 1.0
+</center></h3>
+
+
+<div id="TOC">
+<ul>
+<li><a href="#controle-de-fluxo" id="toc-controle-de-fluxo"><span class="toc-section-number">1</span> Controle de Fluxo</a>
+<ul>
+<li><a href="#if-else-e-else-if" id="toc-if-else-e-else-if"><span class="toc-section-number">1.1</span> if, else e else if</a></li>
+<li><a href="#for" id="toc-for"><span class="toc-section-number">1.2</span> for</a></li>
+<li><a href="#while" id="toc-while"><span class="toc-section-number">1.3</span> while</a></li>
+<li><a href="#repeat" id="toc-repeat"><span class="toc-section-number">1.4</span> repeat</a></li>
+<li><a href="#switch" id="toc-switch"><span class="toc-section-number">1.5</span> switch</a></li>
+</ul></li>
+<li><a href="#funções" id="toc-funções"><span class="toc-section-number">2</span> Funções</a></li>
+<li><a href="#referências" id="toc-referências"><span class="toc-section-number">3</span> Referências</a></li>
+</ul>
+</div>
+
+<!-- ```{r, echo=FALSE} -->
+<!-- htmltools::img(src = knitr::image_uri("C:/Users/Leonardo_Nascimento/Documents/GitHub/Introducao_Ciencias_de_Dados/Cadernos/Figuras/DE.jpg"),  -->
+<!--                alt = 'logo',  -->
+<!--                 width = 180, height = 180, -->
+<!--                style = 'position:absolute; top:10px; right:400px; padding:10px;') -->
+<!-- ``` -->
+<!-- ```{r, echo=FALSE} -->
+<!-- htmltools::img(src = knitr::image_uri("C:/Users/Leonardo_Nascimento/Documents/GitHub/Introducao_Ciencias_de_Dados/Cadernos/Figuras/ufam.png"),  -->
+<!--                alt = 'logo',  -->
+<!--                width = 180, height = 180, -->
+<!--                style = 'position:absolute; top:10px; left:400px; padding:10px; "margin: -100px;') -->
+<!-- ``` -->
+<style type="text/css">
+.watch-out {
+border: 3px solid gray;
+font-weight: bold;
+}
+</style>
+<div id="controle-de-fluxo" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Controle de Fluxo</h1>
+<ul>
+<li><p>O controle de fluxo em R refere-se à capacidade de direcionar a
+execução do código com base em condições específicas.</p></li>
+<li><p>Existem várias estruturas de controle de fluxo em R que permitem
+que você tome decisões, repita operações e controle o fluxo de execução
+do seu programa:</p></li>
+<li><p><code>if</code>, <code>else</code> <code>if</code>,
+<code>for,</code> <code>while</code>, <code>repeat</code> e
+<code>switch</code>.</p></li>
+</ul>
+<div id="if-else-e-else-if" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> if, else e else
+if</h2>
+<ul>
+<li><p><code>if</code> é usado para executar um bloco de código se uma
+condição for verdadeira.</p></li>
+<li><p>O <code>else</code> funciona como uma extensão
+do <code>if</code>, apresenta outra alternativa para o caso do teste
+executado em <code>if</code> seja falso.</p></li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="cf">if</span> (condition) true_action</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="cf">if</span> (condition) true_action <span class="cf">else</span> false_action</span></code></pre></div>
+<ul>
+<li><p>If <code>condition</code> is <code>TRUE</code>, <code>true_action</code> é
+avaliada;</p></li>
+<li><p>if <code>condition</code> is <code>FALSE</code>, a
+opção <code>false_action</code> é avaliada.</p></li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>x <span class="ot">=</span> <span class="st">&quot;Leonardo&quot;</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="cf">if</span>(<span class="fu">class</span>(x)<span class="sc">==</span><span class="st">&quot;character&quot;</span>){</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot; O objeto x=&quot;</span>,x,<span class="st">&quot;é da classe character&quot;</span>,<span class="at">sep=</span><span class="st">&quot; &quot;</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>}</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#&gt;  O objeto x= Leonardo é da classe character</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="cf">if</span>(<span class="fu">class</span>(x)<span class="sc">==</span><span class="st">&quot;character&quot;</span>){</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>  <span class="fu">paste</span>(<span class="st">&quot; O objeto x=&quot;</span>,x,<span class="st">&quot;é da classe character&quot;</span>,<span class="at">sep=</span><span class="st">&quot; &quot;</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>} <span class="cf">else</span>{</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>  <span class="fu">paste</span>(<span class="st">&quot; O objeto x=&quot;</span>,x,<span class="st">&quot;não é da classe character&quot;</span>,<span class="at">sep=</span><span class="st">&quot; &quot;</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>}</span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt; [1] &quot; O objeto x= 1 não é da classe character&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">70</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a> <span class="cf">if</span> (x <span class="sc">&gt;=</span> <span class="dv">90</span> <span class="sc">&amp;</span> x <span class="sc">&lt;=</span> <span class="dv">100</span>) {</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>    <span class="st">&quot;A&quot;</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (x <span class="sc">&gt;=</span> <span class="dv">80</span> <span class="sc">&amp;</span> x <span class="sc">&lt;</span> <span class="dv">90</span>) {</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>    <span class="st">&quot;B&quot;</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>    <span class="st">&quot;C&quot;</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>  }</span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="co">#&gt; [1] &quot;C&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">80</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a> <span class="cf">if</span> (x <span class="sc">&gt;=</span> <span class="dv">100</span> <span class="sc">|</span> x <span class="sc">&lt;=</span> <span class="dv">70</span>) {</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>    <span class="st">&quot;Extremo&quot;</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>    <span class="st">&quot;Não é extremo&quot;</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>  } </span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Não é extremo&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="fu">ifelse</span>(x <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">0</span>, <span class="st">&quot;par&quot;</span>, <span class="st">&quot;ímpar&quot;</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="co">#&gt;  [1] &quot;ímpar&quot; &quot;par&quot;   &quot;ímpar&quot; &quot;par&quot;   &quot;ímpar&quot; &quot;par&quot;   &quot;ímpar&quot; &quot;par&quot;   &quot;ímpar&quot;</span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co">#&gt; [10] &quot;par&quot;</span></span></code></pre></div>
+</div>
+<div id="for" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> for</h2>
+<ul>
+<li>Utilizado para iterar sobre uma sequência de elementos.</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="cf">for</span> (variavel <span class="cf">in</span> sequencia) {</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>  <span class="co"># código a ser executado em cada iteração</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>}</span></code></pre></div>
+<ul>
+<li>Ao executar este código, você verá a saída que mostra os quadrados
+dos números de 1 a 5.</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) {</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>  quadrado <span class="ot">&lt;-</span> i<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;O quadrado de&quot;</span>, i, <span class="st">&quot;é&quot;</span>, quadrado, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>}</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="co">#&gt; O quadrado de 1 é 1 </span></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="co">#&gt; O quadrado de 2 é 4 </span></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co">#&gt; O quadrado de 3 é 9 </span></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="co">#&gt; O quadrado de 4 é 16 </span></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="co">#&gt; O quadrado de 5 é 25</span></span></code></pre></div>
+<ul>
+<li>Ao executar este código, você obterá a saída mostrando a soma dos
+primeiros 10 números naturais.</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>soma <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) {</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>  soma <span class="ot">&lt;-</span> soma <span class="sc">+</span> i</span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>}</span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;A soma dos primeiros 10 números naturais é:&quot;</span>, soma, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="co">#&gt; A soma dos primeiros 10 números naturais é: 55</span></span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="fu">cumsum</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="co"># forma alternativa</span></span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a><span class="co">#&gt;  [1]  1  3  6 10 15 21 28 36 45 55</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>n <span class="ot">=</span> <span class="dv">10</span> <span class="co"># linhas</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>m<span class="ot">=</span><span class="dv">3</span> <span class="co"># colunas</span></span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>matrix_normal <span class="ot">=</span> <span class="fu">matrix</span>(<span class="dv">0</span>,<span class="at">nrow =</span> n,<span class="at">ncol =</span> m) <span class="co"># criando a matriz</span></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2</span>) <span class="co"># gerar sempre as mesmas amostras</span></span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m){</span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">rnorm</span>(n,<span class="at">mean =</span> <span class="dv">0</span>,<span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># gerando amostra da distribuição normal</span></span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>  matrix_normal[,k] <span class="ot">&lt;-</span> x <span class="co"># guardando a amostra gerada na coluna</span></span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a>}</span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a>matrix_normal</span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a><span class="co">#&gt;              [,1]        [,2]         [,3]</span></span>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a><span class="co">#&gt;  [1,] -0.89691455  0.41765075  2.090819205</span></span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a><span class="co">#&gt;  [2,]  0.18484918  0.98175278 -1.199925820</span></span>
+<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a><span class="co">#&gt;  [3,]  1.58784533 -0.39269536  1.589638200</span></span>
+<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a><span class="co">#&gt;  [4,] -1.13037567 -1.03966898  1.954651642</span></span>
+<span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a><span class="co">#&gt;  [5,] -0.08025176  1.78222896  0.004937777</span></span>
+<span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a><span class="co">#&gt;  [6,]  0.13242028 -2.31106908 -2.451706388</span></span>
+<span id="cb11-18"><a href="#cb11-18" tabindex="-1"></a><span class="co">#&gt;  [7,]  0.70795473  0.87860458  0.477237303</span></span>
+<span id="cb11-19"><a href="#cb11-19" tabindex="-1"></a><span class="co">#&gt;  [8,] -0.23969802  0.03580672 -0.596558169</span></span>
+<span id="cb11-20"><a href="#cb11-20" tabindex="-1"></a><span class="co">#&gt;  [9,]  1.98447394  1.01282869  0.792203270</span></span>
+<span id="cb11-21"><a href="#cb11-21" tabindex="-1"></a><span class="co">#&gt; [10,] -0.13878701  0.43226515  0.289636710</span></span>
+<span id="cb11-22"><a href="#cb11-22" tabindex="-1"></a></span>
+<span id="cb11-23"><a href="#cb11-23" tabindex="-1"></a><span class="co"># forma alternativa</span></span>
+<span id="cb11-24"><a href="#cb11-24" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2</span>)</span>
+<span id="cb11-25"><a href="#cb11-25" tabindex="-1"></a><span class="fu">replicate</span>(m,<span class="fu">rnorm</span>(n,<span class="at">mean =</span> <span class="dv">0</span>,<span class="at">sd =</span> <span class="dv">1</span>))</span>
+<span id="cb11-26"><a href="#cb11-26" tabindex="-1"></a><span class="co">#&gt;              [,1]        [,2]         [,3]</span></span>
+<span id="cb11-27"><a href="#cb11-27" tabindex="-1"></a><span class="co">#&gt;  [1,] -0.89691455  0.41765075  2.090819205</span></span>
+<span id="cb11-28"><a href="#cb11-28" tabindex="-1"></a><span class="co">#&gt;  [2,]  0.18484918  0.98175278 -1.199925820</span></span>
+<span id="cb11-29"><a href="#cb11-29" tabindex="-1"></a><span class="co">#&gt;  [3,]  1.58784533 -0.39269536  1.589638200</span></span>
+<span id="cb11-30"><a href="#cb11-30" tabindex="-1"></a><span class="co">#&gt;  [4,] -1.13037567 -1.03966898  1.954651642</span></span>
+<span id="cb11-31"><a href="#cb11-31" tabindex="-1"></a><span class="co">#&gt;  [5,] -0.08025176  1.78222896  0.004937777</span></span>
+<span id="cb11-32"><a href="#cb11-32" tabindex="-1"></a><span class="co">#&gt;  [6,]  0.13242028 -2.31106908 -2.451706388</span></span>
+<span id="cb11-33"><a href="#cb11-33" tabindex="-1"></a><span class="co">#&gt;  [7,]  0.70795473  0.87860458  0.477237303</span></span>
+<span id="cb11-34"><a href="#cb11-34" tabindex="-1"></a><span class="co">#&gt;  [8,] -0.23969802  0.03580672 -0.596558169</span></span>
+<span id="cb11-35"><a href="#cb11-35" tabindex="-1"></a><span class="co">#&gt;  [9,]  1.98447394  1.01282869  0.792203270</span></span>
+<span id="cb11-36"><a href="#cb11-36" tabindex="-1"></a><span class="co">#&gt; [10,] -0.13878701  0.43226515  0.289636710</span></span></code></pre></div>
+<p>Utilizando dois <code>for</code></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># Criar uma matriz 3x3</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>matriz <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="co"># Preencher a matriz com números sequenciais usando um loop for</span></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>contador <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) {</span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) { <span class="co"># fixa o i e varia o j</span></span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a>    matriz[i, j] <span class="ot">&lt;-</span> contador </span>
+<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a>    contador <span class="ot">&lt;-</span> contador <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a>  }</span>
+<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a>}</span>
+<span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="#cb12-14" tabindex="-1"></a><span class="fu">print</span>(matriz)</span>
+<span id="cb12-15"><a href="#cb12-15" tabindex="-1"></a><span class="co">#&gt;      [,1] [,2] [,3]</span></span>
+<span id="cb12-16"><a href="#cb12-16" tabindex="-1"></a><span class="co">#&gt; [1,]    1    2    3</span></span>
+<span id="cb12-17"><a href="#cb12-17" tabindex="-1"></a><span class="co">#&gt; [2,]    4    5    6</span></span>
+<span id="cb12-18"><a href="#cb12-18" tabindex="-1"></a><span class="co">#&gt; [3,]    7    8    9</span></span></code></pre></div>
+</div>
+<div id="while" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> while</h2>
+<ul>
+<li>Também é utilizado para iterar sobre uma sequência de
+elementos.</li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="cf">while</span> (condition) {</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>  <span class="co"># código executado enquanto a condição for verdade </span></span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>}</span></code></pre></div>
+<ul>
+<li><p>O código a seguir irá imprimir o valor de <code>i</code> enquanto
+este objeto for menor que 5.</p></li>
+<li><p>Quando a condição não for mais respeitada, o processo será
+interrompido.</p></li>
+</ul>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>i <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="cf">while</span>(i<span class="sc">&lt;</span><span class="dv">5</span>){</span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>  <span class="fu">cat</span>(i,<span class="st">&quot;é menor que 5&quot;</span>,<span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>  i <span class="ot">=</span> i<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>}</span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a><span class="co">#&gt; 0 é menor que 5 </span></span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a><span class="co">#&gt; 1 é menor que 5 </span></span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a><span class="co">#&gt; 2 é menor que 5 </span></span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a><span class="co">#&gt; 3 é menor que 5 </span></span>
+<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a><span class="co">#&gt; 4 é menor que 5</span></span></code></pre></div>
+<ul>
+<li>Lançamento de um dado até que um determinado número seja
+obtido.</li>
+</ul>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>numero_escolhido <span class="ot">&lt;-</span> <span class="dv">6</span></span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>resultado_dado <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a><span class="cf">while</span> (resultado_dado<span class="sc">!=</span>numero_escolhido) {</span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a>  resultado_dado <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,<span class="dv">1</span>,<span class="at">replace =</span> T,<span class="at">prob =</span> <span class="cn">NULL</span>) <span class="co"># sorteando número de 1 a 6</span></span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;Número do dado é&quot;</span>,resultado_dado,<span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>}</span>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a><span class="co">#&gt; Número do dado é 1 </span></span>
+<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a><span class="co">#&gt; Número do dado é 2 </span></span>
+<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a><span class="co">#&gt; Número do dado é 4 </span></span>
+<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a><span class="co">#&gt; Número do dado é 5 </span></span>
+<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a><span class="co">#&gt; Número do dado é 6</span></span></code></pre></div>
+</div>
+<div id="repeat" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> repeat</h2>
+<ul>
+<li>A ideia é repetir um loop e parar quando a condição for satisfeita,
+para isso será utiliza a função <code>break</code></li>
+</ul>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="cf">repeat</span> {</span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>  <span class="co"># código será executado repetidamente </span></span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>  <span class="cf">if</span> (condition) {</span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>    <span class="cf">break</span>  <span class="co"># se a condição for satisfeita, para a repetição </span></span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a>  }</span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a>}</span></code></pre></div>
+<ul>
+<li><p>Rode esse código no seu computador</p></li>
+<li><p>O programa irá gerar um número e o usuário vai ficar tentanto
+acertar o número gerado</p></li>
+</ul>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="co"># Gera um número aleatório entre 1 e 10</span></span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>numero_correto <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">1</span>,<span class="at">replace =</span> T)</span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a><span class="co"># Inicializa a variável para armazenar a tentativa do usuário</span></span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a>tentativa_usuario <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a><span class="co"># Use um loop repeat para continuar o jogo até que o número correto seja adivinhado</span></span>
+<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a><span class="cf">repeat</span> {</span>
+<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a>  <span class="co"># Solicita que o usuário insira uma tentativa</span></span>
+<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a>  tentativa_usuario <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(<span class="fu">readline</span>(<span class="st">&quot;Tente adivinhar o número (entre 1 e 10): &quot;</span>))</span>
+<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a>  </span>
+<span id="cb17-12"><a href="#cb17-12" tabindex="-1"></a>  <span class="co"># Verifica se a tentativa do usuário é correta</span></span>
+<span id="cb17-13"><a href="#cb17-13" tabindex="-1"></a>  <span class="cf">if</span> (tentativa_usuario <span class="sc">==</span> numero_correto) {</span>
+<span id="cb17-14"><a href="#cb17-14" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">&quot;Parabéns! Você adivinhou corretamente.</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb17-15"><a href="#cb17-15" tabindex="-1"></a>    <span class="cf">break</span>  <span class="co"># Sai do loop quando adivinha corretamente</span></span>
+<span id="cb17-16"><a href="#cb17-16" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb17-17"><a href="#cb17-17" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">&quot;Tente novamente. Dica: &quot;</span>, <span class="fu">ifelse</span>(tentativa_usuario <span class="sc">&lt;</span> numero_correto, <span class="st">&quot;Tente um número maior.&quot;</span>, <span class="st">&quot;Tente um número menor.&quot;</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb17-18"><a href="#cb17-18" tabindex="-1"></a>  }</span>
+<span id="cb17-19"><a href="#cb17-19" tabindex="-1"></a>}</span></code></pre></div>
+<ul>
+<li><p>Rode esse código no seu computador</p></li>
+<li><p>Avaliar como o tamanho da amostra afeta a média amostral</p></li>
+</ul>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a></span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>media <span class="ot">=</span> <span class="dv">30</span></span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a>desvio_padrao <span class="ot">=</span> <span class="dv">5</span></span>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a>erro <span class="ot">=</span> <span class="dv">10</span><span class="sc">^</span>(<span class="sc">-</span><span class="dv">3</span>) <span class="co"># escolha com cuidado, pode travar o computador</span></span>
+<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a>n <span class="ot">=</span> <span class="dv">1</span> <span class="co"># tamanho da amostra inicial</span></span>
+<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a>crescimento_do_n <span class="ot">=</span> <span class="dv">3</span> <span class="co"># se a condição não for satisfeita, o n anterior será multiplicado por 3</span></span>
+<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a><span class="co"># escolha com cuidado, pode travar o computador</span></span>
+<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" tabindex="-1"></a><span class="cf">repeat</span>{</span>
+<span id="cb18-10"><a href="#cb18-10" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">rnorm</span>(n,<span class="at">mean =</span> media,<span class="at">sd =</span> desvio_padrao) <span class="co"># gerando amostra</span></span>
+<span id="cb18-11"><a href="#cb18-11" tabindex="-1"></a>  media_x <span class="ot">=</span> <span class="fu">mean</span>(x) <span class="co"># média da amostra</span></span>
+<span id="cb18-12"><a href="#cb18-12" tabindex="-1"></a>  </span>
+<span id="cb18-13"><a href="#cb18-13" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">abs</span>(media_x<span class="sc">-</span>media)<span class="sc">&lt;</span>erro){</span>
+<span id="cb18-14"><a href="#cb18-14" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">&quot;n=&quot;</span>,n,<span class="st">&quot;media_x&quot;</span><span class="ot">=</span><span class="st">&quot;,media_x=&quot;</span>,media_x,<span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb18-15"><a href="#cb18-15" tabindex="-1"></a>    <span class="cf">break</span></span>
+<span id="cb18-16"><a href="#cb18-16" tabindex="-1"></a>  }<span class="cf">else</span>{</span>
+<span id="cb18-17"><a href="#cb18-17" tabindex="-1"></a>    n <span class="ot">=</span> n<span class="sc">*</span>crescimento_do_n</span>
+<span id="cb18-18"><a href="#cb18-18" tabindex="-1"></a>     <span class="fu">cat</span>(<span class="st">&quot;n=&quot;</span>,n,<span class="st">&quot;media_x&quot;</span><span class="ot">=</span><span class="st">&quot;,media_x&quot;</span>,media_x,<span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb18-19"><a href="#cb18-19" tabindex="-1"></a>  }</span>
+<span id="cb18-20"><a href="#cb18-20" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<div id="switch" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> switch</h2>
+<ul>
+<li><p>A função <strong><code>switch</code></strong> uma construção
+condicional que permite escolher um valor com base na correspondência de
+casos.</p></li>
+<li><p>Ela é frequentemente utilizada quando você tem várias opções e
+deseja realizar diferentes ações dependendo do valor de uma
+expressão.</p></li>
+<li><p>É útil quando você tem uma série de casos possíveis e deseja
+evitar a aninhamento excessivo de instruções
+<strong><code>if-else</code></strong>.</p></li>
+<li><p>Torna o código mais limpo e legível, especialmente em situações
+em que há muitas opções possíveis.</p></li>
+<li><p>Esse exemplo faz uma correspondência entre o número e o dia da
+semana</p></li>
+</ul>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>numero <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>dia <span class="ot">&lt;-</span> <span class="cf">switch</span>(numero,</span>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a>                <span class="st">&quot;1&quot;</span><span class="ot">=</span><span class="st">&quot;Domingo&quot;</span>,</span>
+<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a>                <span class="st">&quot;2&quot;</span><span class="ot">=</span><span class="st">&quot;Segunda-feira&quot;</span>,</span>
+<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a>                <span class="st">&quot;3&quot;</span><span class="ot">=</span><span class="st">&quot;Terça-feira&quot;</span>,</span>
+<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a>                <span class="st">&quot;4&quot;</span><span class="ot">=</span><span class="st">&quot;Quarta-feira&quot;</span>,</span>
+<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a>                <span class="st">&quot;5&quot;</span><span class="ot">=</span><span class="st">&quot;Quinta-feira&quot;</span>,</span>
+<span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a>                <span class="st">&quot;6&quot;</span><span class="ot">=</span><span class="st">&quot;Sexta-feira&quot;</span>,</span>
+<span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a>                <span class="st">&quot;7&quot;</span><span class="ot">=</span><span class="st">&quot;Sábado&quot;</span></span>
+<span id="cb19-10"><a href="#cb19-10" tabindex="-1"></a>               )</span>
+<span id="cb19-11"><a href="#cb19-11" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;O dia correspondente ao número&quot;</span>, numero, <span class="st">&quot;é&quot;</span>, dia, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb19-12"><a href="#cb19-12" tabindex="-1"></a><span class="co">#&gt; O dia correspondente ao número 1 é Domingo</span></span></code></pre></div>
+<ul>
+<li>Esse exemplo faz uma correspondência entre o número percentual
+(character) e o número decimal (numeric)</li>
+</ul>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a>PROP <span class="ot">=</span> <span class="st">&quot;25%&quot;</span></span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>prop <span class="ot">&lt;-</span> <span class="cf">switch</span> (PROP,</span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a>    <span class="st">&quot;25%&quot;</span> <span class="ot">=</span> <span class="fl">0.25</span>,</span>
+<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a>    <span class="st">&quot;50%&quot;</span> <span class="ot">=</span> <span class="fl">0.5</span>,</span>
+<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a>    <span class="st">&quot;75%&quot;</span> <span class="ot">=</span> <span class="fl">0.75</span></span>
+<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a>  )</span>
+<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a>prop</span>
+<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a><span class="co">#&gt; [1] 0.25</span></span></code></pre></div>
+</div>
+</div>
+<div id="funções" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Funções</h1>
+<ul>
+<li><p>Funções são blocos de código que podem ser chamados para realizar
+uma tarefa específica</p></li>
+<li><p>Elas facilitam a organização do código, promovem a reutilização e
+tornam o código mais organizados.</p></li>
+<li><p>Dica: você deve considerar escrever uma função sempre que copiar
+e colar um bloco de código mais de duas vezes</p></li>
+<li><p>Para definir uma função em R, você usa a palavra-chave
+<strong><code>function</code></strong> seguida pelos
+<strong>parâmetros/argumentos</strong> da função e o <strong>corpo da
+função</strong></p></li>
+</ul>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>name <span class="ot">&lt;-</span> <span class="cf">function</span>(arguments) {</span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>  body</span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>  <span class="fu">return</span>(objeto que guarda o resultado final)</span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a>}</span></code></pre></div>
+<ul>
+<li><span class="math inline">\(f(x) = 2x\)</span></li>
+</ul>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a>f_x <span class="ot">=</span> <span class="cf">function</span>(x){</span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>  f_x <span class="ot">=</span> <span class="dv">2</span><span class="sc">*</span>x</span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a>  <span class="fu">return</span>(f_x)</span>
+<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a>}</span>
+<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)</span>
+<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a>y <span class="ot">=</span> <span class="fu">f_x</span>(x)</span>
+<span id="cb22-8"><a href="#cb22-8" tabindex="-1"></a><span class="fu">plot</span>(x,y)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
+<ul>
+<li>Média de um vetor numérico</li>
+</ul>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a>media <span class="ot">=</span> <span class="cf">function</span>(x){</span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>  media_x <span class="ot">=</span> <span class="fu">sum</span>(x)<span class="sc">/</span><span class="fu">length</span>(x)</span>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a>  <span class="fu">return</span>(media_x)</span>
+<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a>}</span>
+<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a>y <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>,<span class="dv">20</span>,<span class="at">replace=</span>T)</span>
+<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a><span class="fu">media</span>(y)</span>
+<span id="cb23-7"><a href="#cb23-7" tabindex="-1"></a><span class="co">#&gt; [1] 48.35</span></span></code></pre></div>
+<ul>
+<li>Função para fazer uma correspondência entre o número e o dia da
+semana</li>
+</ul>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a>dia_semana <span class="ot">&lt;-</span> <span class="cf">function</span>(numero_dia) {</span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a>  dia <span class="ot">&lt;-</span> <span class="cf">switch</span>(</span>
+<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a>    numero,</span>
+<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a>    <span class="st">&quot;1&quot;</span> <span class="ot">=</span> <span class="st">&quot;Domingo&quot;</span>,</span>
+<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a>    <span class="st">&quot;2&quot;</span> <span class="ot">=</span> <span class="st">&quot;Segunda-feira&quot;</span>,</span>
+<span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a>    <span class="st">&quot;3&quot;</span> <span class="ot">=</span> <span class="st">&quot;Terça-feira&quot;</span>,</span>
+<span id="cb24-7"><a href="#cb24-7" tabindex="-1"></a>    <span class="st">&quot;4&quot;</span> <span class="ot">=</span> <span class="st">&quot;Quarta-feira&quot;</span>,</span>
+<span id="cb24-8"><a href="#cb24-8" tabindex="-1"></a>    <span class="st">&quot;5&quot;</span> <span class="ot">=</span> <span class="st">&quot;Quinta-feira&quot;</span>,</span>
+<span id="cb24-9"><a href="#cb24-9" tabindex="-1"></a>    <span class="st">&quot;6&quot;</span> <span class="ot">=</span> <span class="st">&quot;Sexta-feira&quot;</span>,</span>
+<span id="cb24-10"><a href="#cb24-10" tabindex="-1"></a>    <span class="st">&quot;7&quot;</span> <span class="ot">=</span> <span class="st">&quot;Sábado&quot;</span></span>
+<span id="cb24-11"><a href="#cb24-11" tabindex="-1"></a>  )</span>
+<span id="cb24-12"><a href="#cb24-12" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">cat</span>(<span class="st">&quot;O dia correspondente ao número&quot;</span>, numero, <span class="st">&quot;é&quot;</span>, dia, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>))</span>
+<span id="cb24-13"><a href="#cb24-13" tabindex="-1"></a>}</span>
+<span id="cb24-14"><a href="#cb24-14" tabindex="-1"></a><span class="fu">dia_semana</span>(<span class="dv">2</span>)</span>
+<span id="cb24-15"><a href="#cb24-15" tabindex="-1"></a><span class="co">#&gt; O dia correspondente ao número 1 é Domingo</span></span></code></pre></div>
+</div>
+<div id="referências" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Referências</h1>
+<ul>
+<li><p><a href="https://adv-r.hadley.nz/index.html"><u>Advanced
+R</u></a></p></li>
+<li><p><a href="https://r4ds.had.co.nz/index.html"><u>R for Data
+Science</u></a></p></li>
+<li><p><a href="https://web.itu.edu.tr/~tokerem/Hands-On_R.pdf">Hands-On
+Programming with R</a></p></li>
+</ul>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
