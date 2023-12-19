@@ -18,9 +18,9 @@
 
 # Questão 3 ---------------------------------------------------------------
 #' localize seu diretório inicial
-#' com a função dir.create() crie um dirtetório (pasta no seu pc)
+#' com a função dir.create() crie um diretório (pasta no seu pc)
 #' Crie uma função que:
-#' 1-gera da distribuição normal. Use n  como argumento e ... para arumentos adicionais
+#' 1-gera da distribuição normal. Use n  como argumento e ... para argumentos adicionais
 #' 2-salve os dados gerados na pasta que você criou com dir.create()
 #' 3- volte para o diretório inicial (de forma automática), utilizando on.exit()
 
