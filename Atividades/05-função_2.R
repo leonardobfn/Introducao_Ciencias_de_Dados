@@ -1,6 +1,6 @@
 # Questão 1 ---------------------------------------------------------------
 
-#'Considente a seguinte função:
+#'Considere a seguinte função:
 #'f(x) = (x - 3)^2 + 5 se 0=<x<10
 #'f(x) = 54 se x>=10
 #' x é número inteiro 
