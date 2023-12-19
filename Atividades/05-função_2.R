@@ -33,6 +33,6 @@
 # Questão 5 ---------------------------------------------------------------
 
 #' Crie um exemplo usando a função try
-#' se for erro: atribua qualquer NaN ao objeto da class try-error
+#' se for erro: atribua NaN ao objeto da class try-error e imprima mensagem de erro
 
 
