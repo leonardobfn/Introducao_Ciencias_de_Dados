@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Aula_19-12-2023.knit</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } code span.at { color: #7d9029; } code span.bn { color: #40a070; } code span.bu { color: #008000; } code span.cf { color: #007020; font-weight: bold; } code span.ch { color: #4070a0; } code span.cn { color: #880000; } code span.co { color: #60a0b0; font-style: italic; } code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } code span.do { color: #ba2121; font-style: italic; } code span.dt { color: #902000; } code span.dv { color: #40a070; } code span.er { color: #ff0000; font-weight: bold; } code span.ex { } code span.fl { color: #40a070; } code span.fu { color: #06287e; } code span.im { color: #008000; font-weight: bold; } code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } code span.kw { color: #007020; font-weight: bold; } code span.op { color: #666666; } code span.ot { color: #007020; } code span.pp { color: #bc7a00; } code span.sc { color: #4070a0; } code span.ss { color: #bb6688; } code span.st { color: #4070a0; } code span.va { color: #19177c; } code span.vs { color: #4070a0; } code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } </style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; }
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+code > span.kw { color: #555; font-weight: bold; } code > span.dt { color: #902000; } code > span.dv { color: #40a070; } code > span.bn { color: #d14; } code > span.fl { color: #d14; } code > span.ch { color: #d14; } code > span.st { color: #d14; } code > span.co { color: #888888; font-style: italic; } code > span.ot { color: #007020; } code > span.al { color: #ff0000; font-weight: bold; } code > span.fu { color: #900; font-weight: bold; } code > span.er { color: #a61717; background-color: #e3d2d2; } </style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore"><center>
+Universidade Federal do Amazonas
+</center>
+<center>
+Departamento de Estatística
+</center></h1>
+<h3 class="subtitle"><center>
+Curso: Introdução à Ciência de Dados
+</center>
+<center>
+Professor: Leonardo Nascimento
+</center>
+<center>
+19/12/2023
+<center>
+Versão 1.0
+</center></h3>
+
+
+<div id="TOC">
+<ul>
+<li><a href="#funções" id="toc-funções"><span class="toc-section-number">1</span> Funções</a>
+<ul>
+<li><a href="#dotdotdot" id="toc-dotdotdot"><span class="toc-section-number">1.1</span> <code>…</code>
+dot,dot,dot</a></li>
+<li><a href="#on.exit" id="toc-on.exit"><span class="toc-section-number">1.2</span> on.exit</a></li>
+<li><a href="#formas-de-funções" id="toc-formas-de-funções"><span class="toc-section-number">1.3</span> Formas de Funções</a>
+<ul>
+<li><a href="#prefix-functions" id="toc-prefix-functions"><span class="toc-section-number">1.3.1</span> Prefix Functions</a></li>
+<li><a href="#infix-functions" id="toc-infix-functions"><span class="toc-section-number">1.3.2</span> Infix Functions</a></li>
+<li><a href="#replacement-functions" id="toc-replacement-functions"><span class="toc-section-number">1.3.3</span> Replacement Functions</a></li>
+<li><a href="#special-functios" id="toc-special-functios"><span class="toc-section-number">1.3.4</span> Special functios</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#condições" id="toc-condições"><span class="toc-section-number">2</span> Condições</a>
+<ul>
+<li><a href="#erro-stop-condition" id="toc-erro-stop-condition"><span class="toc-section-number">2.1</span> Erro (Stop Condition):</a></li>
+<li><a href="#aviso-warning-condition" id="toc-aviso-warning-condition"><span class="toc-section-number">2.2</span> Aviso (Warning
+Condition):</a></li>
+<li><a href="#mensagem-informativa-message-condition" id="toc-mensagem-informativa-message-condition"><span class="toc-section-number">2.3</span> Mensagem Informativa (Message
+Condition):</a></li>
+<li><a href="#ignorando-as-condições" id="toc-ignorando-as-condições"><span class="toc-section-number">2.4</span> Ignorando as condições</a>
+<ul>
+<li><a href="#try" id="toc-try"><span class="toc-section-number">2.4.1</span>
+<strong><code>try()</code></strong></a></li>
+<li><a href="#suppresswarnings-para-suprimir-avisos" id="toc-suppresswarnings-para-suprimir-avisos"><span class="toc-section-number">2.4.2</span> <code>suppressWarnings()</code>
+para Suprimir Avisos:</a></li>
+<li><a href="#suppressmessages-para-suprimir-mensagens" id="toc-suppressmessages-para-suprimir-mensagens"><span class="toc-section-number">2.4.3</span>
+<strong><code>suppressMessages()</code> para</strong> Suprimir
+Mensagens:</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#referências" id="toc-referências"><span class="toc-section-number">3</span> Referências</a></li>
+</ul>
+</div>
+
+<!-- ```{r, echo=FALSE} -->
+<!-- htmltools::img(src = knitr::image_uri("C:/Users/Leonardo_Nascimento/Documents/GitHub/Introducao_Ciencias_de_Dados/Cadernos/Figuras/DE.jpg"),  -->
+<!--                alt = 'logo',  -->
+<!--                 width = 180, height = 180, -->
+<!--                style = 'position:absolute; top:10px; right:400px; padding:10px;') -->
+<!-- ``` -->
+<!-- ```{r, echo=FALSE} -->
+<!-- htmltools::img(src = knitr::image_uri("C:/Users/Leonardo_Nascimento/Documents/GitHub/Introducao_Ciencias_de_Dados/Cadernos/Figuras/ufam.png"),  -->
+<!--                alt = 'logo',  -->
+<!--                width = 180, height = 180, -->
+<!--                style = 'position:absolute; top:10px; left:400px; padding:10px; "margin: -100px;') -->
+<!-- ``` -->
+<style type="text/css">
+.watch-out {
+border: 3px solid gray;
+font-weight: bold;
+}
+</style>
+<div id="funções" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Funções</h1>
+<ul>
+<li>Continuação da aula</li>
+</ul>
+<div id="dotdotdot" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> <code>…</code>
+dot,dot,dot</h2>
+<ul>
+<li>Na definição de uma função, você pode usar três pontos
+(<strong><code>...</code></strong>) para indicar que a função aceita
+argumentos adicionais.</li>
+<li>Esses argumentos adicionais não precisam ser explicitamente listados
+na definição da função</li>
+<li>Esses argumentos adicionais geralmente são passados para outras
+funções dentro do corpo da função.</li>
+<li>No exemplo abaixo, <strong><code>...</code></strong> permite a
+passagem de argumentos adicionais, como
+<strong><code>na.rm</code></strong> para remover valores ausentes ao
+calcular a média.</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>media_ponderada <span class="ot">&lt;-</span> <span class="cf">function</span>(valores,pesos,...) {</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  <span class="co"># Calcula a média ponderada</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  resultado <span class="ot">&lt;-</span> <span class="fu">sum</span>(valores <span class="sc">*</span> pesos,...) <span class="sc">/</span> <span class="fu">sum</span>(pesos,...)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  <span class="fu">return</span>(resultado)</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>}</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="fu">media_ponderada</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="cn">NA</span>),<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>))</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="co">#&gt; [1] NA</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="fu">media_ponderada</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="cn">NA</span>),<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>),<span class="at">na.rm=</span>T)</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="co">#&gt; [1] 0.8333333</span></span></code></pre></div>
+</div>
+<div id="on.exit" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> on.exit</h2>
+<ul>
+<li><p>A função <strong><code>on.exit</code></strong> é usada para
+especificar código que deve ser executado quando a execução de uma
+função é concluída</p></li>
+<li><p>Frequentemente usada para garantir que determinadas ações sejam
+realizadas antes que a função termine, independentemente de como ele
+termina</p></li>
+<li><p>No exemplo a seguir vamos trocar de diretório</p></li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>names_wd_atual <span class="ot">&lt;-</span> <span class="st">&quot;~/GitHub/Introducao_Ciencias_de_Dados/&quot;</span> <span class="co"># diretório atual</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>wd_atual <span class="ot">&lt;-</span> <span class="fu">setwd</span>(names_wd_atual)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>geracao_normal <span class="ot">&lt;-</span> <span class="cf">function</span>(n,...){</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>  new_wd <span class="ot">&lt;-</span> <span class="fu">paste0</span>(wd_atual,<span class="st">&quot;/dados/new_wd.txt&quot;</span>) <span class="co"># trocando diretório</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>  <span class="fu">write.table</span>(x,new_wd)</span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>  <span class="fu">on.exit</span>({</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>    <span class="fu">setwd</span>(wd_atual) <span class="co"># voltando para o diretório atual</span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>  })</span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>}</span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="fu">geracao_normal</span>(<span class="dv">100</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div>
+<ul>
+<li><p>Irei salvar uma figura no diretório:
+<code>&quot;~/GitHub/Introducao_Ciencias_de_Dados/Cadernos/Figuras/figura_exemplo_on_exit.jpg&quot;</code></p></li>
+<li><p>Depois irei voltar para o diretório
+<code>&quot;~/GitHub/Introducao_Ciencias_de_Dados&quot;</code></p></li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>names_wd_atual <span class="ot">&lt;-</span> <span class="st">&quot;~/GitHub/Introducao_Ciencias_de_Dados/&quot;</span> <span class="co"># diretório atual</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>wd_atual <span class="ot">&lt;-</span> <span class="fu">setwd</span>(names_wd_atual)</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>criar_grafico <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>  <span class="fu">x11</span>() <span class="co"># abrindo nova janela para a figura</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>  new_wd <span class="ot">&lt;-</span> <span class="fu">paste0</span>(wd_atual,<span class="st">&quot;/Cadernos/Figuras/figura_exemplo_on_exit.jpg&quot;</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>  <span class="fu">jpeg</span>(new_wd) <span class="co"># salvando figura no novo diretório</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">main =</span> <span class="st">&quot;Meu Gráfico&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Valores&quot;</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>  <span class="co"># Configura on.exit para fechar o dispositivo gráfico ao sair</span></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>  <span class="fu">on.exit</span>({</span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>    <span class="fu">dev.off</span>()</span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">&quot;Fechando o dispositivo gráfico</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a>    <span class="fu">setwd</span>(wd_atual) <span class="co"># voltando para o diretório atual</span></span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">&quot;voltando para o diretório atual</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>  }, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a>}</span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a><span class="co"># Chama a função</span></span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a><span class="fu">criar_grafico</span>()</span></code></pre></div>
+</div>
+<div id="formas-de-funções" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Formas de
+Funções</h2>
+<ul>
+<li><p>Embora tudo o que acontece em R seja resultado de uma função, nem
+todos as funções são formuladas da mesma forma.</p></li>
+<li><p>Existem quatro formas de função:</p>
+<ul>
+<li><p>Prefix Functions</p></li>
+<li><p>Infix Functions</p></li>
+<li><p>Replacement Functions</p></li>
+<li><p>Special functios</p></li>
+</ul></li>
+</ul>
+<div id="prefix-functions" class="section level3" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> Prefix
+Functions</h3>
+<ul>
+<li>São as funções padrão ou regulares, identificadas por um nome
+seguido de argumentos entre parênteses.</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>media_ponderada <span class="ot">&lt;-</span> <span class="cf">function</span>(x,<span class="at">peso=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>),...)<span class="fu">return</span>(<span class="fu">sum</span>(peso<span class="sc">*</span>x,...)<span class="sc">/</span><span class="fu">sum</span>(peso,...))</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">media_ponderada</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)) <span class="co"># o nome da função vem antes de seus argumento</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">#&gt; [1] 2</span></span></code></pre></div>
+</div>
+<div id="infix-functions" class="section level3" number="1.3.2">
+<h3><span class="header-section-number">1.3.2</span> Infix
+Functions</h3>
+<ul>
+<li><p>O nome da função fica entre seus argumentos</p></li>
+<li><p>As formas infixas são usadas para muitos operadores matemáticos e
+para funções definidas pelo usuário que começam e terminam
+com <code>%</code></p></li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="dv">2-3</span> ; <span class="dv">2</span><span class="sc">+</span><span class="dv">3</span> ; <span class="dv">2</span><span class="sc">*</span><span class="dv">3</span>; <span class="dv">2</span><span class="sc">/</span><span class="dv">3</span> <span class="co"># os operadores estão entre dois argumentos</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="dv">6</span> <span class="sc">%in%</span> x <span class="co"># o número 6 pertence ao conjuto x?</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">#&gt; [1] FALSE</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="dv">2</span> <span class="sc">%in%</span> x <span class="co"># o número 2 pertence ao conjuto x?</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>mat1 <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>),<span class="dv">2</span>,<span class="dv">2</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>mat2 <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>),<span class="dv">2</span>,<span class="dv">2</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>mat1 <span class="sc">%*%</span> mat2 <span class="co"># multiplicação de matriz</span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co">#&gt;      [,1] [,2]</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="co">#&gt; [1,]    7   15</span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="co">#&gt; [2,]   10   22</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="st">`</span><span class="at">%+%</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="cf">function</span>(a, b) <span class="fu">paste</span>(a, b,<span class="at">sep=</span><span class="st">&quot;-&quot;</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="st">&quot;new &quot;</span> <span class="sc">%+%</span> <span class="st">&quot;string&quot;</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="co">#&gt; [1] &quot;new -string&quot;</span></span></code></pre></div>
+<ul>
+<li>A biblioteca <code>magrittr</code> adiciona o operador
+<strong>pipe</strong>, que permite usar a saída de uma função como
+entrada de outra função</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">require</span>(magrittr) <span class="co"># pacote para usar %&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="co">#&gt; Carregando pacotes exigidos: magrittr</span></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>desvio_padrao <span class="ot">=</span> <span class="fu">sqrt</span>( <span class="fu">var</span>(x) )</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>desvio_padrao <span class="ot">=</span> <span class="fu">var</span>(x) <span class="sc">%&gt;%</span> <span class="fu">sqrt</span>()</span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>desvio_padrao <span class="ot">=</span> <span class="fu">var</span>(x) <span class="sc">|&gt;</span> <span class="fu">sqrt</span>()</span></code></pre></div>
+<ul>
+<li>Os colchetes transformam o pipe no que é quase uma função
+anônima</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">5</span> <span class="sc">%&gt;%</span> {(. <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">/</span> <span class="dv">2</span>} <span class="co"># 1:5 são utilizados no lugar do ponto</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="co">#&gt; [1] 1.0 1.5 2.0 2.5 3.0</span></span></code></pre></div>
+<ul>
+<li>Para mais exemplos, vê <a href="https://adv-r.hadley.nz/functions.html#function-forms"><u>Advanced
+R</u></a></li>
+</ul>
+</div>
+<div id="replacement-functions" class="section level3" number="1.3.3">
+<h3><span class="header-section-number">1.3.3</span> Replacement
+Functions</h3>
+<ul>
+<li>Estas funções são frequentemente usadas para atribuir valores a
+variáveis ou modificar objetos existentes.</li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="st">&#39;function_name&lt;-&#39;</span> <span class="ot">&lt;-</span> <span class="cf">function</span>(x, additional arguments, value) </span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>{ </span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="cf">function</span> body </span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>} </span></code></pre></div>
+<ul>
+<li>Nomear elementos do vetor com a função <code>names</code></li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="fu">names</span>(x) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;n&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(x))</span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>x</span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="co">#&gt; n1 n2 n3 n4 </span></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="co">#&gt;  1  2  3  4</span></span></code></pre></div>
+<ul>
+<li>Mudar o segundo elemento do vetor</li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="st">&quot;replace_second&lt;-&quot;</span> <span class="ot">=</span> <span class="cf">function</span>(x,value){</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>  x[<span class="dv">2</span>] <span class="ot">&lt;-</span> value</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>  x</span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>}</span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a><span class="fu">replace_second</span>(x) <span class="ot">&lt;-</span> 0L</span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a>x</span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a><span class="co">#&gt; [1] 1 0 3 4</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="st">&#39;modify&lt;-&#39;</span> <span class="ot">&lt;-</span> <span class="cf">function</span>(x, position, value) {</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>  x[position] <span class="ot">&lt;-</span> value</span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>  x</span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>}</span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a><span class="fu">modify</span>(x, <span class="dv">1</span>) <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="co"># value=2</span></span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a>x</span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a><span class="co">#&gt; [1] 2 2 3 4 5</span></span></code></pre></div>
+</div>
+<div id="special-functios" class="section level3" number="1.3.4">
+<h3><span class="header-section-number">1.3.4</span> Special
+functios</h3>
+<ul>
+<li><p>Funções especiais muitas vezes desempenham papéis específicos,
+como manipulação condicional, filtragem de dados e manipulação de
+strings.</p></li>
+<li><p>Ferramentas de controle de fluxo</p>
+<ul>
+<li><p><code>if (cond) true</code>
+(<code>`if`(cond, true)</code>)</p></li>
+<li><p><code>if (cond) true else false</code>
+(<code>`if`(cond, true, false)</code>)</p></li>
+<li><p><code>for(var in seq) action</code>
+(<code>`for`(var, seq, action)</code>)</p></li>
+<li><p><code>while(cond) action</code>
+(<code>`while`(cond, action)</code>)</p></li>
+<li><p><code>repeat expr</code> (<code>`repeat`(expr)</code>)</p></li>
+<li><p><code>next</code> (<code>`next`()</code>)</p></li>
+<li><p><code>break</code> (<code>`break`()</code>)</p></li>
+</ul></li>
+<li><p>Para mais detalhes <a href="https://adv-r.hadley.nz/functions.html#special-forms">Advanced
+R</a></p></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="condições" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Condições</h1>
+<ul>
+<li><p>O sistema de <strong>condições</strong> fornece um conjunto de
+ferramentas que permitem ao autor de uma função indicar que algo incomum
+está acontecendo</p></li>
+<li><p>O autor da função <strong>sinaliza</strong> condições com funções
+como <a href="https://rdrr.io/r/base/stop.html"><code>stop()</code></a> (para
+erros), <a href="https://rdrr.io/r/base/warning.html"><code>warning()</code></a> (
+para avisos) e <a href="https://rdrr.io/r/base/message.html"><code>message()</code></a> (para
+mensagens)</p></li>
+<li><p>Compreender o sistema de condições é importante porque muitas
+vezes você precisará desempenhar as duas funções: sinalizar as condições
+das funções que você cria e lidar com as condições sinalizadas pelas
+funções que você chama.</p></li>
+</ul>
+<div id="erro-stop-condition" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Erro (Stop
+Condition):</h2>
+<ul>
+<li>A função <strong><code>stop()</code></strong> é usada para sinalizar
+um erro. Quando um erro é sinalizado, a execução do código é
+interrompida e uma mensagem de erro é exibida.</li>
+</ul>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>calcular_media <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(x) <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">&quot;Erro: O vetor está vazio.&quot;</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a>  }</span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.numeric</span>(x) <span class="sc">==</span> F) {</span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">&quot;Erro: vetor deve ser do tipo numérico&quot;</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>  }</span>
+<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">mean</span>(x))</span>
+<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a>}</span>
+<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a><span class="fu">calcular_media</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)</span>
+<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a><span class="co">#&gt; [1] 2.5</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>calcular_media <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(x) <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">&quot;Erro: O vetor está vazio.&quot;</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>  }</span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.numeric</span>(x) <span class="sc">==</span> F) {</span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">&quot;Erro: vetor deve ser do tipo numérico&quot;</span>)</span>
+<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a>  }</span>
+<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">mean</span>(x))</span>
+<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a>}</span>
+<span id="cb16-10"><a href="#cb16-10" tabindex="-1"></a><span class="fu">calcular_media</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="st">&quot;l&quot;</span>))</span>
+<span id="cb16-11"><a href="#cb16-11" tabindex="-1"></a><span class="co"># Error in calcular_media(c(1, 2, 3, &quot;l&quot;)) : </span></span>
+<span id="cb16-12"><a href="#cb16-12" tabindex="-1"></a><span class="co">#  Erro: vetor deve ser do tipo numérico</span></span></code></pre></div>
+</div>
+<div id="aviso-warning-condition" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Aviso (Warning
+Condition):</h2>
+<ul>
+<li>A função <strong><code>warning()</code></strong> é usada para
+sinalizar um aviso. Um aviso não interrompe a execução do código, mas
+alerta o usuário sobre algo que pode ser problemático.</li>
+</ul>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>calcular_raiz_quadrada <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">any</span>(x <span class="sc">&lt;</span> <span class="dv">0</span>)) {</span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>    <span class="fu">warning</span>(<span class="st">&quot;Alguns valores são negativos. A raiz quadrada de números negativos será tratada como NaN.&quot;</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a>  }</span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">sqrt</span>(x))</span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a>}</span>
+<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a><span class="co"># Exemplo de uso</span></span>
+<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a>resultado <span class="ot">&lt;-</span> <span class="fu">calcular_raiz_quadrada</span>(<span class="fu">c</span>(<span class="dv">4</span>, <span class="sc">-</span><span class="dv">9</span>, <span class="dv">16</span>))</span>
+<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a><span class="co">#&gt; Warning in calcular_raiz_quadrada(c(4, -9, 16)): Alguns valores são negativos.</span></span>
+<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a><span class="co">#&gt; A raiz quadrada de números negativos será tratada como NaN.</span></span>
+<span id="cb17-12"><a href="#cb17-12" tabindex="-1"></a><span class="co">#&gt; Warning in sqrt(x): NaNs produzidos</span></span>
+<span id="cb17-13"><a href="#cb17-13" tabindex="-1"></a><span class="fu">print</span>(resultado)</span>
+<span id="cb17-14"><a href="#cb17-14" tabindex="-1"></a><span class="co">#&gt; [1]   2 NaN   4</span></span></code></pre></div>
+</div>
+<div id="mensagem-informativa-message-condition" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Mensagem Informativa
+(Message Condition):</h2>
+<ul>
+<li>A função <strong><code>message()</code></strong> é usada para
+sinalizar mensagens informativas. Essas mensagens são úteis para
+fornecer informações adicionais durante a execução do código.</li>
+</ul>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a>calcular_cubo <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>  <span class="fu">message</span>(<span class="st">&quot;Calculando o cubo dos valores.&quot;</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a>  <span class="fu">return</span>(x<span class="sc">^</span><span class="dv">3</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a>}</span>
+<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a><span class="co"># Exemplo de uso</span></span>
+<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a>resultado <span class="ot">&lt;-</span> <span class="fu">calcular_cubo</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>))</span>
+<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a><span class="co">#&gt; Calculando o cubo dos valores.</span></span>
+<span id="cb18-9"><a href="#cb18-9" tabindex="-1"></a><span class="fu">print</span>(resultado)</span>
+<span id="cb18-10"><a href="#cb18-10" tabindex="-1"></a><span class="co">#&gt; [1]  8 27 64</span></span></code></pre></div>
+<ul>
+<li>Ao lidar com condições em R, você pode usar as funções
+<strong><code>try()</code></strong>,
+<strong><code>suppressWarnings()</code></strong>, e
+<strong><code>suppressMessages()</code></strong> para controlar o
+tratamento de erros, avisos e mensagens.</li>
+</ul>
+</div>
+<div id="ignorando-as-condições" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Ignorando as
+condições</h2>
+<div id="try" class="section level3" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span>
+<strong><code>try()</code></strong></h3>
+<ul>
+<li>A função <strong><code>try()</code></strong> é usada para avaliar
+expressões e manipular erros sem interromper a execução do código. Ela
+retorna um objeto que você pode verificar usando
+<strong><code>inherits()</code></strong> para determinar se ocorreu um
+erro.</li>
+</ul>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">c</span>()</span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a><span class="fu">mean</span>(x)</span>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a><span class="co">#&gt; Warning in mean.default(x): argumento não é numérico nem lógico: retornando NA</span></span>
+<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a><span class="co">#&gt; [1] NA</span></span>
+<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a>resultado <span class="ot">&lt;-</span> <span class="fu">try</span>(<span class="fu">mean</span>(), <span class="at">silent =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a>resultado</span>
+<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Error in mean.default() : argumento \&quot;x\&quot; ausente, sem padrão\n&quot;</span></span>
+<span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a><span class="co">#&gt; attr(,&quot;class&quot;)</span></span>
+<span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a><span class="co">#&gt; [1] &quot;try-error&quot;</span></span>
+<span id="cb19-10"><a href="#cb19-10" tabindex="-1"></a><span class="co">#&gt; attr(,&quot;condition&quot;)</span></span>
+<span id="cb19-11"><a href="#cb19-11" tabindex="-1"></a><span class="co">#&gt; &lt;simpleError in mean.default(): argumento &quot;x&quot; ausente, sem padrão&gt;</span></span>
+<span id="cb19-12"><a href="#cb19-12" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">inherits</span>(resultado, <span class="st">&quot;try-error&quot;</span>)) { <span class="co"># verifica se o objeto resultado é da classe &quot;try-error</span></span>
+<span id="cb19-13"><a href="#cb19-13" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">&quot;Erro: Ocorreu um problema ao calcular a média.</span><span class="sc">\n</span><span class="st">&quot;</span>)}</span>
+<span id="cb19-14"><a href="#cb19-14" tabindex="-1"></a><span class="co">#&gt; Erro: Ocorreu um problema ao calcular a média.</span></span></code></pre></div>
+</div>
+<div id="suppresswarnings-para-suprimir-avisos" class="section level3" number="2.4.2">
+<h3><span class="header-section-number">2.4.2</span>
+<code>suppressWarnings()</code> para Suprimir Avisos:</h3>
+<ul>
+<li>A função <strong><code>suppressWarnings()</code></strong> é usada
+para executar uma expressão e suprimir os avisos que ela pode
+gerar.</li>
+</ul>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">c</span>()</span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a><span class="fu">mean</span>(x)</span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a><span class="co">#&gt; Warning in mean.default(x): argumento não é numérico nem lógico: retornando NA</span></span>
+<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a><span class="co">#&gt; [1] NA</span></span>
+<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a><span class="fu">suppressWarnings</span>(<span class="fu">mean</span>(x))</span>
+<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a><span class="co">#&gt; [1] NA</span></span></code></pre></div>
+</div>
+<div id="suppressmessages-para-suprimir-mensagens" class="section level3" number="2.4.3">
+<h3><span class="header-section-number">2.4.3</span>
+<strong><code>suppressMessages()</code> para</strong> Suprimir
+Mensagens:</h3>
+<ul>
+<li>A função <strong><code>suppressMessages()</code></strong> é usada
+para executar uma expressão e suprimir as mensagens informativas que ela
+pode gerar.</li>
+</ul>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r watch-out"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>calcular_cubo <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>  <span class="fu">message</span>(<span class="st">&quot;Calculando o cubo dos valores.&quot;</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>  <span class="fu">return</span>(x<span class="sc">^</span><span class="dv">3</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a>}</span>
+<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a><span class="co"># Exemplo de uso</span></span>
+<span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a>resultado <span class="ot">&lt;-</span> <span class="fu">suppressMessages</span>(<span class="fu">calcular_cubo</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)))</span>
+<span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a>resultado</span>
+<span id="cb21-9"><a href="#cb21-9" tabindex="-1"></a><span class="co">#&gt; [1]  8 27 64</span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="referências" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Referências</h1>
+<ul>
+<li><p><a href="https://adv-r.hadley.nz/index.html"><u>Advanced
+R</u></a></p></li>
+<li><p><a href="https://r4ds.had.co.nz/index.html"><u>R for Data
+Science</u></a></p></li>
+<li><p><a href="https://web.itu.edu.tr/~tokerem/Hands-On_R.pdf">Hands-On
+Programming with R</a></p></li>
+</ul>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

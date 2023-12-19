@@ -15,284 +15,255 @@ knitr::opts_chunk$set(
 )
 
 
-## -------------------------------------------------------------------------------------
-a <- 2
-a = 2
-print(a)
+## ----eval=F---------------------------------------------------------------------------
+## if (condition) true_action
+
+
+## ----eval=F---------------------------------------------------------------------------
+## if (condition) true_action else false_action
 
 
 ## -------------------------------------------------------------------------------------
-b <- 1:6
-print(b)
+x = "Leonardo"
+if(class(x)=="character"){
+  cat(" O objeto x=",x,"é da classe character",sep=" ")
+}
 
 
 ## -------------------------------------------------------------------------------------
-lgl_var <- c(TRUE, FALSE)# lógico
-lgl_var <- c(T, F)# lógico
-typeof(lgl_var)# verificar o tipo
-is.logical(lgl_var) # testar se o vetor é do tipo lógico
-is.integer(lgl_var)
-length(lgl_var)
+x = 1
+
+if(class(x)=="character"){
+  paste(" O objeto x=",x,"é da classe character",sep=" ")
+} else{
+  paste(" O objeto x=",x,"não é da classe character",sep=" ")
+}
 
 
 ## -------------------------------------------------------------------------------------
-dbl_var <- c(1, 2.5, 4.5)#forma decimal 
-dbl_var <- c(1.23e4)##forma científica 
-typeof(dbl_var) 
-is.double(dbl_var) # testar se o vetor é do tipo Double 
-is.character(lgl_var)
-length(dbl_var)
+x = 70
+ if (x >= 90 & x <= 100) {
+    "A"
+  } else if (x >= 80 & x < 90) {
+    "B"
+  } else {
+    "C"
+  }
 
 
 ## -------------------------------------------------------------------------------------
-dbl_var <- c(Inf,-Inf,NaN)
-typeof(dbl_var)
+x = 80
+ if (x >= 100 | x <= 70) {
+    "Extremo"
+  } else {
+    "Não é extremo"
+  } 
 
 
 ## -------------------------------------------------------------------------------------
-int_var <- c(1L, 6L, 10L)# inteiro
-typeof(int_var)
-is.integer(int_var)
-is.character(int_var)
-length(int_var)
+x = 1:10
+ifelse(x %% 2 == 0, "par", "ímpar")
+
+
+## ----eval=F---------------------------------------------------------------------------
+## for (variavel in sequencia) {
+##   # código a ser executado em cada iteração
+## }
 
 
 ## -------------------------------------------------------------------------------------
-chr_var <- c("Leonardo", "Nascimento")
-chr_var <- c("Ótimo", "Bom","Ruim")
-chr_var <- c("Masculino", "Feminino")
-is.character(chr_var)
-typeof(chr_var)
+for (i in 1:5) {
+  quadrado <- i^2
+  cat("O quadrado de", i, "é", quadrado, "\n")
+}
 
 
 ## -------------------------------------------------------------------------------------
-meu_vetor = c(1,2,10,4,5)
-meu_vetor[3]
+soma <- 0
+for (i in 1:10) {
+  soma <- soma + i
+}
+cat("A soma dos primeiros 10 números naturais é:", soma, "\n")
+
+cumsum(1:10) # forma alternativa
 
 
 ## -------------------------------------------------------------------------------------
-vetor_null <- c(NULL)
-vetor_null
-typeof(vetor_null)
+n = 10 # linhas
+m=3 # colunas
+matrix_normal = matrix(0,nrow = n,ncol = m) # criando a matriz
+
+set.seed(8) # gerar sempre as mesmas amostras
+for(k in 1:m){
+  x = rnorm(n,mean = 0,sd = 1) # gerando amostra da distribuição normal
+  matrix_normal[,k] <- x # guardando a amostra gerada na coluna
+}
+matrix_normal
+
+# forma alternativa
+set.seed(2)
+replicate(m,rnorm(n,mean = 0,sd = 1))
 
 
 ## -------------------------------------------------------------------------------------
-meu_vetor <- c(10,NA)
-2*meu_vetor
+# Criar uma matriz 3x3
+matriz <- matrix(0, nrow = 3, ncol = 3)
+
+# Preencher a matriz com números sequenciais usando um loop for
+contador <- 1
+
+for (i in 1:3) {
+  for (j in 1:3) { # fixa o i e varia o j
+    matriz[i, j] <- contador 
+    contador <- contador + 1
+  }
+}
+
+print(matriz)
+
+
+
+## ----eval=F---------------------------------------------------------------------------
+## while (condition) {
+##   # código executado enquanto a condição for verdade
+## }
 
 
 ## -------------------------------------------------------------------------------------
-x <- c(1, 2,3,NA, 5)
-is.na(x)
-
-
-
-## -------------------------------------------------------------------------------------
-notas_alunos <- c(10, 7, NA, 8, 8.5)
-mean(notas_alunos, na.rm = TRUE) # média
+i = 0
+while(i<5){
+  cat(i,"é menor que 5","\n")
+  i = i+1
+}
 
 
 ## -------------------------------------------------------------------------------------
-meu_vetor <- c(1, 2,3, 4, NA)
-meu_vetor[is.na(meu_vetor)] <- 0
+numero_escolhido <- 6
+resultado_dado = 1
+while (resultado_dado!=numero_escolhido) {
+  resultado_dado = sample(1:5,1,replace = T,prob = NULL) # sorteando número de 1 a 6
+  cat("Número do dado é",resultado_dado,"\n")
+}
+
+
+## ----eval=F---------------------------------------------------------------------------
+## repeat {
+##   # código será executado repetidamente
+##   if (condition) {
+##     break  # se a condição for satisfeita, para a repetição
+##   }
+## }
+
+
+## ----eval =F--------------------------------------------------------------------------
+## # Gera um número aleatório entre 1 e 10
+numero_correto <- sample(1:10, 1,replace = T)
+
+# Inicializa a variável para armazenar a tentativa do usuário
+tentativa_usuario <- NULL
+
+# Use um loop repeat para continuar o jogo até que o número correto seja adivinhado
+repeat {
+  # Solicita que o usuário insira uma tentativa
+  tentativa_usuario <- as.integer(readline("Tente adivinhar o número (entre 1 e 10): "))
+
+  # Verifica se a tentativa do usuário é correta
+  if (tentativa_usuario == numero_correto) {
+    cat("Parabéns! Você adivinhou corretamente.\n")
+    break  # Sai do loop quando adivinha corretamente
+  } else {
+    cat("Tente novamente. Dica: ", ifelse(tentativa_usuario < numero_correto, "Tente um número maior.", "Tente um número menor."), "\n")
+  }
+}
+
+
+## ----eval = F-------------------------------------------------------------------------
+## 
+media = 30
+desvio_padrao = 5
+erro = 10^(-3) # escolha com cuidado, pode travar o computador
+n = 1 # tamanho da amostra inicial
+crescimento_do_n = 3 # se a condição não for satisfeita, o n anterior será multiplicado por 3
+# escolha com cuidado, pode travar o computador
+
+repeat{
+  x = rnorm(n,mean = media,sd = desvio_padrao) # gerando amostra
+  media_x = mean(x) # média da amostra
+
+  if(abs(media_x-media)<erro){
+    cat("n=",n,"media_x"=",media_x=",media_x,"\n")
+    break
+  }else{
+    n = n*crescimento_do_n
+     cat("n=",n,"media_x"=",media_x",media_x,"\n")
+  }
+}
 
 
 ## -------------------------------------------------------------------------------------
-y1 <- c(1L,"leonardo") # inteiro, character
-y1
-typeof(y1)
-
-y2 <- c(5.5,10L) # double, inteiro
-y2
-typeof(y2)
-
-
-## -------------------------------------------------------------------------------------
-l1 <- list(
-  1:3, 
-  "a", 
-  c(TRUE, FALSE, TRUE), 
-  c(2.3, 5.9)
-)
-print(l1)
-typeof(l1)
-
+numero = 1
+dia <- switch(numero,
+                "1"="Domingo",
+                "2"="Segunda-feira",
+                "3"="Terça-feira",
+                "4"="Quarta-feira",
+                "5"="Quinta-feira",
+                "6"="Sexta-feira",
+                "7"="Sábado"
+               )
+cat("O dia correspondente ao número", numero, "é", dia, "\n")
 
 
 ## -------------------------------------------------------------------------------------
-l1 <- list(
-  1:3, 
-  "a", 
-  c(TRUE, FALSE, TRUE), 
-  c(2.3, 5.9)
-)
-l1[[4]]
-l1[[4]][1]
+PROP = "25%"
+prop <- switch (PROP,
+    "25%" = 0.25,
+    "50%" = 0.5,
+    "75%" = 0.75
+  )
+prop
+
+
+## ----eval = F-------------------------------------------------------------------------
+## name <- function(arguments) {
+##   body
+##   return(objeto que guarda o resultado final)
+## }
 
 
 ## -------------------------------------------------------------------------------------
-minha_lista = list(1:3)
-print(minha_lista)
-is.list(minha_lista)
-vec <- c(1,2,3)
-is.list(vec)
-as.list(vec)
+f_x = function(x){
+  f_x = 2*x
+  return(f_x)
+}
 
-
-
-## -------------------------------------------------------------------------------------
-minha_lista = list(1:3,4:10)
-print(minha_lista)
-unlist(minha_lista)
+x = c(1,2,3,4)
+y = f_x(x)
+plot(x,y)
 
 
 ## -------------------------------------------------------------------------------------
-# Criando uma matriz 2x2
-vec1 = c(1,2)
-vec2 = c(3,4)
-minha_matriz <- matrix(c(vec1,vec2), nrow = 2, ncol = 2)
-minha_matriz
-is.matrix(minha_matriz)
+media = function(x){
+  media_x = sum(x)/length(x)
+  return(media_x)
+}
+y = sample(1:100,20,replace=T)
+media(y)
 
 
 ## -------------------------------------------------------------------------------------
-vec1 = c(1,2)
-vec2 = c(3,4)
-minha_matriz <- matrix(c(vec1,vec2), nrow = 2, ncol = 2,byrow = T)
-minha_matriz
-dim(minha_matriz)
-ncol(minha_matriz)
-nrow(minha_matriz)
-
-
-## -------------------------------------------------------------------------------------
-minha_matriz[1,2] # Acessando o elemento na primeira linha e segunda coluna
-
-
-## -------------------------------------------------------------------------------------
-# Criando um array 2x3x2 - linhas X colunas X camadas
-vec1 = c(1L,2L,3L,4L)
-vec2 = c(5L,6L,7L,8L)
-vec2 = c(5L,6L,7L,8L)
-meu_array <- array(c(vec1,vec2), dim = c(2,2,3))
-meu_array
-typeof(meu_array)
-
-
-## -------------------------------------------------------------------------------------
-meu_array[1,2,2]# linhas X colunas X camadas
-meu_array[,,1] # acessando a matriz da primeira camada
-meu_array[,,2]# acessando a matriz da segunda camada
-
-
-## -------------------------------------------------------------------------------------
-meu_data_frame <- data.frame(
-  Nome = c("Alice","Leo","Vitor"),
-  Idade = c(25,30,22),
-  Nota = c(85, 92, 78)
-)
-meu_data_frame
-
-
-## -------------------------------------------------------------------------------------
-dados_climaticos <- data.frame(
-  Dia = seq(from = as.Date("2023-01-01"), by = "days", length.out = 5),
-  Temperatura = c(25.3, 24.5, 22.0, 26.8, 23.5),
-  Umidade = c(65, 70, 75, 60, 80),
-  VelocidadeVento = c(10, 12, 8, 15, 9)
-)
-
-# Exibindo o data frame
-print(dados_climaticos)
-head(dados_climaticos,3)
-
-
-## -------------------------------------------------------------------------------------
-dados_climaticos$Temperatura
-dados_climaticos[,2]
-
-
-## -------------------------------------------------------------------------------------
-meu_vetor <- c(1, 2, 3)
-names(meu_vetor) <- c("primeiro", "segundo", "terceiro")
-meu_vetor
-attributes(meu_vetor)
-
-
-## -------------------------------------------------------------------------------------
-x1 <- c(a = 1, b = 2, c = 3)
-x1
-
-x2 <- setNames(1:3, c("a", "b", "c"))
-x2
-
-
-## -------------------------------------------------------------------------------------
-meu_vetor <- 1:5
-meu_vetor
-dim(meu_vetor) <- c(5, 1) # linha x coluna
-meu_vetor
-attributes(meu_vetor)
-
-
-## -------------------------------------------------------------------------------------
-vec1 = c(1,2)
-vec2 = c(3,4)
-class(vec1)
-minha_matriz <- matrix(c(vec1,vec2), nrow = 2, ncol = 2)
-minha_matriz
-class(minha_matriz)
-
-
-## -------------------------------------------------------------------------------------
-vec <- c(1,2,3,4)
-class(vec)
-class(vec)<- "minha_classe"
-class(vec)
-
-
-
-## -------------------------------------------------------------------------------------
-
-pessoa1 <- structure(
-  c("Leonardo"), 
-  idade = 31,
-  last_name = "Nascimento",
-  class = "Pessoa",
-  names = c("nome_pessoa")
-)
-pessoa1
-class(pessoa1)
-attr(pessoa1,"idade") # selecionado o atributo idade
-names(pessoa1)
-
-
-## -------------------------------------------------------------------------------------
-dados_sexo_curso <- read.csv("~/GitHub/Introducao_Ciencias_de_Dados/dados/tab_sexo_curso.csv")
-head(dados_sexo_curso)
-
-
-## -------------------------------------------------------------------------------------
-exemplo_csv = data.frame(Pessoa = c("Leo","Lennon"),Idade=c(30,29))
-write.csv(exemplo_csv ,"~/GitHub/Introducao_Ciencias_de_Dados/dados/exemplo_csv.csv")
-
-
-## -------------------------------------------------------------------------------------
-dados_temperatura <- read.table("~/GitHub/Introducao_Ciencias_de_Dados/dados/temperatura.txt") 
-head(dados_temperatura)
-
-
-## -------------------------------------------------------------------------------------
-exemplo_txt = data.frame(Pessoa = c("Leo","Lennon"),Idade=c(30,29)) 
-write.table(exemplo_txt ,"~/GitHub/Introducao_Ciencias_de_Dados/dados/exemplo_txt.txt")
-
-
-## -------------------------------------------------------------------------------------
-dados <- readRDS("~/GitHub/Introducao_Ciencias_de_Dados/dados/tempo_exercicio_perda_peso.rds") 
-head(dados)
-
-
-## -------------------------------------------------------------------------------------
-exemplo_rds = data.frame(Pessoa = c("Leo","Lennon"),Idade=c(30,29))  
-saveRDS(exemplo_rds ,"~/GitHub/Introducao_Ciencias_de_Dados/dados/exemplo_rds.rds")
+dia_semana <- function(numero_dia) {
+  dia <- switch(
+    numero,
+    "1" = "Domingo",
+    "2" = "Segunda-feira",
+    "3" = "Terça-feira",
+    "4" = "Quarta-feira",
+    "5" = "Quinta-feira",
+    "6" = "Sexta-feira",
+    "7" = "Sábado"
+  )
+  return(cat("O dia correspondente ao número", numero, "é", dia, "\n"))
+}
+dia_semana(2)
 

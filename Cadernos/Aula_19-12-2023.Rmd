@@ -1,0 +1,392 @@
+---
+title: |
+  <center> Universidade Federal do Amazonas </center>
+  <center> Departamento de Estatística </center>
+  
+subtitle: |  
+  <center> Curso: Introdução à Ciência de Dados </center>
+  <center> Professor: Leonardo Nascimento </center>
+  <center> 19/12/2023
+  <center> Versão 1.0 </center>
+output: 
+  html_vignette:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+
+vignette: >
+  %\VignetteIndexEntry{}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+<!-- ```{r, echo=FALSE} -->
+
+<!-- htmltools::img(src = knitr::image_uri("C:/Users/Leonardo_Nascimento/Documents/GitHub/Introducao_Ciencias_de_Dados/Cadernos/Figuras/DE.jpg"),  -->
+
+<!--                alt = 'logo',  -->
+
+<!--                 width = 180, height = 180, -->
+
+<!--                style = 'position:absolute; top:10px; right:400px; padding:10px;') -->
+
+<!-- ``` -->
+
+<!-- ```{r, echo=FALSE} -->
+
+<!-- htmltools::img(src = knitr::image_uri("C:/Users/Leonardo_Nascimento/Documents/GitHub/Introducao_Ciencias_de_Dados/Cadernos/Figuras/ufam.png"),  -->
+
+<!--                alt = 'logo',  -->
+
+<!--                width = 180, height = 180, -->
+
+<!--                style = 'position:absolute; top:10px; left:400px; padding:10px; "margin: -100px;') -->
+
+<!-- ``` -->
+
+```{css, echo=FALSE}
+.watch-out {
+  border: 3px solid gray;
+  font-weight: bold;
+}
+
+```
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment  = "#>",
+  class.source = "watch-out",
+  fig.height = 3, 
+  fig.width = 3, 
+  fig.align = "center"
+)
+```
+
+# Funções
+
+-   Continuação da aula
+
+## `…` dot,dot,dot
+
+-   Na definição de uma função, você pode usar três pontos (**`...`**) para indicar que a função aceita argumentos adicionais.
+-   Esses argumentos adicionais não precisam ser explicitamente listados na definição da função
+-   Esses argumentos adicionais geralmente são passados para outras funções dentro do corpo da função.
+-   No exemplo abaixo, **`...`** permite a passagem de argumentos adicionais, como **`na.rm`** para remover valores ausentes ao calcular a média.
+
+```{r}
+media_ponderada <- function(valores,pesos,...) {
+  # Calcula a média ponderada
+  resultado <- sum(valores * pesos,...) / sum(pesos,...)
+  return(resultado)
+}
+media_ponderada(c(1,2,NA),c(1,2,3))
+media_ponderada(c(1,2,NA),c(1,2,3),na.rm=T)
+```
+
+## on.exit
+
+-   A função **`on.exit`** é usada para especificar código que deve ser executado quando a execução de uma função é concluída
+
+-   Frequentemente usada para garantir que determinadas ações sejam realizadas antes que a função termine, independentemente de como ele termina
+
+-   No exemplo a seguir vamos trocar de diretório
+
+```{r eval=F}
+names_wd_atual <- "~/GitHub/Introducao_Ciencias_de_Dados/" # diretório atual
+wd_atual <- setwd(names_wd_atual)
+geracao_normal <- function(n,...){
+
+  x = rnorm(n)
+  new_wd <- paste0(wd_atual,"/dados/new_wd.txt") # trocando diretório
+  write.table(x,new_wd)
+  on.exit({
+    setwd(wd_atual) # voltando para o diretório atual
+  })
+}
+geracao_normal(100)
+getwd()
+```
+
+-   Irei salvar uma figura no diretório: `"~/GitHub/Introducao_Ciencias_de_Dados/Cadernos/Figuras/figura_exemplo_on_exit.jpg"`
+
+-   Depois irei voltar para o diretório `"~/GitHub/Introducao_Ciencias_de_Dados"`
+
+```{r eval = F}
+names_wd_atual <- "~/GitHub/Introducao_Ciencias_de_Dados/" # diretório atual
+wd_atual <- setwd(names_wd_atual)
+
+criar_grafico <- function() {
+  x11() # abrindo nova janela para a figura
+  new_wd <- paste0(wd_atual,"/Cadernos/Figuras/figura_exemplo_on_exit.jpg")
+  jpeg(new_wd) # salvando figura no novo diretório
+  plot(1:10, main = "Meu Gráfico", ylab = "Valores")
+  # Configura on.exit para fechar o dispositivo gráfico ao sair
+  on.exit({
+    dev.off()
+    cat("Fechando o dispositivo gráfico\n")
+    setwd(wd_atual) # voltando para o diretório atual
+    cat("voltando para o diretório atual\n")
+  }, add = TRUE)
+}
+
+# Chama a função
+criar_grafico()
+
+```
+
+## Formas de Funções
+
+-   Embora tudo o que acontece em R seja resultado de uma função, nem todos as funções são formuladas da mesma forma.
+
+-   Existem quatro formas de função:
+
+    -   Prefix Functions
+
+    -   Infix Functions
+
+    -   Replacement Functions
+
+    -   Special functios
+
+### Prefix Functions
+
+-   São as funções padrão ou regulares, identificadas por um nome seguido de argumentos entre parênteses.
+
+```{r}
+media_ponderada <- function(x,peso=c(1,1,1),...)return(sum(peso*x,...)/sum(peso,...))
+media_ponderada(c(1,2,3)) # o nome da função vem antes de seus argumento
+```
+
+### Infix Functions
+
+-   O nome da função fica entre seus argumentos
+
+-   As formas infixas são usadas para muitos operadores matemáticos e para funções definidas pelo usuário que começam e terminam com `%`
+
+```{r eval=FALSE}
+2-3 ; 2+3 ; 2*3; 2/3 # os operadores estão entre dois argumentos
+```
+
+```{r}
+x <- c(1,2,3,4,5)
+6 %in% x # o número 6 pertence ao conjuto x?
+x <- c(1,2,3,4,5)
+2 %in% x # o número 2 pertence ao conjuto x?
+```
+
+```{r}
+mat1 = matrix(c(1,2,3,4),2,2)
+mat2 = matrix(c(1,2,3,4),2,2)
+mat1 %*% mat2 # multiplicação de matriz
+```
+
+```{r}
+`%+%` <- function(a, b) paste(a, b,sep="-")
+"new " %+% "string"
+```
+
+-   A biblioteca `magrittr` adiciona o operador **pipe**, que permite usar a saída de uma função como entrada de outra função
+
+```{r}
+require(magrittr) # pacote para usar %>%
+x <- c(1,2,3,4)
+desvio_padrao = sqrt( var(x) )
+desvio_padrao = var(x) %>% sqrt()
+desvio_padrao = var(x) |> sqrt()
+```
+
+-   Os colchetes transformam o pipe no que é quase uma função anônima
+
+```{r}
+1:5 %>% {(. + 1) / 2} # 1:5 são utilizados no lugar do ponto
+```
+
+-   Para mais exemplos, vê [[Advanced R]{.underline}](https://adv-r.hadley.nz/functions.html#function-forms)
+
+### Replacement Functions
+
+-   Estas funções são frequentemente usadas para atribuir valores a variáveis ou modificar objetos existentes.
+
+```{r eval=F}
+'function_name<-' <- function(x, additional arguments, value) 
+{ 
+function body 
+} 
+```
+
+-   Nomear elementos do vetor com a função `names`
+
+```{r}
+x = c(1,2,3,4)
+names(x) <- paste0("n",1:length(x))
+x
+```
+
+-   Mudar o segundo elemento do vetor
+
+```{r}
+"replace_second<-" = function(x,value){
+  x[2] <- value
+  x
+}
+x = c(1,2,3,4)
+replace_second(x) <- 0L
+x
+```
+
+```{r}
+'modify<-' <- function(x, position, value) {
+  x[position] <- value
+  x
+}
+x = 1:5
+modify(x, 1) <- 2 # value=2
+x
+```
+
+### Special functios
+
+-   Funções especiais muitas vezes desempenham papéis específicos, como manipulação condicional, filtragem de dados e manipulação de strings.
+
+-   Ferramentas de controle de fluxo
+
+    -   `if (cond) true` (`` `if`(cond, true) ``)
+
+    -   `if (cond) true else false` (`` `if`(cond, true, false) ``)
+
+    -   `for(var in seq) action` (`` `for`(var, seq, action) ``)
+
+    -   `while(cond) action` (`` `while`(cond, action) ``)
+
+    -   `repeat expr` (`` `repeat`(expr) ``)
+
+    -   `next` (`` `next`() ``)
+
+    -   `break` (`` `break`() ``)
+
+-   Para mais detalhes [Advanced R](https://adv-r.hadley.nz/functions.html#special-forms)
+
+# Condições
+
+-   O sistema de **condições** fornece um conjunto de ferramentas que permitem ao autor de uma função indicar que algo incomum está acontecendo
+
+-   O autor da função **sinaliza** condições com funções como [`stop()`](https://rdrr.io/r/base/stop.html) (para erros), [`warning()`](https://rdrr.io/r/base/warning.html) ( para avisos) e [`message()`](https://rdrr.io/r/base/message.html) (para mensagens)
+
+-   Compreender o sistema de condições é importante porque muitas vezes você precisará desempenhar as duas funções: sinalizar as condições das funções que você cria e lidar com as condições sinalizadas pelas funções que você chama.
+
+## Erro (Stop Condition):
+
+-   A função **`stop()`** é usada para sinalizar um erro. Quando um erro é sinalizado, a execução do código é interrompida e uma mensagem de erro é exibida.
+
+```{r}
+calcular_media <- function(x) {
+  if (length(x) == 0) {
+    stop("Erro: O vetor está vazio.")
+  }
+  if (is.numeric(x) == F) {
+    stop("Erro: vetor deve ser do tipo numérico")
+  }
+  return(mean(x))
+}
+calcular_media(1:4)
+```
+
+```{r eval=F}
+calcular_media <- function(x) {
+  if (length(x) == 0) {
+    stop("Erro: O vetor está vazio.")
+  }
+  if (is.numeric(x) == F) {
+    stop("Erro: vetor deve ser do tipo numérico")
+  }
+  return(mean(x))
+}
+calcular_media(c(1,2,3,"l"))
+# Error in calcular_media(c(1, 2, 3, "l")) : 
+#  Erro: vetor deve ser do tipo numérico
+```
+
+## Aviso (Warning Condition):
+
+-   A função **`warning()`** é usada para sinalizar um aviso. Um aviso não interrompe a execução do código, mas alerta o usuário sobre algo que pode ser problemático.
+
+```{r}
+calcular_raiz_quadrada <- function(x) {
+  if (any(x < 0)) {
+    warning("Alguns valores são negativos. A raiz quadrada de números negativos será tratada como NaN.")
+  }
+  return(sqrt(x))
+}
+
+# Exemplo de uso
+resultado <- calcular_raiz_quadrada(c(4, -9, 16))
+print(resultado)
+
+```
+
+## Mensagem Informativa (Message Condition):
+
+-   A função **`message()`** é usada para sinalizar mensagens informativas. Essas mensagens são úteis para fornecer informações adicionais durante a execução do código.
+
+```{r}
+calcular_cubo <- function(x) {
+  message("Calculando o cubo dos valores.")
+  return(x^3)
+}
+
+# Exemplo de uso
+resultado <- calcular_cubo(c(2, 3, 4))
+print(resultado)
+
+```
+
+-   Ao lidar com condições em R, você pode usar as funções **`try()`**, **`suppressWarnings()`**, e **`suppressMessages()`** para controlar o tratamento de erros, avisos e mensagens.
+
+## Ignorando as condições
+
+### **`try()`** 
+
+-   A função **`try()`** é usada para avaliar expressões e manipular erros sem interromper a execução do código. Ela retorna um objeto que você pode verificar usando **`inherits()`** para determinar se ocorreu um erro.
+
+```{r}
+x = c()
+mean(x)
+resultado <- try(mean(), silent = TRUE)
+resultado
+if (inherits(resultado, "try-error")) { # verifica se o objeto resultado é da classe "try-error
+    cat("Erro: Ocorreu um problema ao calcular a média.\n")}
+```
+
+### `suppressWarnings()` para Suprimir Avisos:
+
+-   A função **`suppressWarnings()`** é usada para executar uma expressão e suprimir os avisos que ela pode gerar.
+
+```{r}
+x = c()
+mean(x)
+suppressWarnings(mean(x))
+```
+
+### **`suppressMessages()` para** Suprimir Mensagens:
+
+-   A função **`suppressMessages()`** é usada para executar uma expressão e suprimir as mensagens informativas que ela pode gerar.
+
+```{r}
+calcular_cubo <- function(x) {
+  message("Calculando o cubo dos valores.")
+  return(x^3)
+}
+
+# Exemplo de uso
+resultado <- suppressMessages(calcular_cubo(c(2, 3, 4)))
+resultado
+```
+
+# Referências
+
+-   [[Advanced R]{.underline}](https://adv-r.hadley.nz/index.html)
+
+-   [[R for Data Science]{.underline}](https://r4ds.had.co.nz/index.html)
+
+-   [Hands-On Programming with R](https://web.itu.edu.tr/~tokerem/Hands-On_R.pdf)

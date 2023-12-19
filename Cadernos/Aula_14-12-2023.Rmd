@@ -7,7 +7,7 @@ subtitle: |
   <center> Curso: Introdução à Ciência de Dados </center>
   <center> Professor: Leonardo Nascimento </center>
   <center> 14/12/2023
-  <center> Versão 1.0 </center>
+  <center> Versão 1.1 </center>
 output: 
   html_vignette:
     toc: true
@@ -353,8 +353,7 @@ name <- function(arguments) {
 }
 ```
 
--   
-    $f(x) = 2x$
+-   $f(x) = 2x$
 
 ```{r}
 f_x = function(x){
@@ -383,7 +382,7 @@ media(y)
 ```{r}
 dia_semana <- function(numero_dia) {
   dia <- switch(
-    numero,
+    numero_dia,
     "1" = "Domingo",
     "2" = "Segunda-feira",
     "3" = "Terça-feira",
@@ -392,7 +391,7 @@ dia_semana <- function(numero_dia) {
     "6" = "Sexta-feira",
     "7" = "Sábado"
   )
-  return(cat("O dia correspondente ao número", numero, "é", dia, "\n"))
+  return(cat("O dia correspondente ao número", numero_dia, "é", dia, "\n"))
 }
 dia_semana(2)
 ```
