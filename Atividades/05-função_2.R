@@ -28,7 +28,7 @@
 
 # Questão 4 ---------------------------------------------------------------
 
-# use o símbolo SOMA para somar três números
+# use o símbolo SOMA para somar três números, sendo um dos valores fixo
 
 # Questão 5 ---------------------------------------------------------------
 
