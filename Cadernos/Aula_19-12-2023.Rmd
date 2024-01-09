@@ -7,7 +7,7 @@ subtitle: |
   <center> Curso: Introdução à Ciência de Dados </center>
   <center> Professor: Leonardo Nascimento </center>
   <center> 19/12/2023
-  <center> Versão 1.0 </center>
+  <center> Versão 1.1 </center>
 output: 
   html_vignette:
     toc: true
@@ -22,9 +22,9 @@ vignette: >
 
 <!-- ```{r, echo=FALSE} -->
 
-<!-- htmltools::img(src = knitr::image_uri("C:/Users/Leonardo_Nascimento/Documents/GitHub/Introducao_Ciencias_de_Dados/Cadernos/Figuras/DE.jpg"),  -->
+<!-- htmltools::img(src = knitr::image_uri("C:/Users/Leonardo_Nascimento/Documents/GitHub/Introducao_Ciencias_de_Dados/Cadernos/Figuras/DE.jpg"), -->
 
-<!--                alt = 'logo',  -->
+<!--                alt = 'logo', -->
 
 <!--                 width = 180, height = 180, -->
 
@@ -34,9 +34,9 @@ vignette: >
 
 <!-- ```{r, echo=FALSE} -->
 
-<!-- htmltools::img(src = knitr::image_uri("C:/Users/Leonardo_Nascimento/Documents/GitHub/Introducao_Ciencias_de_Dados/Cadernos/Figuras/ufam.png"),  -->
+<!-- htmltools::img(src = knitr::image_uri("C:/Users/Leonardo_Nascimento/Documents/GitHub/Introducao_Ciencias_de_Dados/Cadernos/Figuras/ufam.png"), -->
 
-<!--                alt = 'logo',  -->
+<!--                alt = 'logo', -->
 
 <!--                width = 180, height = 180, -->
 
@@ -44,28 +44,28 @@ vignette: >
 
 <!-- ``` -->
 
-```{css, echo=FALSE}
-.watch-out {
-  border: 3px solid gray;
-  font-weight: bold;
-}
+<!-- ```{css, echo=FALSE} -->
+<!-- .watch-out { -->
+<!--   border: 3px solid gray; -->
+<!--   font-weight: bold; -->
+<!-- } -->
 
-```
+<!-- ``` -->
 
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment  = "#>",
-  class.source = "watch-out",
-  fig.height = 3, 
-  fig.width = 3, 
-  fig.align = "center"
-)
-```
+<!-- ```{r setup, include = FALSE} -->
+<!-- knitr::opts_chunk$set( -->
+<!--   collapse = TRUE, -->
+<!--   comment  = "#>", -->
+<!--   class.source = "watch-out", -->
+<!--   fig.height = 3,  -->
+<!--   fig.width = 3,  -->
+<!--   fig.align = "center" -->
+<!-- ) -->
+<!-- ``` -->
 
 # Funções
 
--   Continuação da aula
+-   Continuação da [Aula_14/12/2023](https://rpubs.com/leonardobfn/Aula_14-12-2023)
 
 ## `…` dot,dot,dot
 
@@ -97,7 +97,7 @@ names_wd_atual <- "~/GitHub/Introducao_Ciencias_de_Dados/" # diretório atual
 wd_atual <- setwd(names_wd_atual)
 geracao_normal <- function(n,...){
 
-  x = rnorm(n)
+  x = rnorm(n,...)
   new_wd <- paste0(wd_atual,"/dados/new_wd.txt") # trocando diretório
   write.table(x,new_wd)
   on.exit({
@@ -139,7 +139,7 @@ criar_grafico()
 
 -   Embora tudo o que acontece em R seja resultado de uma função, nem todos as funções são formuladas da mesma forma.
 
--   Existem quatro formas de função:
+-   Existem quatro formas de funções:
 
     -   Prefix Functions
 
@@ -180,6 +180,8 @@ mat1 = matrix(c(1,2,3,4),2,2)
 mat2 = matrix(c(1,2,3,4),2,2)
 mat1 %*% mat2 # multiplicação de matriz
 ```
+
+-   Definindo nova função infix
 
 ```{r}
 `%+%` <- function(a, b) paste(a, b,sep="-")
@@ -245,7 +247,7 @@ modify(x, 1) <- 2 # value=2
 x
 ```
 
-### Special functios
+### Special Functions
 
 -   Funções especiais muitas vezes desempenham papéis específicos, como manipulação condicional, filtragem de dados e manipulação de strings.
 
@@ -338,14 +340,13 @@ calcular_cubo <- function(x) {
 # Exemplo de uso
 resultado <- calcular_cubo(c(2, 3, 4))
 print(resultado)
-
 ```
-
--   Ao lidar com condições em R, você pode usar as funções **`try()`**, **`suppressWarnings()`**, e **`suppressMessages()`** para controlar o tratamento de erros, avisos e mensagens.
 
 ## Ignorando as condições
 
-### **`try()`** 
+-   Ao lidar com condições em R, você pode usar as funções **`try()`**, **`suppressWarnings()`**, e **`suppressMessages()`** para controlar o tratamento de erros, avisos e mensagens.
+
+### **`try()`**
 
 -   A função **`try()`** é usada para avaliar expressões e manipular erros sem interromper a execução do código. Ela retorna um objeto que você pode verificar usando **`inherits()`** para determinar se ocorreu um erro.
 
@@ -368,7 +369,7 @@ mean(x)
 suppressWarnings(mean(x))
 ```
 
-### **`suppressMessages()` para** Suprimir Mensagens:
+### **`suppressMessages()`** para Suprimir Mensagens:
 
 -   A função **`suppressMessages()`** é usada para executar uma expressão e suprimir as mensagens informativas que ela pode gerar.
 

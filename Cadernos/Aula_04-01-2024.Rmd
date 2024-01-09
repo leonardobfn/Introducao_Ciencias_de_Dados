@@ -1,0 +1,177 @@
+---
+title: |
+  <center> Universidade Federal do Amazonas </center>
+  <center> Departamento de Estatística </center>
+  
+subtitle: |  
+  <center> Curso: Introdução à Ciência de Dados </center>
+  <center> Professor: Leonardo Nascimento </center>
+  <center> 04/01/2024
+  <center> Versão 1.0 </center>
+output: 
+  html_vignette:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+
+vignette: >
+  %\VignetteIndexEntry{}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+<!-- ```{r, echo=FALSE} -->
+
+<!-- htmltools::img(src = knitr::image_uri("C:/Users/Leonardo_Nascimento/Documents/GitHub/Introducao_Ciencias_de_Dados/Cadernos/Figuras/DE.jpg"), -->
+
+<!--                alt = 'logo', -->
+
+<!--                 width = 180, height = 180, -->
+
+<!--                style = 'position:absolute; top:10px; right:400px; padding:10px;') -->
+
+<!-- ``` -->
+
+<!-- ```{r, echo=FALSE} -->
+
+<!-- htmltools::img(src = knitr::image_uri("C:/Users/Leonardo_Nascimento/Documents/GitHub/Introducao_Ciencias_de_Dados/Cadernos/Figuras/ufam.png"), -->
+
+<!--                alt = 'logo', -->
+
+<!--                width = 180, height = 180, -->
+
+<!--                style = 'position:absolute; top:10px; left:400px; padding:10px; "margin: -100px;') -->
+
+<!-- ``` -->
+
+<!-- ```{css, echo=FALSE} -->
+
+<!-- .watch-out { -->
+
+<!--   border: 3px solid gray; -->
+
+<!--   font-weight: bold; -->
+
+<!-- } -->
+
+<!-- ``` -->
+
+<!-- ```{r setup, include = FALSE} -->
+
+<!-- knitr::opts_chunk$set( -->
+
+<!--   collapse = TRUE, -->
+
+<!--   comment  = "#>", -->
+
+<!--   class.source = "watch-out", -->
+
+<!--   fig.height = 3,  -->
+
+<!--   fig.width = 3,  -->
+
+<!--   fig.align = "center" -->
+
+<!-- ) -->
+
+<!-- ``` -->
+
+# Condições
+
+-   Continuação da [Aula_19/12/2023](https://rpubs.com/leonardobfn/Aula_19-12-2023)
+
+## Função `tryCatch`
+
+-   A função **`tryCatch`** é uma permite lidar com exceções (erros) de forma mais controlada.
+
+-   Frequentemente usada para envolver blocos de código nos quais você espera que ocorram erros, e você pode especificar ações a serem tomadas em caso de erro.
+
+-   É uma versão mais flexível da função `try`
+
+```{r eval=F}
+tryCatch(
+    expr = {
+        # Your code...
+        # goes here...
+        # ...
+    },
+    error = function(e){ 
+        # (Optional)
+        # Do this if an error is caught...
+    },
+    warning = function(w){
+        # (Optional)
+        # Do this if a warning is caught...
+    },
+    finally = {
+        # (Optional)
+        # Do this at the end before quitting the tryCatch structure...
+    }
+)
+
+ou 
+
+tryCatch(
+    expr = {
+        # Your code...
+        # goes here...
+        # ...
+    },
+    error = { 
+        # (Optional)
+        # Do this if an error is caught...
+    },
+    warning = {
+        # (Optional)
+        # Do this if a warning is caught...
+    },
+    finally = {
+        # (Optional)
+        # Do this at the end before quitting the tryCatch structure...
+    }
+)
+```
+
+-   Argumentos
+
+    -   **expr**: [Obrigatório] Código(s) R a ser(em) avaliado(s)
+
+    -   **error**: [Opcional] O que deve ser executado se ocorrer um erro durante a avaliação dos códigos em expr
+
+    -   **warning**: [Opcional] O que deve ser executado se um aviso ocorrer durante a avaliação dos códigos em expr
+
+    -   **finally**: [Opcional] O que deve ser executado imediatamente antes de encerrar a chamada tryCatch, independentemente de expr ter sido executado com sucesso, com um erro ou com um aviso
+
+```{r}
+log_resul = function(x, ...) {
+  result = tryCatch(
+    expr = {
+      return(log(x, ...))
+    },
+    error = function(e) {
+      cat("Ocorreu o seguinte erro:", conditionMessage(e), "\n")
+    },
+    warning = function(w) {
+      cat("Ocorreu o seguinte aviso:", conditionMessage(w), "\n")
+    },
+    finally = {
+      cat("Operação concluída.\n")
+    }
+  )
+}
+log_resul(3)
+log_resul(-3)
+log_resul(NULL)
+```
+
+<https://cran.r-project.org/web/packages/tryCatchLog/vignettes/tryCatchLog-intro.html>
+
+# Environments
+
+# Referências
+
+-   [[Advanced R]{.underline}](https://adv-r.hadley.nz/index.html)
+
+-   [[R for Data Science]{.underline}](https://r4ds.had.co.nz/index.html)
+
+-   [Hands-On Programming with R](https://web.itu.edu.tr/~tokerem/Hands-On_R.pdf)
