@@ -349,7 +349,7 @@ dados_json <- '[
   {"nome": "Charlie", "idade": 22, "cidade": "Belo Horizonte"}
 ]'
 
-lista_pessoas <- fromJSON(dados_json)
+lista_pessoas <- rjson::fromJSON(dados_json)
 
 # Usar map para extrair os nomes de cada pessoa
 (nomes <- map_chr(lista_pessoas, "nome"))
@@ -418,11 +418,13 @@ num_nucleos <- detectCores()
 nucleos = round(0.60*num_nucleos)
 
 f <- function(i) {
-  lm(Petal.Width ~  Species, data = iris)
+  return(lm(Petal.Width ~  Species, data = iris))
 }
 
 require(snowfall)
 sfInit(parallel=TRUE, cpus=nucleos)
+sfExportAll() # exportar os objetos para todos os núcleos
+sfLibrary("nome_pacote") # exportar o pacote para todos os núcleos
 system.time(sfLapply(1:100000, fun=f))
 sfStop()
 system.time(
@@ -431,8 +433,6 @@ for(i in 1:100000){
 }
 )
 ```
-
-## 
 
 # Referências
 
