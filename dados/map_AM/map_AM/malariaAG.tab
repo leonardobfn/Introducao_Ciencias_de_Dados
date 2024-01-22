@@ -1,0 +1,82 @@
+Titulo1=TabWin:C:\Users\max\Documents\Max\FatorBayesOx\mapas\AM\malariaAG.tab
+[Mapa]
+Nomemapa=C:\Users\max\Documents\Max\FatorBayesOx\mapas\AM\13mu2500gc.MAP
+Colunamapa=3
+NumClasses=6
+IndCor=15
+Cor0=15790320
+Classe0=5
+Cor1=14737632
+Classe1=10
+Cor2=13684944
+Classe2=15
+Cor3=12632256
+Classe3=20
+Cor4=11579568
+Classe4=25
+Cor5=6316128
+Classe5=60
+"13mu2500gc.MAP";"casos";"pop";"(casos/pop)*1000";"(casos/pop)"
+"Alvarães";281;13445;21;0,02089996
+"Amaturá";72;8694;8;0,00828157
+"Anamã";2;8483;0;0,00023577
+"Anori";1;14386;0;0,00006951
+"Apuí";17;18170;1;0,00093561
+"Atalaia do Norte";547;14292;38;0,03827316
+"Autazes";206;31107;7;0,00662230
+"Barcelos";246;25318;10;0,00971641
+"Barreirinha";0;27664;0;0,00000000
+"Benjamin Constant";60;30476;2;0,00196876
+"Beruri";43;14374;3;0,00299151
+"Boa Vista do Ramos";1;13677;0;0,00007312
+"Boca do Acre";57;30858;2;0,00184717
+"Borba";444;32160;14;0,01380597
+"Caapiranga";20;10958;2;0,00182515
+"Canutama";103;11844;9;0,00869639
+"Carauari";250;25950;10;0,00963391
+"Careiro";239;32190;7;0,00742467
+"Careiro da Várzea";27;24030;1;0,00112360
+"Coari";757;67055;11;0,01128924
+"Codajás";11;16418;1;0,00067000
+"Eirunepé";16;30473;1;0,00052505
+"Envira";2;17148;0;0,00011663
+"Fonte Boa";21;19783;1;0,00106152
+"Guajará";91;14684;6;0,00619722
+"Humaitá";70;40027;2;0,00174882
+"Ipixuna";301;17850;17;0,01686275
+"Iranduba";158;33834;5;0,00466986
+"Itacoatiara";391;87896;4;0,00444844
+"Itamarati";10;8300;1;0,00120482
+"Itapiranga";10;9515;1;0,00105097
+"Japurá";64;5025;13;0,01273632
+"Juruá";108;9032;12;0,01195748
+"Jutaí";59;17337;3;0,00340313
+"Lábrea";269;38451;7;0,00699592
+"Manacapuru";165;85279;2;0,00193483
+"Manaquiri";25;20095;1;0,00124409
+"Manaus";1587;1709010;1;0,00092861
+"Manicoré";130;45996;3;0,00282633
+"Maraã";33;18051;2;0,00182815
+"Maués";72;48808;1;0,00147517
+"Nhamundá";43;18198;2;0,00236290
+"Nova Olinda do Norte";190;30357;6;0,00625885
+"Novo Airão";81;15343;5;0,00527928
+"Novo Aripuanã";166;18796;9;0,00883167
+"Parintins";3;105742;0;0,00002837
+"Pauini";13;18938;1;0,00068645
+"Presidente Figueiredo";108;25474;4;0,00423962
+"Rio Preto da Eva";106;26004;4;0,00407630
+"Santa Isabel do Rio Negro";30;17780;2;0,00168729
+"Santo Antônio do Içá";427;30176;14;0,01415032
+"Silves";147;40806;4;0,00360241
+"São Gabriel da Cachoeira";242;32067;8;0,00754670
+"São Paulo de Olivença";55;9079;6;0,00605794
+"São Sebastião do Uatumã";36;8479;4;0,00424578
+"Tabatinga";366;47051;8;0,00777879
+"Tapauá";451;19966;23;0,02258840
+"Tefé";536;64703;8;0,00828401
+"Tonantins";11;19858;1;0,00055393
+"Uarini";227;10130;22;0,02240869
+"Urucará";19;16035;1;0,00118491
+"Urucurituba";0;17971;0;0,00000000
+"Total";0;0;0;0,00000000

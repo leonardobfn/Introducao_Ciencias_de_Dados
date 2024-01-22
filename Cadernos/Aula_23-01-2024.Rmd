@@ -1,0 +1,232 @@
+---
+title: |
+  <center> Universidade Federal do Amazonas </center>
+  <center> Departamento de Estatística </center>
+subtitle: |
+  <center> 11/01/2024
+  <center> Versão 1.0 </center>
+  <center> Curso: Introdução à Ciência de Dados </center>
+  <center> Professor: Leonardo Nascimento </center>
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    number_sections: true
+    toc_float: true
+---
+
+<!-- ```{r, echo=FALSE} -->
+
+<!-- htmltools::img(src = knitr::image_uri("C:/Users/Leonardo_Nascimento/Documents/GitHub/Introducao_Ciencias_de_Dados/Cadernos/Figuras/DE.jpg"), -->
+
+<!--                alt = 'logo', -->
+
+<!--                 width = 180, height = 180, -->
+
+<!--                style = 'position:absolute; top:10px; right:400px; padding:10px;') -->
+
+<!-- ``` -->
+
+<!-- ```{r, echo=FALSE} -->
+
+<!-- htmltools::img(src = knitr::image_uri("C:/Users/Leonardo_Nascimento/Documents/GitHub/Introducao_Ciencias_de_Dados/Cadernos/Figuras/ufam.png"), -->
+
+<!--                alt = 'logo', -->
+
+<!--                width = 180, height = 180, -->
+
+<!--                style = 'position:absolute; top:10px; left:400px; padding:10px; "margin: -100px;') -->
+
+<!-- ``` -->
+
+<!-- ```{css, echo=FALSE} -->
+
+<!-- .watch-out { -->
+
+<!--   border: 3px solid gray; -->
+
+<!--   font-weight: bold; -->
+
+<!-- } -->
+
+<!-- ``` -->
+
+```{r setup, include = FALSE}
+
+knitr::opts_chunk$set(
+ 
+  collapse = TRUE,
+
+  comment  = "#>",
+
+  class.source = "watch-out",
+
+  fig.height = 3,
+
+  fig.width = 3,
+
+  fig.align = "center"
+
+)
+
+require(tidyr)
+require(dplyr)
+temperatura_simulada = readRDS(file = "../dados/temperatura_simulada.rds")
+
+```
+
+# Manipulação de base de dados
+
+# Pivotagem das bases de dados
+
+-   Considere a base de dados temperatura a seguir:
+
+```{r echo=FALSE}
+temperatura_simulada
+```
+
+-   Note que a base de dados é formada por 3 linhas e 4 colunas.
+
+-   Nesse caso, os dados estão armazenados no formato “largo” (*wide*) - em que as características ou respostas dos sujeitos (Cidades) são colocadas em apenas uma linha.
+
+-   Esse é um exemplo de dados “largo” (*wide*) que não adere aos padrões de dados “tidy”, pois os cabeçalhos das colunas (`10/01/2024...`) não representam, de fato, "variáveis” - eles representam *valores* de uma varíavel, nesse caso seria o dia em que a tempertura foi observada.
+
+-   Essa variável será denominada por `Data` .
+
+-   No contexto de análise de dados, é altamente recomendado colocar os dados nos padrões de dados “tidy”.
+
+-   Para isso, podemos utilizar a função `tidyr::pivot_longer()` para transformar a base de dados em um formato mais longo, ou seja ,mais linhas que colunas.
+
+```{r}
+(
+  temp_longer  = tidyr::pivot_longer(
+    temperatura_simulada,
+    cols = !Cidade,# selecionar as colunas diferente de Cidade
+    names_to = "Datas", # as colunas selecionadas serão os valores da variável Data
+    values_to = "Valores" # As observações nas colunas selecionadas serão as observações da variável Valores
+  )
+)
+
+```
+
+-   Para voltar para o formato wide, podemos utilizar a função `tidyr::pivot_wider()`
+
+```{r}
+# Forma 1
+(
+  temp_wider = tidyr::pivot_wider(
+    temp_longer,
+    id_cols = Cidade, #coluna que identifica cada observação
+    names_from = "Datas", # nome da coluna
+    values_from = "Valores" # valores de cada coluna
+  )
+)
+
+# Forma 2
+(
+  temp_wider = tidyr::pivot_wider(
+    temp_longer,
+    id_cols = Datas, #coluna que identifica cada observação
+    names_from = "Cidade", # nome da coluna
+    values_from = "Valores" # valores de cada coluna
+  )
+)
+
+
+
+
+```
+
+# Pacote `dplyr` 
+
+-   dplyr é uma gramática de manipulação de dados, fornecendo um conjunto consistente de funções que ajudam a resolver os desafios mais comuns de manipulação de dados. As principais funções do [dplyr](https://dplyr.tidyverse.org/) são:
+
+    -   [`mutate()`](https://dplyr.tidyverse.org/reference/mutate.html)adiciona novas variáveis ​​que são funções de variáveis ​​existentes.
+
+    -   [`select()`](https://dplyr.tidyverse.org/reference/select.html)escolhe variáveis ​​com base em seus nomes.
+
+    -   [`filter()`](https://dplyr.tidyverse.org/reference/filter.html)escolhe casos com base em seus valores.
+
+    -   [`slice()`](https://dplyr.tidyverse.org/reference/slice.html) escolhe linhas.
+
+    -   [`summarise()`](https://dplyr.tidyverse.org/reference/summarise.html)reduz vários valores a um único resumo.
+
+    -   [`arrange()`](https://dplyr.tidyverse.org/reference/arrange.html)altera a ordem das linhas.
+
+-   Tudo isto se combina naturalmente com [`group_by()`](https://dplyr.tidyverse.org/reference/group_by.html), que permite realizar qualquer operação “por grupo”
+
+-   Para aplicar essas funções, vamos simular a quantidade de casos de degue registrado no estado do Amazonas
+
+```{r}
+dados_am = readRDS("../dados/dados_am") %>% as_tibble()
+dados_am$n_dengue = c(rpois(30,1500),rpois(32,2500))
+dados_am
+```
+
+## Realocando
+
+```{r}
+dados_am %>% relocate(GEOCODIGO,NOME,n_dengue) # realocando Colunas
+```
+
+## Selecionando
+
+```{r}
+dados_am %>% select(NOME,n_dengue) # selecionando Colunas
+dados_am %>% select(NOME:MICROREGIA) 
+dados_am %>% select(1:3)
+dados_am %>% select(-GEOCODIGO)
+```
+
+## Ordenando
+
+```{r}
+dados_am %>% arrange(NOME) # ordenando 
+dados_am_select = dados_am %>% arrange(NOME) %>% relocate(NOME,n_dengue)# ordenando
+```
+
+## Filtro
+
+```{r}
+dados_am_select %>% filter(n_dengue>1500) # filtro
+```
+
+```{r}
+dados_am_select %>% filter(n_dengue>1500 & MESOREGIAO=="NORTE AMAZONENSE") #e
+```
+
+```{r}
+dados_am_select %>% filter(n_dengue>1500 | MESOREGIAO=="NORTE AMAZONENSE") # ou
+dados_am %>% slice(1:3) # selecionando as 3 primeiras linhas
+```
+
+## Modificando 
+
+```{r}
+dados_tx = dados_am_select %>% mutate(total_pop_municipio = c(rpois(30,10000),rpois(32,20000)), # simulando a pop total por município
+                    Taxa = (n_dengue/total_pop_municipio)*1000)
+dados_tx
+```
+
+## Resumindo
+
+```{r}
+dados_tx %>% summarise(media_tx_am = mean(Taxa))
+```
+
+```{r}
+dados_tx %>% group_by(MESOREGIAO) %>% 
+  summarise(media = mean(Taxa),
+            variancia = var(Taxa),
+            n = length(Taxa)) %>%
+  arrange(n) %>%
+  relocate(MESOREGIAO,n)
+```
+
+# Referências
+
+-   [[Advanced R]{.underline}](https://adv-r.hadley.nz/index.html)
+
+-   [[R for Data Science]{.underline}](https://r4ds.had.co.nz/index.html)
+
+-   [Hands-On Programming with R](https://web.itu.edu.tr/~tokerem/Hands-On_R.pdf)
