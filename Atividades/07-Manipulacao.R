@@ -57,8 +57,8 @@ expectativa_vida_brasil_2017 <- readRDS("dados/expectativa_vida_brasil_2017.rds"
 # Questão 4 ---------------------------------------------------------------
 
 # Considere os dados questionario.xlsx
-# os número são as possíveis respostas para cada pergunta
-# Os número representam textos e possuem signicados diferentes em cada pergunta
+# os números são as possíveis respostas para cada pergunta
+# Os números representam textos e possuem significados diferentes em cada pergunta
 require(readxl)
 dados = readxl::read_xlsx("dados/questionario.xlsx",col_types = "text")
 
