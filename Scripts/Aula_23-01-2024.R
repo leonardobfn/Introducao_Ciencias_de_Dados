@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
   fig.align = "center"
 
 )
-
+require(tidyverse)
 require(tidyr)
 require(dplyr)
 temperatura_simulada = readRDS(file = "../dados/temperatura_simulada.rds")

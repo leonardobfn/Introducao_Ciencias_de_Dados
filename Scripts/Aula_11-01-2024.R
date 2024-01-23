@@ -174,7 +174,7 @@ dados_json <- '[
   {"nome": "Charlie", "idade": 22, "cidade": "Belo Horizonte"}
 ]'
 
-lista_pessoas <- fromJSON(dados_json)
+lista_pessoas <- rjson::fromJSON(dados_json)
 
 # Usar map para extrair os nomes de cada pessoa
 (nomes <- map_chr(lista_pessoas, "nome"))
