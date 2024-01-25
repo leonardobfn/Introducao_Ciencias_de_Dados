@@ -49,4 +49,5 @@ dados = readxl::read_xlsx("dados/questionario.xlsx",col_types = "text")
 # Quantas pessoas (abs e porcentagem) responderam "3" na pergunta_2?
 
 # Construa uma tabela que dê a frequência (abs e porcentagem) das respostas dentro de cada pergunta
+# Faça um gráfico de setores ou barras para algumas perguntas. Seja criativo
 
