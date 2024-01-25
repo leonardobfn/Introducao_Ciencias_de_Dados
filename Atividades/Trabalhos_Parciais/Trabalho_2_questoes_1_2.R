@@ -1,4 +1,4 @@
-# Exemplo como unir dois tibbles
+# Exemplo como unir duas tibbles
 n = 12
 d1 = tibble(
   x = LETTERS[1:n],
