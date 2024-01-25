@@ -25,11 +25,11 @@ t.test( rnorm(100, 10), rnorm(90, 10) )
 # Questão 4 ---------------------------------------------------------------
 #' Reproduza o exemplo abaixo usando snowfall
 n = 200
-x = rnorm(n,30,3) # covariável
-b0 = 2
-b1 = 1
-y  = b0 + b1*x + rnorm(n) # resposta simulada
-
+x = rnorm(n,1.80,4) # covariável
+a = 2
+b = 1
+y  = a + b*x + rnorm(n,0,1) # resposta simulada
+plot(x,y)
 dados = data.frame(y,x)
 rs = lm(y~x,data = dados) # aplicando modelo de regressão
 
