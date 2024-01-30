@@ -98,7 +98,7 @@ require(tidyverse)
 
 ![](Figuras/ciclo_cd_2.png){width="584"}
 
-# Pacote `stringr` 
+# Pacote `stringr`
 
 -   Em R, uma string é uma sequência de caracteres.
 
@@ -108,7 +108,7 @@ require(tidyverse)
 
 -   R oferece diversas funções e operadores para lidar com strings, e o pacote **`stringr`** é frequentemente utilizado para facilitar essas manipulações.
 
--    Ele oferece uma série de funções e operadores que simplificam tarefas comuns relacionadas a strings, tornando mais fácil extrair informações específicas, realizar manipulações e preparar dados textuais para análise.
+-   Ele oferece uma série de funções e operadores que simplificam tarefas comuns relacionadas a strings, tornando mais fácil extrair informações específicas, realizar manipulações e preparar dados textuais para análise.
 
 ## Concatenando - `str_c()`
 
@@ -119,14 +119,14 @@ str_c("Mês", 1:12)
 str_c("Mês", 1:12,sep=" ")
 ```
 
-## **Comprimento** `str_length()` 
+## **Comprimento** `str_length()`
 
 ```{r}
 nome  = c("gato","cachorro","leão")
 str_length(nome)
 ```
 
-## **Capitalização e espaços em branco** 
+## **Capitalização e espaços em branco**
 
 [`str_trim()`](https://stringr.tidyverse.org/reference/str_trim.html): resolver excesso de espaço
 
@@ -162,7 +162,7 @@ texto_minusculo <- "exemplo de texto em minúsculas"
 texto_titulo <- str_to_title(texto_minusculo)
 ```
 
-## **Extraindo partes de uma *string -* `str_sub()`** 
+## **Extraindo partes de uma *string -*`str_sub()`**
 
 -   Para extrairmos partes de uma *string*, podemos utilizar a função [`str_sub()`](https://stringr.tidyverse.org/reference/str_sub.html), que se baseia na posição dos caracteres que delimitam o intervalo que você deseja capturar.
 
@@ -180,7 +180,7 @@ texto <- "Análise de Texto"
 
 ```
 
-## Dectando padrão - `str_detect()` 
+## Dectando padrão - `str_detect()`
 
 -   A função **`str_detect()`** do pacote é utilizada para verificar se um padrão está presente em uma ou mais strings
 
@@ -194,7 +194,7 @@ frutas <- c("maçã", "banana", "abacaxi", "laranja")
 
 ```
 
-## **Substituindo partes de um texto com `str_replace()`**
+## **Substituindo partes de um texto** 
 
 -   A função **`str_replace()`** é utilizada para substituir a primeira ocorrência de um padrão por outro em uma string
 
@@ -220,15 +220,51 @@ urls <- c(
 novo_dominio <- "novodomínio"
 
 # Substituir o domínio em todas as URLs
-urls_modificadas <- str_replace(urls, "exemplo", novo_dominio)
+(urls_modificadas <- str_replace(urls, "exemplo", novo_dominio))
 
 
 ```
 
--   
+-   Se você deseja substituir todas as ocorrências de um padrão em uma string, use **`str_replace_all`**.
+
+```{r}
+palavras <- c("arquivo", "estante", "livro", "estiagem",
+              "dinheiro", "paz")
+
+(palavras <- str_replace_all(palavras, "[aeiou]", "_"))
+
+```
+
+## **Dividindo *strings -*** `str_split()` 
+
+```{r}
+data <- "15/02/2024"
+str_split(data,"/") %>% unlist() # transformar no vetor
+str_split(data,"/",simplify = T)
+```
+
+## **Extraindo correspondência de um texto**
+
+-   A função **`str_extract()`** é utilizada para extrair a primeira correspondência de um padrão em uma string. Para extrair todas as correspondências use **`str_extract_all()`**
+
+```{r}
+vetor = c("O preço do produto é 2 reais. A validade é: jan/2024",
+          "O preço do produto é 5 reais. A validade é: fev/2026")
+
+str_extract(vetor,"[0-9]+")
+str_extract_all(vetor,"[0-9]+",simplify = F)
+```
+
+-   **`[0-9]`**: Corresponde a qualquer dígito de 0 a 9. É uma classe de caracteres que representa todos os dígitos numéricos.
+
+-   **`+`**: Indica que deve haver pelo menos um ou mais caracteres do conjunto **`[0-9]`** em sequência.
+
+-   A expressão regular **`[0-9]+`** irá corresponder a qualquer sequência de um ou mais dígitos numéricos em uma string
 
 # Referências
 
 -   [Ciência de Dados em R](https://livro.curso-r.com/index.html)
 
 -   [Tidyverse](https://www.tidyverse.org/packages/#installation-and-use)
+
+-   [Introdução à Linguagem R: seus fundamentos e sua prática](https://pedropark99.github.io/Introducao_R/index.html)

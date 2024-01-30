@@ -51,3 +51,25 @@ dados = readxl::read_xlsx("dados/questionario.xlsx",col_types = "text")
 # Construa uma tabela que dê a frequência (abs e porcentagem) das respostas dentro de cada pergunta
 # Faça um gráfico de setores ou barras para algumas perguntas. Seja criativo
 
+
+
+# Questão 3 ---------------------------------------------------------------
+
+# Criando um dataframe fictício para temperaturas e umidade relativa em alguns municípios do Amazonas
+dados_climaticos_amazonas <- data.frame(
+  Municipio = c("Manaus", "Parintins", "Itacoatiara", "Coari", "Tefé", "Manacapuru", "Humaitá"),
+  Temperatura_C = c(30, 28, 31, 29, 27, 29, 33),
+  Umidade_Relativa = c(70, 75, 80, 65, 85, 78, 60)
+)
+
+# Em formato de texto
+dados_climaticos_amazonas_texto <- paste(
+  "Em", dados_climaticos_amazonas$Municipio,
+  "a temperatura é", dados_climaticos_amazonas$Temperatura_C, "°C e a umidade relativa é",
+  dados_climaticos_amazonas$Umidade_Relativa, "%."
+)
+
+## Letra a ----------
+#' Coloque a base dados_climaticos_amazonas_texto no formato da base dados_climaticos_amazonas
+##Letra b -----------
+#' Após transformar, coloque com duas variáveis: "municipio", "variavel_meteo"

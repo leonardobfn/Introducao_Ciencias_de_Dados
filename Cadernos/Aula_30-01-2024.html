@@ -1585,9 +1585,9 @@ como uma alternativa à função <a href="https://rdrr.io/r/base/paste.html"><c
 <pre class="r watch-out"><code>str_c(&quot;Mês&quot;, 1:12)
 #&gt;  [1] &quot;Mês1&quot;  &quot;Mês2&quot;  &quot;Mês3&quot;  &quot;Mês4&quot;  &quot;Mês5&quot;  &quot;Mês6&quot;  &quot;Mês7&quot;  &quot;Mês8&quot;  &quot;Mês9&quot; 
 #&gt; [10] &quot;Mês10&quot; &quot;Mês11&quot; &quot;Mês12&quot;
-str_c(&quot;Mês&quot;, 1:12,&quot; &quot;)
-#&gt;  [1] &quot;Mês1 &quot;  &quot;Mês2 &quot;  &quot;Mês3 &quot;  &quot;Mês4 &quot;  &quot;Mês5 &quot;  &quot;Mês6 &quot;  &quot;Mês7 &quot;  &quot;Mês8 &quot; 
-#&gt;  [9] &quot;Mês9 &quot;  &quot;Mês10 &quot; &quot;Mês11 &quot; &quot;Mês12 &quot;</code></pre>
+str_c(&quot;Mês&quot;, 1:12,sep=&quot; &quot;)
+#&gt;  [1] &quot;Mês 1&quot;  &quot;Mês 2&quot;  &quot;Mês 3&quot;  &quot;Mês 4&quot;  &quot;Mês 5&quot;  &quot;Mês 6&quot;  &quot;Mês 7&quot;  &quot;Mês 8&quot; 
+#&gt;  [9] &quot;Mês 9&quot;  &quot;Mês 10&quot; &quot;Mês 11&quot; &quot;Mês 12&quot;</code></pre>
 </div>
 <div id="comprimento-str_length" class="section level2" number="2.2">
 <h2><span class="header-section-number">2.2</span>
@@ -1596,6 +1596,150 @@ str_c(&quot;Mês&quot;, 1:12,&quot; &quot;)
 str_length(nome)
 #&gt; [1] 4 8 4</code></pre>
 </div>
+<div id="capitalização-e-espaços-em-branco" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> <strong>Capitalização
+e espaços em branco</strong></h2>
+<p><a href="https://stringr.tidyverse.org/reference/str_trim.html"><code>str_trim()</code></a>: resolver
+excesso de espaço</p>
+<p><a href="https://stringr.tidyverse.org/reference/case.html"><code>str_to_upper()</code></a>
+, <a href="https://stringr.tidyverse.org/reference/case.html"><code>str_to_lower()</code></a>e
+<a href="https://stringr.tidyverse.org/reference/case.html"><code>str_to_title()</code></a>
+:alterar a capitalização das letras</p>
+<pre class="r watch-out"><code># Exemplo com excesso de espaço
+string_com_espaco &lt;- &quot;   Exemplo com excesso de espaço   &quot;
+
+# Remover espaços em branco no início e no final
+string_sem_espaco &lt;- str_trim(string_com_espaco)</code></pre>
+<pre class="r watch-out"><code>texto_minusculo &lt;- &quot;exemplo em minúsculas&quot;
+
+# Converter para maiúsculas
+texto_maiusculo &lt;- str_to_upper(texto_minusculo)</code></pre>
+<pre class="r watch-out"><code>texto_maiusculo &lt;- &quot;EXEMPLO EM MAIÚSCULAS&quot;
+
+# Converter para minúsculas
+texto_minusculo &lt;- str_to_lower(texto_maiusculo)</code></pre>
+<pre class="r watch-out"><code># Exemplo com texto em minúsculas
+texto_minusculo &lt;- &quot;exemplo de texto em minúsculas&quot;
+
+# Converter para título
+texto_titulo &lt;- str_to_title(texto_minusculo)</code></pre>
+</div>
+<div id="extraindo-partes-de-uma-string--str_sub" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> <strong>Extraindo
+partes de uma <em>string -</em><code>str_sub()</code></strong></h2>
+<ul>
+<li>Para extrairmos partes de uma <em>string</em>, podemos utilizar a
+função <a href="https://stringr.tidyverse.org/reference/str_sub.html"><code>str_sub()</code></a>,
+que se baseia na posição dos caracteres que delimitam o intervalo que
+você deseja capturar.</li>
+</ul>
+<pre class="r watch-out"><code># Carregar o pacote
+library(stringr)
+
+# Exemplo de uso do str_sub()
+texto &lt;- &quot;Análise de Texto&quot;
+
+# Extrair os caracteres da posição 1 até a posição 7
+(substring_resultado &lt;- str_sub(texto, start = 1, end = 3))
+#&gt; [1] &quot;Aná&quot;</code></pre>
+</div>
+<div id="dectando-padrão---str_detect" class="section level2" number="2.5">
+<h2><span class="header-section-number">2.5</span> Dectando padrão -
+<code>str_detect()</code></h2>
+<ul>
+<li>A função <strong><code>str_detect()</code></strong> do pacote é
+utilizada para verificar se um padrão está presente em uma ou mais
+strings</li>
+</ul>
+<pre class="r watch-out"><code># Exemplo de uso do str_detect()
+frutas &lt;- c(&quot;maçã&quot;, &quot;banana&quot;, &quot;abacaxi&quot;, &quot;laranja&quot;)
+
+# Verificar se o padrão &quot;na&quot; está presente em cada elemento da string
+(padrao_detectado &lt;- str_detect(frutas, &quot;na&quot;))
+#&gt; [1] FALSE  TRUE FALSE FALSE</code></pre>
+</div>
+<div id="substituindo-partes-de-um-texto" class="section level2" number="2.6">
+<h2><span class="header-section-number">2.6</span> <strong>Substituindo
+partes de um texto</strong></h2>
+<ul>
+<li>A função <strong><code>str_replace()</code></strong> é utilizada
+para substituir a primeira ocorrência de um padrão por outro em uma
+string</li>
+</ul>
+<pre class="r watch-out"><code>palavras &lt;- c(&quot;arquivo&quot;, &quot;estante&quot;, &quot;livro&quot;, &quot;estiagem&quot;,
+              &quot;dinheiro&quot;, &quot;paz&quot;)
+
+(palavras &lt;- str_replace(palavras, &quot;[aeiou]&quot;, &quot;_&quot;))
+#&gt; [1] &quot;_rquivo&quot;  &quot;_stante&quot;  &quot;l_vro&quot;    &quot;_stiagem&quot; &quot;d_nheiro&quot; &quot;p_z&quot;</code></pre>
+<ul>
+<li>Manipular uma lista de URLs</li>
+</ul>
+<pre class="r watch-out"><code># Lista de URLs
+urls &lt;- c(
+  &quot;https://www.exemplo.com/pagina1&quot;,
+  &quot;https://www.exemplo.com/pagina2&quot;,
+  &quot;https://www.exemplo.com/pagina3&quot;
+)
+
+# Novo domínio
+novo_dominio &lt;- &quot;novodomínio&quot;
+
+# Substituir o domínio em todas as URLs
+(urls_modificadas &lt;- str_replace(urls, &quot;exemplo&quot;, novo_dominio))
+#&gt; [1] &quot;https://www.novodomínio.com/pagina1&quot; &quot;https://www.novodomínio.com/pagina2&quot;
+#&gt; [3] &quot;https://www.novodomínio.com/pagina3&quot;</code></pre>
+<ul>
+<li>Se você deseja substituir todas as ocorrências de um padrão em uma
+string, use <strong><code>str_replace_all</code></strong>.</li>
+</ul>
+<pre class="r watch-out"><code>palavras &lt;- c(&quot;arquivo&quot;, &quot;estante&quot;, &quot;livro&quot;, &quot;estiagem&quot;,
+              &quot;dinheiro&quot;, &quot;paz&quot;)
+
+(palavras &lt;- str_replace_all(palavras, &quot;[aeiou]&quot;, &quot;_&quot;))
+#&gt; [1] &quot;_rq__v_&quot;  &quot;_st_nt_&quot;  &quot;l_vr_&quot;    &quot;_st__g_m&quot; &quot;d_nh__r_&quot; &quot;p_z&quot;</code></pre>
+</div>
+<div id="dividindo-strings---str_split" class="section level2" number="2.7">
+<h2><span class="header-section-number">2.7</span> <strong>Dividindo
+<em>strings -</em></strong> <code>str_split()</code></h2>
+<pre class="r watch-out"><code>data &lt;- &quot;15/02/2024&quot;
+str_split(data,&quot;/&quot;) %&gt;% unlist() # transformar no vetor
+#&gt; [1] &quot;15&quot;   &quot;02&quot;   &quot;2024&quot;
+str_split(data,&quot;/&quot;,simplify = T)
+#&gt;      [,1] [,2] [,3]  
+#&gt; [1,] &quot;15&quot; &quot;02&quot; &quot;2024&quot;</code></pre>
+</div>
+<div id="extraindo-correspondência-de-um-texto" class="section level2" number="2.8">
+<h2><span class="header-section-number">2.8</span> <strong>Extraindo
+correspondência de um texto</strong></h2>
+<ul>
+<li>A função <strong><code>str_extract()</code></strong> é utilizada
+para extrair a primeira correspondência de um padrão em uma string. Para
+extrair todas as correspondências use
+<strong><code>str_extract_all()</code></strong></li>
+</ul>
+<pre class="r watch-out"><code>vetor = c(&quot;O preço do produto é 2 reais. A validade é: jan/2024&quot;,
+          &quot;O preço do produto é 5 reais. A validade é: fev/2026&quot;)
+
+str_extract(vetor,&quot;[0-9]+&quot;)
+#&gt; [1] &quot;2&quot; &quot;5&quot;
+str_extract_all(vetor,&quot;[0-9]+&quot;,simplify = F)
+#&gt; [[1]]
+#&gt; [1] &quot;2&quot;    &quot;2024&quot;
+#&gt; 
+#&gt; [[2]]
+#&gt; [1] &quot;5&quot;    &quot;2026&quot;</code></pre>
+<ul>
+<li><p><strong><code>[0-9]</code></strong>: Corresponde a qualquer
+dígito de 0 a 9. É uma classe de caracteres que representa todos os
+dígitos numéricos.</p></li>
+<li><p><strong><code>+</code></strong>: Indica que deve haver pelo menos
+um ou mais caracteres do conjunto <strong><code>[0-9]</code></strong> em
+sequência.</p></li>
+<li><p>A expressão regular <strong><code>[0-9]+</code></strong> irá
+corresponder a qualquer sequência de um ou mais dígitos numéricos em uma
+string</p></li>
+</ul>
+</div>
 </div>
 <div id="referências" class="section level1" number="3">
 <h1><span class="header-section-number">3</span> Referências</h1>
@@ -1603,6 +1747,8 @@ str_length(nome)
 <li><p><a href="https://livro.curso-r.com/index.html">Ciência de Dados
 em R</a></p></li>
 <li><p><a href="https://www.tidyverse.org/packages/#installation-and-use">Tidyverse</a></p></li>
+<li><p><a href="https://pedropark99.github.io/Introducao_R/index.html">Introdução
+à Linguagem R: seus fundamentos e sua prática</a></p></li>
 </ul>
 </div>
 
