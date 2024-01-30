@@ -72,4 +72,4 @@ dados_climaticos_amazonas_texto <- paste(
 ## Letra a ----------
 #' Coloque a base dados_climaticos_amazonas_texto no formato da base dados_climaticos_amazonas
 ##Letra b -----------
-#' Após transformar, coloque com duas variáveis: "municipio", "variavel_meteo"
+#' Após transformar, coloque com três variáveis: "municipio", "variavel_meteo","valores"
