@@ -194,7 +194,7 @@ frutas <- c("maçã", "banana", "abacaxi", "laranja")
 
 ```
 
-## **Substituindo partes de um texto** 
+## **Substituindo partes de um texto**
 
 -   A função **`str_replace()`** é utilizada para substituir a primeira ocorrência de um padrão por outro em uma string
 
@@ -235,7 +235,7 @@ palavras <- c("arquivo", "estante", "livro", "estiagem",
 
 ```
 
-## **Dividindo *strings -*** `str_split()` 
+## **Dividindo *strings -*** `str_split()`
 
 ```{r}
 data <- "15/02/2024"
