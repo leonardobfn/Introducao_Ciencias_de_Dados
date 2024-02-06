@@ -54,7 +54,7 @@ dados = readxl::read_xlsx("dados/questionario.xlsx",col_types = "text")
 
 
 # Questão 3 ---------------------------------------------------------------
-
+#' 1 ponto
 # Criando um dataframe fictício para temperaturas e umidade relativa em alguns municípios do Amazonas
 dados_climaticos_amazonas <- data.frame(
   Municipio = c("Manaus", "Parintins", "Itacoatiara", "Coari", "Tefé", "Manacapuru", "Humaitá"),
@@ -69,7 +69,20 @@ dados_climaticos_amazonas_texto <- paste(
   dados_climaticos_amazonas$Umidade_Relativa, "%."
 )
 
-## Letra a ----------
+## Letra a ---------- (0,5)
 #' Coloque a base dados_climaticos_amazonas_texto no formato da base dados_climaticos_amazonas
-##Letra b -----------
+##Letra b ----------- (0,5)
 #' Após transformar, coloque com três variáveis: "municipio", "variavel_meteo","valores"
+
+
+# Questão 4 ---------------------------------------------------------------
+
+#' Considere a base dados_meteorologicos_am para fazer os seguintes gráficos utilizando 
+#' ggplot
+
+## Letra a------------
+
+#'Comportamento da variável rh por mês. Pode ser um boxplot. O que pode ser observado?
+#'Comporatamento da variável rh por mês e em cada cidade (use facet_grid ou facet_wrap).O que pode ser observado?
+#'Total de precp por mês. Pode ser um gráfico de barras
+#'Total de precp por cidade. Pode ser um gráfico de barras organizado do menor para o maior
