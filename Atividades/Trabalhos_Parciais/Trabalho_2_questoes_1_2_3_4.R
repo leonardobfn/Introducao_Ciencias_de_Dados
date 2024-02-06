@@ -76,7 +76,7 @@ dados_climaticos_amazonas_texto <- paste(
 
 
 # Questão 4 ---------------------------------------------------------------
-
+#' 1 ponto
 #' Considere a base dados_meteorologicos_am para fazer os seguintes gráficos utilizando 
 #' ggplot
 
@@ -85,4 +85,4 @@ dados_climaticos_amazonas_texto <- paste(
 #'Comportamento da variável rh por mês. Pode ser um boxplot. O que pode ser observado?
 #'Comporatamento da variável rh por mês e em cada cidade (use facet_grid ou facet_wrap).O que pode ser observado?
 #'Total de precp por mês. Pode ser um gráfico de barras
-#'Total de precp por cidade. Pode ser um gráfico de barras organizado do menor para o maior
+#'Total de precp por cidade. Pode ser um gráfico de barras organizado do menor para o maior nível de precp

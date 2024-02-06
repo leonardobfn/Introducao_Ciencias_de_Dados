@@ -70,6 +70,7 @@ knitr::opts_chunk$set(
 )
 
 require(tidyverse)
+require(dplyr)
 ```
 
 # Tidyverse
@@ -129,9 +130,8 @@ typeof(x1)
         sort(x1)
         ```
 
-```{=html}
 <!-- -->
-```
+
 -   Você pode corrigir esses dois problemas utilizando **fator.** Para criar um fator você deve começar criando uma lista dos **níveis** válidos
 
 ```{r}
@@ -154,7 +154,7 @@ y2 <- factor(x2, levels = month_levels)
 y2
 ```
 
-## `Função fct()` 
+## `Função fct()`
 
 -   Utilizando a função `forcats::fct` para criar fatores
 
@@ -182,7 +182,7 @@ meses_reordenados <- fct_relevel(meses_ordenados, "Dec")
 meses_reordenados
 ```
 
-## Reordenamento de níveis - `fct_infreq()` 
+## Reordenamento de níveis - `fct_infreq()`
 
 -   A função `forcats::fct_infreq()` permite reordenar o atributo `levels` de acordo com a frequência em que cada nível aparece no vetor (do nível mais frequente para o menos frequente).
 
@@ -197,9 +197,9 @@ levels(frutas_reordenadas)
 table(frutas)
 ```
 
-## Reordenamento de níveis - `fct_inorder()` 
+## Reordenamento de níveis - `fct_inorder()`
 
--   Ordenar os níveis de um fator, de acordo com a ordem da primeira aparição de cada nível
+-   Ordenar os níveis de um fator de acordo com a ordem da primeira aparição de cada nível
 
 ```{r}
 frutas <- factor(c("Maçã", "Banana", "Laranja", "Pera", "Uva", "Banana", "Banana", "Laranja", "Maçã", "Maçã"))
@@ -208,7 +208,9 @@ forcats::fct_inorder(frutas)
 
 ```
 
-## Reordenamento de níveis - `fct_reorder()` 
+## Reordenamento de níveis - `fct_reorder()`
+
+-   Ordenar os níveis de seu fator de acordo com uma segunda variável.
 
 ```{r}
 library(forcats)
@@ -225,7 +227,58 @@ barplot(sort(populacao), names.arg = levels(paises_ord), xlab = "País", ylab = 
 
 ```
 
+-   Ordenando através de uma estatística
+
+```{r}
+
+produtos <- c("Produto A", "Produto B", "Produto C", "Produto D")
+vendas <- c(1500, 2000, 1200, 1800)  # Total de vendas por produto
+regiao <- c("Norte", "Sul", "Leste", "Oeste")  # Regiões fictícias
+produto_regiao <- expand.grid(Produto = produtos, Regiao = regiao)
+produto_regiao$Vendas <- sample(vendas, nrow(produto_regiao), replace = TRUE)
+
+produto_regiao
+factor(produtos)
+
+produto_regiao %>%  
+  mutate(teste_fact = forcats::fct_reorder(factor(Produto),Vendas,.fun = mean,.desc = F)) %>% pull(teste_fact) %>% levels()
+
+```
+
+-   Note que ele ordenou pela média de vendas
+
+```{r}
+produto_regiao %>% 
+  group_by(Produto) %>% 
+  summarise(md = mean(Vendas)) %>% 
+  arrange(md)
+```
+
+## Modificando os níveis de um fator
+
+-   A função **`forcats::fct_recode()`** é utilizada para renomear ou recodificar os níveis de um fator de acordo com um novo conjunto de valores.
+
+-   Isso é útil quando você precisa alterar os rótulos dos níveis do fator para torná-los mais descritivos, agrupá-los ou simplificá-los.
+
+```{r}
+clima <- c("Ensolarado", "Chuvoso", "Nublado", "Ensolarado", "Chuvoso", "Nublado", "Chuvoso", "Nublado")
+
+# Criando um fator com os dados do clima
+clima_fator <- factor(clima)
+
+# Recodificando os níveis do fator clima
+clima_recodificado <- forcats::fct_recode(clima_fator,
+                                           "Ensolarado/Parcialmente Ensolarado" = "Ensolarado",
+                                           "Chuvoso/Chuva" = "Chuvoso",
+                                           "Nublado/Nublado com Possibilidade de Chuva" = "Nublado")
+
+# Verificando os níveis recodificados
+levels(clima_recodificado)
+```
+
 # Referências
+
+-   [R for Data Science](https://r4ds.hadley.nz/)
 
 -   [Ciência de Dados em R](https://livro.curso-r.com/index.html)
 
