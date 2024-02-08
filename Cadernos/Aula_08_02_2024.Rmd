@@ -1,0 +1,261 @@
+---
+title: |
+  <center> Universidade Federal do Amazonas </center>
+  <center> Departamento de Estatística </center>
+subtitle: |
+  <center> 06/02/2024
+  <center> Versão 1.0 </center>
+  <center> Curso: Introdução à Ciência de Dados </center>
+  <center> Professor: Leonardo Nascimento </center>
+output:
+  html_document:
+    toc: true
+    toc_depth: 4
+    number_sections: true
+    toc_float: true
+---
+
+<!-- ```{r, echo=FALSE} -->
+
+<!-- htmltools::img(src = knitr::image_uri("C:/Users/Leonardo_Nascimento/Documents/GitHub/Introducao_Ciencias_de_Dados/Cadernos/Figuras/DE.jpg"), -->
+
+<!--                alt = 'logo', -->
+
+<!--                 width = 180, height = 180, -->
+
+<!--                style = 'position:absolute; top:10px; right:400px; padding:10px;') -->
+
+<!-- ``` -->
+
+<!-- ```{r, echo=FALSE} -->
+
+<!-- htmltools::img(src = knitr::image_uri("C:/Users/Leonardo_Nascimento/Documents/GitHub/Introducao_Ciencias_de_Dados/Cadernos/Figuras/ufam.png"), -->
+
+<!--                alt = 'logo', -->
+
+<!--                width = 180, height = 180, -->
+
+<!--                style = 'position:absolute; top:10px; left:400px; padding:10px; "margin: -100px;') -->
+
+<!-- ``` -->
+
+<!-- ```{css, echo=FALSE} -->
+
+<!-- .watch-out { -->
+
+<!--   border: 3px solid gray; -->
+
+<!--   font-weight: bold; -->
+
+<!-- } -->
+
+<!-- ``` -->
+
+```{r setup, include = FALSE}
+
+knitr::opts_chunk$set(
+ 
+  collapse = TRUE,
+
+  comment  = "#>",
+
+  class.source = "watch-out",
+
+  fig.height = 10,
+
+  fig.width = 10,
+
+  fig.align = "center"
+
+)
+
+require(tidyverse)
+require(dplyr)
+```
+
+# Tidyverse
+
+-   O **`tidyverse`** é um conjunto integrado de pacotes R desenvolvidos para facilitar a manipulação, visualização e análise de dados de forma consistente e eficiente.
+
+-   O **`tidyverse`** é composto por vários pacotes, sendo os principais:
+
+    1.  **`ggplot2`:** Um pacote poderoso para criação de gráficos baseados na gramática de gráficos. Ele permite criar visualizações complexas e esteticamente agradáveis com uma sintaxe declarativa.
+
+    2.  **`dplyr`:** Oferece funções para manipulação eficiente de dados, facilitando a filtragem, seleção, agrupamento, ordenação e resumo de conjuntos de dados.
+
+    3.  **`tidyr`:** Fornecer ferramentas para manipulação de dados para torná-los "tidy". Isso inclui funções para espalhar (spread) e juntar (gather) dados, entre outras operações de reformatar.
+
+    4.  **`tibble`:** Introduz o conceito de tibble, uma versão moderna de data frames, mais eficiente e fácil de usar, seguindo os princípios de dados "tidy".
+
+    5.  **`readr`:** Oferece funções rápidas e eficientes para ler dados retos em R. Ele é projetado para ser mais rápido que as funções base do R, como **`read.csv`**.
+
+    6.  **`purrr`:** Facilita a aplicação de funções em listas e vetores, proporcionando uma abordagem mais consistente e funcional para operações em dados.
+
+    7.  **`stringr`:** Fornece funções para manipulação de strings de uma maneira mais intuitiva e consistente do que as funções base do R.
+
+    8.  **`forcats`:** Especializado na manipulação de fatores, permitindo ajustar facilmente os níveis e rótulos dos fatores.
+
+-   Para carregar todos esses pacotes utilize `library(tidyverse)` 
+
+![](Figuras/ciclo_cd_2.png){width="584"}
+
+# Pacote `lubridate`
+
+-   Datas no R são tratadas como um tipo especial de objeto, com classe `date`
+
+-   O pacote **`lubridate`** é uma biblioteca em R projetada para facilitar a manipulação de datas e tempos de uma maneira mais intuitiva e eficiente.
+
+-   Fornece funções simples e consistentes para análise, manipulação e formatação de datas e horas. Veja o exemplo a seguir
+
+```{r}
+data_string <- "08-02-2024"
+class(data_string)
+
+data_date <- date(data_string)
+class(data_date)
+```
+
+-   A função `date()` converte a *string* para data, mas o resultado não está no padrão
+
+## Conversão de Strings/Números para Data/Hora
+
+-   O pacote facilita a conversão de strings em objetos de data/hora
+
+```{r}
+data_string <- "15-02-2024"
+data_new = lubridate::dmy(data_string)
+class(data_new)
+```
+
+-   Existem funções para todas as ordens possíveis: `dmy()`, `mdy()`, `myd()`, `ymd()`, `ydm()`
+
+-   Criar objetos com classe `date` a partir de números e *strings* em diversos formatos.
+
+```{r}
+data = 08022024 # 08-02-2024
+class(data)
+data_new = dmy(data)
+class(data_new)
+```
+
+-   Em algumas situações você precisa especificar o horário. Nesse caso, pode usar as funções do tipo `dmy_h()`, `dmy_hm()` e `dmy_hms().`
+
+```{r}
+dmy_hms(08022024163010) # 08-02-2024 16h:30:10
+```
+
+-   Atribuir componentes a um objeto da classe `date`
+
+```{r}
+data <- dmy("08/02/2024")
+hour(data) <- 20
+data
+
+```
+
+## Extração de Componentes de Data/Hora
+
+-   Permite extrair componentes específicos de uma data ou hora, como dia, mês, ano, hora, minuto e segundo.
+
+-   Funções para extrair os componentes de um objeto da classe `date`.
+
+    -   `second()` - extrai os segundos.
+
+    -   `minute()` - extrai os minutos.
+
+    -   `hour()` - extrai a hora.
+
+    -   `wday()` - extrai o dia da semana.
+
+    -   `mday()` - extrai o dia do mês.
+
+    -   `month()` - extrai o mês.
+
+    -   `year()` - extrai o ano.
+
+```{r}
+minha_data = dmy("08/02/2024")
+print(paste("Dia:", day(minha_data),
+            "Mês:", month(minha_data),
+            "Ano:", year(minha_data)))
+```
+
+### Operações com datas
+
+-   O pacote oferece várias funções para realizar operações aritméticas em datas e horas, como adição e subtração de dias, semanas, meses ou anos.
+
+```{r}
+data <- dmy("08/02/2024")
+data - days(1)
+data + years(1)
+data + weeks(0:10)
+
+```
+
+-   Permite calcular a diferença entre duas datas ou horas, expressando a diferença em termos de dias, semanas, meses, anos, horas, minutos, etc.
+
+```{r}
+minha_data = "08/02/2024"
+duracao <- difftime(dmy(minha_data), ymd("2023-01-01"), units = "days")
+print(duracao)
+```
+
+## Fusos horários
+
+-   Quando a data exata da sua análise for relevante, você terá que converter horários para outros fusos
+
+-   Para fazer essas coisas, o `lubridate` fornece as funções `with_tz()` e `force_tz().`
+
+```{r}
+jogo_hora <- ymd_hms("2024-02-08 22:00:00", tz = "America/Sao_Paulo")
+jogo_hora
+with_tz(jogo_hora, tzone = "America/Manaus")
+force_tz(jogo_hora, tzone = "America/Manaus") # alteração de fuso horário
+```
+
+## Formatação de Data/Hora:
+
+```{r}
+minha_data = "08/02/2024" %>% dmy()
+format(minha_data, "%d de %B de %Y")
+format(minha_data, "%d/%b/%Y")
+format(minha_data, "%d/%m/%Y")
+```
+
+## **Dento de um tibble**
+
+-   Caso você possua, separadamente, cada um dos itens que compõe um dado do tipo `date-time` (dia, mês, ano, hora, minuto e segundo), você pode utilizar a função `make_datetime()` para uni-los em um único vetor do tipo `date-time`
+
+```{r}
+tab <- tibble::tibble(
+  ano = 2020,
+  mês = 5,
+  dia = c(15, 16, 16, 18, 19),
+  hora = c(9, 11, 12, 8, 14),
+  minuto = c(7, 23, 19, 15, 30),
+  segundo = c(34, 11, 5, 17, 49)
+)
+
+tab
+```
+
+```{r}
+tab_new <- tab %>% mutate(
+  date_time = make_datetime(
+    year = ano, month = mês, day = dia,
+    hour = hora, min = minuto, sec = segundo
+  )
+)
+
+tab_new
+```
+
+# Referências
+
+-   [R for Data Science](https://r4ds.hadley.nz/)
+
+-   [Ciência de Dados em R](https://livro.curso-r.com/index.html)
+
+-   [Tidyverse](https://www.tidyverse.org/packages/#installation-and-use)
+
+-   [Introdução à Linguagem R: seus fundamentos e sua prática](https://pedropark99.github.io/Introducao_R/index.html)
