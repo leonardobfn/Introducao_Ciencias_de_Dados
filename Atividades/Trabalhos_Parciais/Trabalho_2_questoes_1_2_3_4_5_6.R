@@ -86,3 +86,28 @@ dados_climaticos_amazonas_texto <- paste(
 #'Comporatamento da variável rh por mês e em cada cidade (use facet_grid ou facet_wrap).O que pode ser observado?
 #'Total de precp por mês. Pode ser um gráfico de barras
 #'Total de precp por cidade. Pode ser um gráfico de barras organizado do menor para o maior nível de precp
+
+
+
+# Questão 5 ---------------------------------------------------------------
+
+#' Considere a base de dados Introducao_Ciencias_de_Dados/dados/am_dados_meteorologicos/dados_simulados.rds
+#' 1 ponto
+##letra a)-------
+#' Separe a coluna data_hora em: ano, mes, dia e hora
+#' obtenha o coeficiente de variação para as variáveis temperatura e umidade em cada cidade e em cada hora. 
+#' Qual hora há maior dispersão, justifique?
+
+
+
+# Questão 6 ---------------------------------------------------------------
+#' 2 pontos
+
+#' Considere o banco de dados Introducao_Ciencias_de_Dados/dados/nascidos_vivos_am_2022_DATASUS.rds
+#' Organize os dados:
+#' sem acentuação nos nomes das variáveis e nos nomes dos Municípios. Pesquise sobre o pacote "janitor"
+#' Letras minúsculas nos nomes das variáveis e nos nomes dos Municípios
+#' Separe a coluna Município em: codigo e municipio. Remova a parte "130" do código
+#' Transforme as colunas  Nascim_p_resid_mãe e Nascim_p_ocorrência em tipo_nascimento
+#' Faça alguma análise estatística
+
