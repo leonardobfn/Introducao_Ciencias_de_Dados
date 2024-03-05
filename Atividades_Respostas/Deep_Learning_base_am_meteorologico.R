@@ -50,5 +50,6 @@ y.est.lm = predict(model.lm,dados.glm[-id_treino,] %>% as.data.frame() )
 resid.lm = y[-id_treino]-y.est.lm
 acf(resid.lm) # ainda falta modelar. 
 
-keras$utils$plot_model(model)
+
+
 
