@@ -13,7 +13,7 @@ head(dados_brutos)
 dados  =  dados_brutos %>% select("rh","tbs","precp")
 dados$rh = ifelse(dados$rh>=0.70,1,0)
 
-(tab = table(dados$rh)) # desbanleceado 
+(tab = table(dados$rh)) # desbalanceado 
 (tab.prop = prop.table(tab))
 id.treino <- createDataPartition(dados$rh, p=0.7, list=F) # 70% dos dados para treinamento
 
