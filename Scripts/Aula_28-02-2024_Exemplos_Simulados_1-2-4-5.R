@@ -238,7 +238,7 @@ model = keras_model_sequential() %>%
               activation = "relu") %>%
   layer_dense(units = 1,#quantidade de neurônios
               activation = "sigmoid" 
-  )
+  ) # camada: output ( Y)
 summary(model)  
 
 model %>% 
@@ -254,4 +254,4 @@ model %>%
 get_weights(model)
 y_est = predict(model, X)
 y_est
-plot(y_est,y)
+
