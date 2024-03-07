@@ -42,7 +42,7 @@ y_est = predict(model,X[-id.treino,])
 mc = table(y_est>0.5,y[-id.treino],dnn = c("Pred","Obs")) # matriz de confusão
 rownames(mc) = c("0","1")
 
-caret::confusionMatrix(mc2,mode = "everything",positive = "1")
+caret::confusionMatrix(mc,mode = "everything",positive = "1")
 (ac = sum(diag(mc))/sum(mc))
 (pr = 395/(395+42))
 (rc = 395/(395+99))
