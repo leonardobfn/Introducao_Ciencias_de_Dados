@@ -12,10 +12,11 @@ head(dados_brutos)
 
 dados  =  dados_brutos %>% select("rh","tbs","precp")
 dados$rh = ifelse(dados$rh>=0.70,1,0)
-
+head(dados)
 (tab = table(dados$rh)) # desbalanceado 
 (tab.prop = prop.table(tab))
 id.treino <- createDataPartition(dados$rh, p=0.7, list=F) # 70% dos dados para treinamento
+dados$rh[id.treino] %>% table() %>% prop.table()
 
 mf = model.frame(rh~.-1,data = dados)
 y = model.response(mf)
@@ -35,24 +36,25 @@ model %>%
           )
 
 
-hist = model %>%
+model %>%
   fit(x=X[id.treino,],y = y[id.treino],batch_size = 20,epochs = 100)
 
-y_est = predict(model,X[-id.treino,])
-mc = table(y_est>0.5,y[-id.treino],dnn = c("Pred","Obs")) # matriz de confusão
+prob_est = predict(model,X[-id.treino,])
+mc = table(prob_est>0.5,y[-id.treino],dnn = c("Pred","Obs")) # matriz de confusão
 rownames(mc) = c("0","1")
 
 caret::confusionMatrix(mc,mode = "everything",positive = "1")
 (ac = sum(diag(mc))/sum(mc))
-(pr = 395/(395+42))
-(rc = 395/(395+99))
+(pr = 398/(398+98))
+(rc = 398/(398+36))
 (f1 = 2*pr*rc/(pr+rc))
 
 # Usando glm
+
 dados.glm = cbind(X,y) %>% as.data.frame()
 model_2 <- glm(y ~ ., family = "binomial",data=dados.glm[id.treino,])
-y_est.2 = predict(model_2, dados.glm[-id.treino,], type = "response")
-mc2 = table(y_est>0.5,y[-id.treino],dnn = c("Pred","Obs")) # matriz de confusão
+prob_est.2 = predict(model_2, dados.glm[-id.treino,], type = "response")
+mc2 = table(prob_est.2>0.5,y[-id.treino],dnn = c("Pred","Obs")) # matriz de confusão
 rownames(mc2) = c("0","1")
 caret::confusionMatrix(mc2,mode = "everything",positive = "1")
 

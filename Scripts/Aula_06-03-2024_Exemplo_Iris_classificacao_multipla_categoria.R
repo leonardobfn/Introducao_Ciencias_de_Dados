@@ -34,7 +34,7 @@ model %>% compile(optimizer = "adam",
                   metrics = "accuracy")
 
 
-model %>% fit(X[id.treino,],y = y[id.treino,],batch_size = 30,epochs = 200)
+model %>% fit(X[id.treino,],y = y[id.treino,],batch_size = 30,epochs = 100)
 
 prob.pred = predict(model,X[-id.treino,])
 
@@ -54,7 +54,7 @@ require(nnet)
 
 dados.mul = cbind(yn = as.factor(yn),X) %>% data.frame()
 
-model.mul = multinom(yn ~ .,data = dados.mul[id.treino,])
+model.mul = nnet::multinom(yn ~ .,data = dados.mul[id.treino,])
 ClassPredicted <- predict(model.mul,
                           newdata = dados.mul[-id.treino,], 
                           type = "class")
