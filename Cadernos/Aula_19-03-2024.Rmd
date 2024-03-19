@@ -1,0 +1,242 @@
+---
+title: |
+  <center> Universidade Federal do Amazonas </center>
+  <center> Departamento de Estatística </center>
+  
+subtitle: |  
+  <center> Curso: Introdução à Ciência de Dados </center>
+  <center> Professor: Leonardo Nascimento </center>
+  <center> 04/01/2024
+  <center> Versão 1.0 </center>
+output: 
+  html_vignette:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+
+vignette: >
+  %\VignetteIndexEntry{}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+<!-- ```{r, echo=FALSE} -->
+
+<!-- htmltools::img(src = knitr::image_uri("C:/Users/Leonardo_Nascimento/Documents/GitHub/Introducao_Ciencias_de_Dados/Cadernos/Figuras/DE.jpg"), -->
+
+<!--                alt = 'logo', -->
+
+<!--                 width = 180, height = 180, -->
+
+<!--                style = 'position:absolute; top:10px; right:400px; padding:10px;') -->
+
+<!-- ``` -->
+
+<!-- ```{r, echo=FALSE} -->
+
+<!-- htmltools::img(src = knitr::image_uri("C:/Users/Leonardo_Nascimento/Documents/GitHub/Introducao_Ciencias_de_Dados/Cadernos/Figuras/ufam.png"), -->
+
+<!--                alt = 'logo', -->
+
+<!--                width = 180, height = 180, -->
+
+<!--                style = 'position:absolute; top:10px; left:400px; padding:10px; "margin: -100px;') -->
+
+<!-- ``` -->
+
+<!-- ```{css, echo=FALSE} -->
+
+<!-- .watch-out { -->
+
+<!--   border: 3px solid gray; -->
+
+<!--   font-weight: bold; -->
+
+<!-- } -->
+
+<!-- ``` -->
+
+<!-- ```{r setup, include = FALSE} -->
+
+<!-- knitr::opts_chunk$set( -->
+
+<!--   collapse = TRUE, -->
+
+<!--   comment  = "#>", -->
+
+<!--   class.source = "watch-out", -->
+
+<!--   fig.height = 3,  -->
+
+<!--   fig.width = 3,  -->
+
+<!--   fig.align = "center" -->
+
+<!-- ) -->
+
+<!-- ``` -->
+
+# Programação orientada a objetos
+
+-   Considere o seguinte exemplo:
+
+```{r}
+diamonds <- ggplot2::diamonds
+class(diamonds$carat)
+class(diamonds$cut)
+summary(diamonds$carat)
+summary(diamonds$cut)
+```
+
+-   Note que **`summary()`**pode produzir diferentes resultados para variáveis ​​numéricas e fatoriais.
+
+-   Você poderia imaginar [`summary()`](https://rdrr.io/r/base/summary.html)uma série de instruções if-else, mas isso significaria que apenas o autor original poderia adicionar novas implementações.
+
+-   A principal razão para usar OOP é **o polimorfismo** (literalmente: muitas formas). Polimorfismo significa que um desenvolvedor pode considerar a interface de uma função separadamente de sua implementação, possibilitando usar a mesma forma de função para diferentes tipos de entrada
+
+-   Um sistema OOP possibilita que qualquer desenvolvedor estenda a **interface** com implementações para novos tipos de entrada/classes.
+
+-   Portanto, **classe** define o tipo de objeto e os **métodos** descrevem o que esse objeto pode *fazer, ou seja, é uma implementação para uma classe específica.*
+
+-   Existem dois paradigmas principais de programação orientada a objetos que diferem na forma como métodos e classes estão relacionados: encapsulados e funcionais:
+
+-   Na OOP **encapsulada** , os métodos pertencem a objetos ou classes, e as chamadas de método normalmente se parecem com `object.method(arg1, arg2)`
+
+-   Na OOP **funcional** , os métodos pertencem a funções **genéricas** e as chamadas de método parecem chamadas de função comuns: `generic(object, arg2, arg3)`.
+
+-   Exemplo no python:
+
+```{python}
+# Definição da classe 'Pessoa'
+class Pessoa:
+    # Método de inicialização
+    def __init__(self, nome, idade):
+        self.nome = nome
+        self.idade = idade
+    
+    # Método para apresentar a pessoa
+    def apresentar(self):
+        print(f"Olá, eu sou {self.nome} e tenho {self.idade} anos.")
+
+# Instanciando objetos da classe 'Pessoa'
+pessoa1 = Pessoa("João", 30)
+pessoa2 = Pessoa("Maria", 25)
+
+# Chamando o método 'apresentar' para cada objeto
+pessoa1.apresentar()
+pessoa2.apresentar()
+
+```
+
+-   Exemplo no R
+
+```{r}
+# Definição da classe'Pessoa'
+pessoa <- list(nome = "Leo", idade = "30")
+class(pessoa)
+print(pessoa)
+```
+
+```{r}
+# Método genérico
+class(pessoa) <-"Pessoa"
+print.Pessoa <- function(x) { # a função genérica é o print
+  cat("Nome:", x$nome, "\n")
+  cat("Idade:", x$idade, "\n")
+}
+print(pessoa)
+```
+
+-   Existem vários sistemas OOP para escolher. Aqui vamos considerar os sistemas S3 e S4.
+
+-   S3 e S4 usam função genérica OOP que é bastante diferente da OOP encapsulada usada pela maioria das linguagens populares atualmente
+
+## S3
+
+-   O S3 permite que suas funções retornem resultados avançados com exibição amigável e componentes internos fáceis de programar. S3 é usado em toda a base R
+
+-   A função de um genérico S3 é encontrar a implementação específica para uma classe
+
+-   O envio do método é realizado por [`UseMethod()`](https://rdrr.io/r/base/UseMethod.html), que todo genérico chama
+
+-   UseMethod()recebe dois argumentos: o nome da função genérica (obrigatório) e o argumento a ser usado para envio do método (opcional). 
+
+```{r}
+# Definição da função genérica 'foo'
+minha_funcao_generica <- function(x) {
+  # Chamando useMethod para despachar para métodos específicos
+  UseMethod("minha_funcao_generica")
+}
+
+# Definição de métodos específicos para diferentes classes
+minha_funcao_generica.default <- function(x) {
+  print("Método padrão chamado")
+}
+
+minha_funcao_generica.integer <- function(x) {
+  print("Método para números inteiros chamado")
+}
+
+minha_funcao_generica.character <- function(x) {
+  print("Método para caracteres chamado")
+}
+
+# Testando a função genérica com diferentes tipos de argumentos
+minha_funcao_generica(5)       # Chamará minha_funcao_generica.integer
+minha_funcao_generica("Hello") # Chamará minha_funcao_generica.character
+minha_funcao_generica(TRUE)    # Chamará minha_funcao_generica.default
+
+```
+
+## S4
+
+-   S4 fornece uma abordagem formal para OOP funcional. As ideias subjacentes são semelhantes às do S3 , mas a implementação é muito mais rigorosa e faz uso de funções especializadas para criação de classes ( [`setClass()`](https://rdrr.io/r/methods/setClass.html)), genéricos ( [`setGeneric()`](https://rdrr.io/r/methods/setGeneric.html)) e métodos ( [`setMethod()`](https://rdrr.io/r/methods/setMethod.html))
+
+```{r}
+setClass("Person", 
+  slots = c(
+    name = "character", 
+    age = "numeric"
+  )
+)
+```
+
+-   Uma vez definida a classe, você pode construir novos objetos a partir dela chamando [`new()`](https://rdrr.io/r/methods/new.html)com o nome da classe e um valor para cada slot:
+
+```{r}
+leo <- new("Person", name = "Leo Nascimento", age = 32)
+leo@name
+```
+
+-   Aqui criaremos genéricos com [`setGeneric()`](https://rdrr.io/r/methods/setGeneric.html):
+
+```{r}
+setGeneric("idade", function(x) standardGeneric("idade"))
+```
+
+-   E então definindo métodos com [`setMethod()`](https://rdrr.io/r/methods/setMethod.html):
+
+```{r}
+setMethod("idade", "Person", function(x) x@age)
+idade(leo)
+```
+
+-    Definição de métodos específicos para diferentes classes
+
+```{r}
+setClass("Animal", 
+  slots = c(
+    name = "character", 
+    age = "numeric"
+  )
+)
+setMethod("idade", "Animal", function(x) cat("A idade é",x@age))
+leao = new("Animal",name = "leão",age = 25)
+idade(leao)
+```
+
+-   [[Advanced R]{.underline}](https://adv-r.hadley.nz/index.html)
+
+-   [[R for Data Science]{.underline}](https://r4ds.had.co.nz/index.html)
+
+-   [Hands-On Programming with R](https://web.itu.edu.tr/~tokerem/Hands-On_R.pdf)

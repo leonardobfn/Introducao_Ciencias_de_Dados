@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Aula_19-03-2024.knit</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore"><center>
+Universidade Federal do Amazonas
+</center>
+<center>
+Departamento de Estatística
+</center></h1>
+<h3 class="subtitle"><center>
+Curso: Introdução à Ciência de Dados
+</center>
+<center>
+Professor: Leonardo Nascimento
+</center>
+<center>
+04/01/2024
+<center>
+Versão 1.0
+</center></h3>
+
+
+<div id="TOC">
+<ul>
+<li><a href="#programação-orientada-a-objetos" id="toc-programação-orientada-a-objetos"><span class="toc-section-number">1</span> Programação orientada a objetos</a>
+<ul>
+<li><a href="#s3" id="toc-s3"><span class="toc-section-number">1.1</span> S3</a></li>
+<li><a href="#s4" id="toc-s4"><span class="toc-section-number">1.2</span> S4</a></li>
+</ul></li>
+</ul>
+</div>
+
+<!-- ```{r, echo=FALSE} -->
+<!-- htmltools::img(src = knitr::image_uri("C:/Users/Leonardo_Nascimento/Documents/GitHub/Introducao_Ciencias_de_Dados/Cadernos/Figuras/DE.jpg"), -->
+<!--                alt = 'logo', -->
+<!--                 width = 180, height = 180, -->
+<!--                style = 'position:absolute; top:10px; right:400px; padding:10px;') -->
+<!-- ``` -->
+<!-- ```{r, echo=FALSE} -->
+<!-- htmltools::img(src = knitr::image_uri("C:/Users/Leonardo_Nascimento/Documents/GitHub/Introducao_Ciencias_de_Dados/Cadernos/Figuras/ufam.png"), -->
+<!--                alt = 'logo', -->
+<!--                width = 180, height = 180, -->
+<!--                style = 'position:absolute; top:10px; left:400px; padding:10px; "margin: -100px;') -->
+<!-- ``` -->
+<!-- ```{css, echo=FALSE} -->
+<!-- .watch-out { -->
+<!--   border: 3px solid gray; -->
+<!--   font-weight: bold; -->
+<!-- } -->
+<!-- ``` -->
+<!-- ```{r setup, include = FALSE} -->
+<!-- knitr::opts_chunk$set( -->
+<!--   collapse = TRUE, -->
+<!--   comment  = "#>", -->
+<!--   class.source = "watch-out", -->
+<!--   fig.height = 3,  -->
+<!--   fig.width = 3,  -->
+<!--   fig.align = "center" -->
+<!-- ) -->
+<!-- ``` -->
+<div id="programação-orientada-a-objetos" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Programação orientada a
+objetos</h1>
+<ul>
+<li>Considere o seguinte exemplo:</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>diamonds <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span>diamonds</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">class</span>(diamonds<span class="sc">$</span>carat)</span></code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">class</span>(diamonds<span class="sc">$</span>cut)</span></code></pre></div>
+<pre><code>## [1] &quot;ordered&quot; &quot;factor&quot;</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">summary</span>(diamonds<span class="sc">$</span>carat)</span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##  0.2000  0.4000  0.7000  0.7979  1.0400  5.0100</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">summary</span>(diamonds<span class="sc">$</span>cut)</span></code></pre></div>
+<pre><code>##      Fair      Good Very Good   Premium     Ideal 
+##      1610      4906     12082     13791     21551</code></pre>
+<ul>
+<li><p>Note que <strong><code>summary()</code></strong>pode produzir
+diferentes resultados para variáveis ​​numéricas e fatoriais.</p></li>
+<li><p>Você poderia imaginar <a href="https://rdrr.io/r/base/summary.html"><code>summary()</code></a>uma
+série de instruções if-else, mas isso significaria que apenas o autor
+original poderia adicionar novas implementações.</p></li>
+<li><p>A principal razão para usar OOP é <strong>o
+polimorfismo</strong> (literalmente: muitas formas). Polimorfismo
+significa que um desenvolvedor pode considerar a interface de uma função
+separadamente de sua implementação, possibilitando usar a mesma forma de
+função para diferentes tipos de entrada</p></li>
+<li><p>Um sistema OOP possibilita que qualquer desenvolvedor estenda a
+<strong>interface</strong> com implementações para novos tipos de
+entrada/classes.</p></li>
+<li><p>Portanto, <strong>classe</strong> define o tipo de objeto e os
+<strong>métodos</strong> descrevem o que esse objeto pode <em>fazer, ou
+seja, é uma implementação para uma classe específica.</em></p></li>
+<li><p>Existem dois paradigmas principais de programação orientada a
+objetos que diferem na forma como métodos e classes estão relacionados:
+encapsulados e funcionais:</p></li>
+<li><p>Na OOP <strong>encapsulada</strong> , os métodos pertencem a
+objetos ou classes, e as chamadas de método normalmente se parecem
+com <code>object.method(arg1, arg2)</code></p></li>
+<li><p>Na OOP <strong>funcional</strong> , os métodos pertencem a
+funções <strong>genéricas</strong> e as chamadas de método parecem
+chamadas de função
+comuns: <code>generic(object, arg2, arg3)</code>.</p></li>
+<li><p>Exemplo no python:</p></li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># Definição da classe &#39;Pessoa&#39;</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="kw">class</span> Pessoa:</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>    <span class="co"># Método de inicialização</span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, nome, idade):</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>        <span class="va">self</span>.nome <span class="op">=</span> nome</span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>        <span class="va">self</span>.idade <span class="op">=</span> idade</span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>    </span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>    <span class="co"># Método para apresentar a pessoa</span></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>    <span class="kw">def</span> apresentar(<span class="va">self</span>):</span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;Olá, eu sou </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>nome<span class="sc">}</span><span class="ss"> e tenho </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>idade<span class="sc">}</span><span class="ss"> anos.&quot;</span>)</span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="co"># Instanciando objetos da classe &#39;Pessoa&#39;</span></span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a>pessoa1 <span class="op">=</span> Pessoa(<span class="st">&quot;João&quot;</span>, <span class="dv">30</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a>pessoa2 <span class="op">=</span> Pessoa(<span class="st">&quot;Maria&quot;</span>, <span class="dv">25</span>)</span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a><span class="co"># Chamando o método &#39;apresentar&#39; para cada objeto</span></span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a>pessoa1.apresentar()</span></code></pre></div>
+<pre><code>## Olá, eu sou João e tenho 30 anos.</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>pessoa2.apresentar()</span></code></pre></div>
+<pre><code>## Olá, eu sou Maria e tenho 25 anos.</code></pre>
+<ul>
+<li>Exemplo no R</li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co"># Definição da classe&#39;Pessoa&#39;</span></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>pessoa <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">nome =</span> <span class="st">&quot;Leo&quot;</span>, <span class="at">idade =</span> <span class="st">&quot;30&quot;</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="fu">class</span>(pessoa)</span></code></pre></div>
+<pre><code>## [1] &quot;list&quot;</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="fu">print</span>(pessoa)</span></code></pre></div>
+<pre><code>## $nome
+## [1] &quot;Leo&quot;
+## 
+## $idade
+## [1] &quot;30&quot;</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="co"># Método genérico</span></span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a><span class="fu">class</span>(pessoa) <span class="ot">&lt;-</span><span class="st">&quot;Pessoa&quot;</span></span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>print.Pessoa <span class="ot">&lt;-</span> <span class="cf">function</span>(x) { <span class="co"># a função genérica é o print</span></span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;Nome:&quot;</span>, x<span class="sc">$</span>nome, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;Idade:&quot;</span>, x<span class="sc">$</span>idade, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a>}</span>
+<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a><span class="fu">print</span>(pessoa)</span></code></pre></div>
+<pre><code>## Nome: Leo 
+## Idade: 30</code></pre>
+<ul>
+<li><p>Existem vários sistemas OOP para escolher. Aqui vamos considerar
+os sistemas S3 e S4.</p></li>
+<li><p>S3 e S4 usam função genérica OOP que é bastante diferente da OOP
+encapsulada usada pela maioria das linguagens populares
+atualmente</p></li>
+</ul>
+<div id="s3" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> S3</h2>
+<ul>
+<li><p>O S3 permite que suas funções retornem resultados avançados com
+exibição amigável e componentes internos fáceis de programar. S3 é usado
+em toda a base R</p></li>
+<li><p>A função de um genérico S3 é encontrar a implementação específica
+para uma classe</p></li>
+<li><p>O envio do método é realizado por <a href="https://rdrr.io/r/base/UseMethod.html"><code>UseMethod()</code></a>,
+que todo genérico chama</p></li>
+<li><p>UseMethod()recebe dois argumentos: o nome da função genérica
+(obrigatório) e o argumento a ser usado para envio do método
+(opcional). </p></li>
+</ul>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="co"># Definição da função genérica &#39;foo&#39;</span></span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>minha_funcao_generica <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a>  <span class="co"># Chamando useMethod para despachar para métodos específicos</span></span>
+<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a>  <span class="fu">UseMethod</span>(<span class="st">&quot;minha_funcao_generica&quot;</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a>}</span>
+<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a><span class="co"># Definição de métodos específicos para diferentes classes</span></span>
+<span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a>minha_funcao_generica.default <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Método padrão chamado&quot;</span>)</span>
+<span id="cb19-10"><a href="#cb19-10" tabindex="-1"></a>}</span>
+<span id="cb19-11"><a href="#cb19-11" tabindex="-1"></a></span>
+<span id="cb19-12"><a href="#cb19-12" tabindex="-1"></a>minha_funcao_generica.integer <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb19-13"><a href="#cb19-13" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Método para números inteiros chamado&quot;</span>)</span>
+<span id="cb19-14"><a href="#cb19-14" tabindex="-1"></a>}</span>
+<span id="cb19-15"><a href="#cb19-15" tabindex="-1"></a></span>
+<span id="cb19-16"><a href="#cb19-16" tabindex="-1"></a>minha_funcao_generica.character <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb19-17"><a href="#cb19-17" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Método para caracteres chamado&quot;</span>)</span>
+<span id="cb19-18"><a href="#cb19-18" tabindex="-1"></a>}</span>
+<span id="cb19-19"><a href="#cb19-19" tabindex="-1"></a></span>
+<span id="cb19-20"><a href="#cb19-20" tabindex="-1"></a><span class="co"># Testando a função genérica com diferentes tipos de argumentos</span></span>
+<span id="cb19-21"><a href="#cb19-21" tabindex="-1"></a><span class="fu">minha_funcao_generica</span>(<span class="dv">5</span>)       <span class="co"># Chamará minha_funcao_generica.integer</span></span></code></pre></div>
+<pre><code>## [1] &quot;Método padrão chamado&quot;</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="fu">minha_funcao_generica</span>(<span class="st">&quot;Hello&quot;</span>) <span class="co"># Chamará minha_funcao_generica.character</span></span></code></pre></div>
+<pre><code>## [1] &quot;Método para caracteres chamado&quot;</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="fu">minha_funcao_generica</span>(<span class="cn">TRUE</span>)    <span class="co"># Chamará minha_funcao_generica.default</span></span></code></pre></div>
+<pre><code>## [1] &quot;Método padrão chamado&quot;</code></pre>
+</div>
+<div id="s4" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> S4</h2>
+<ul>
+<li>S4 fornece uma abordagem formal para OOP funcional. As ideias
+subjacentes são semelhantes às do S3 , mas a implementação é muito mais
+rigorosa e faz uso de funções especializadas para criação de classes
+( <a href="https://rdrr.io/r/methods/setClass.html"><code>setClass()</code></a>),
+genéricos ( <a href="https://rdrr.io/r/methods/setGeneric.html"><code>setGeneric()</code></a>)
+e métodos ( <a href="https://rdrr.io/r/methods/setMethod.html"><code>setMethod()</code></a>)</li>
+</ul>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="fu">setClass</span>(<span class="st">&quot;Person&quot;</span>, </span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a>  <span class="at">slots =</span> <span class="fu">c</span>(</span>
+<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">&quot;character&quot;</span>, </span>
+<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a>    <span class="at">age =</span> <span class="st">&quot;numeric&quot;</span></span>
+<span id="cb25-5"><a href="#cb25-5" tabindex="-1"></a>  )</span>
+<span id="cb25-6"><a href="#cb25-6" tabindex="-1"></a>)</span></code></pre></div>
+<ul>
+<li>Uma vez definida a classe, você pode construir novos objetos a
+partir dela chamando <a href="https://rdrr.io/r/methods/new.html"><code>new()</code></a>com o
+nome da classe e um valor para cada slot:</li>
+</ul>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a>leo <span class="ot">&lt;-</span> <span class="fu">new</span>(<span class="st">&quot;Person&quot;</span>, <span class="at">name =</span> <span class="st">&quot;Leo Nascimento&quot;</span>, <span class="at">age =</span> <span class="dv">32</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a>leo<span class="sc">@</span>name</span></code></pre></div>
+<pre><code>## [1] &quot;Leo Nascimento&quot;</code></pre>
+<ul>
+<li>Aqui criaremos genéricos com <a href="https://rdrr.io/r/methods/setGeneric.html"><code>setGeneric()</code></a>:</li>
+</ul>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a><span class="fu">setGeneric</span>(<span class="st">&quot;idade&quot;</span>, <span class="cf">function</span>(x) <span class="fu">standardGeneric</span>(<span class="st">&quot;idade&quot;</span>))</span></code></pre></div>
+<pre><code>## [1] &quot;idade&quot;</code></pre>
+<ul>
+<li>E então definindo métodos com <a href="https://rdrr.io/r/methods/setMethod.html"><code>setMethod()</code></a>:</li>
+</ul>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a><span class="fu">setMethod</span>(<span class="st">&quot;idade&quot;</span>, <span class="st">&quot;Person&quot;</span>, <span class="cf">function</span>(x) x<span class="sc">@</span>age)</span>
+<span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a><span class="fu">idade</span>(leo)</span></code></pre></div>
+<pre><code>## [1] 32</code></pre>
+<ul>
+<li>Definição de métodos específicos para diferentes classes</li>
+</ul>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a><span class="fu">setClass</span>(<span class="st">&quot;Animal&quot;</span>, </span>
+<span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a>  <span class="at">slots =</span> <span class="fu">c</span>(</span>
+<span id="cb32-3"><a href="#cb32-3" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">&quot;character&quot;</span>, </span>
+<span id="cb32-4"><a href="#cb32-4" tabindex="-1"></a>    <span class="at">age =</span> <span class="st">&quot;numeric&quot;</span></span>
+<span id="cb32-5"><a href="#cb32-5" tabindex="-1"></a>  )</span>
+<span id="cb32-6"><a href="#cb32-6" tabindex="-1"></a>)</span>
+<span id="cb32-7"><a href="#cb32-7" tabindex="-1"></a><span class="fu">setMethod</span>(<span class="st">&quot;idade&quot;</span>, <span class="st">&quot;Animal&quot;</span>, <span class="cf">function</span>(x) <span class="fu">cat</span>(<span class="st">&quot;A idade é&quot;</span>,x<span class="sc">@</span>age))</span>
+<span id="cb32-8"><a href="#cb32-8" tabindex="-1"></a>leao <span class="ot">=</span> <span class="fu">new</span>(<span class="st">&quot;Animal&quot;</span>,<span class="at">name =</span> <span class="st">&quot;leão&quot;</span>,<span class="at">age =</span> <span class="dv">25</span>)</span>
+<span id="cb32-9"><a href="#cb32-9" tabindex="-1"></a><span class="fu">idade</span>(leao)</span></code></pre></div>
+<pre><code>## A idade é 25</code></pre>
+<ul>
+<li><p>erências<a href="https://adv-r.hadley.nz/index.html"><u>Advanced
+R</u></a></p></li>
+<li><p><a href="https://r4ds.had.co.nz/index.html"><u>R for Data
+Science</u></a></p></li>
+<li><p><a href="https://web.itu.edu.tr/~tokerem/Hands-On_R.pdf">Hands-On
+Programming with R</a></p></li>
+</ul>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
