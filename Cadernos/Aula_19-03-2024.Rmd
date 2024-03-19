@@ -106,7 +106,8 @@ summary(diamonds$cut)
 
 -   Exemplo no python:
 
-```{python}
+```{python eval=F}
+
 # Definição da classe 'Pessoa'
 class Pessoa:
     # Método de inicialização
@@ -221,7 +222,7 @@ setMethod("idade", "Person", function(x) x@age)
 idade(leo)
 ```
 
--    Definição de métodos específicos para diferentes classes
+-   Definição de métodos específicos para diferentes classes
 
 ```{r}
 setClass("Animal", 
