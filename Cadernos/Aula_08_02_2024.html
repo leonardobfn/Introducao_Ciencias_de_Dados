@@ -1484,7 +1484,7 @@ Universidade Federal do Amazonas
 Departamento de Estatística
 </center></h1>
 <h3 class="subtitle"><center>
-06/02/2024
+08/02/2024
 <center>
 Versão 1.0
 </center>
@@ -1575,6 +1575,8 @@ class(data_string)
 #&gt; [1] &quot;character&quot;
 
 data_date &lt;- date(data_string)
+data_date
+#&gt; [1] &quot;0008-02-20&quot;
 class(data_date)
 #&gt; [1] &quot;Date&quot;</code></pre>
 <ul>
@@ -1590,6 +1592,8 @@ data/hora</li>
 </ul>
 <pre class="r watch-out"><code>data_string &lt;- &quot;15-02-2024&quot;
 data_new = lubridate::dmy(data_string)
+data_new 
+#&gt; [1] &quot;2024-02-15&quot;
 class(data_new)
 #&gt; [1] &quot;Date&quot;</code></pre>
 <ul>
@@ -1689,6 +1693,13 @@ force_tz(jogo_hora, tzone = &quot;America/Manaus&quot;) # alteração de fuso ho
 <div id="formatação-de-datahora" class="section level2" number="2.4">
 <h2><span class="header-section-number">2.4</span> Formatação de
 Data/Hora:</h2>
+<pre class="r watch-out"><code>minha_data = &quot;08/02/2024&quot; %&gt;% dmy()
+format(minha_data, &quot;%d de %B de %Y&quot;)
+#&gt; [1] &quot;08 de fevereiro de 2024&quot;
+format(minha_data, &quot;%d/%b/%Y&quot;)
+#&gt; [1] &quot;08/fev/2024&quot;
+format(minha_data, &quot;%d/%m/%Y&quot;)
+#&gt; [1] &quot;08/02/2024&quot;</code></pre>
 </div>
 <div id="dento-de-um-tibble" class="section level2" number="2.5">
 <h2><span class="header-section-number">2.5</span> <strong>Dento de um
@@ -1738,6 +1749,7 @@ tab_new
 <div id="referências" class="section level1" number="3">
 <h1><span class="header-section-number">3</span> Referências</h1>
 <ul>
+<li><p><a href="https://lubridate.tidyverse.org/">lubridate</a></p></li>
 <li><p><a href="https://r4ds.hadley.nz/">R for Data Science</a></p></li>
 <li><p><a href="https://livro.curso-r.com/index.html">Ciência de Dados
 em R</a></p></li>

@@ -3,7 +3,7 @@ title: |
   <center> Universidade Federal do Amazonas </center>
   <center> Departamento de Estatística </center>
 subtitle: |
-  <center> 06/02/2024
+  <center> 08/02/2024
   <center> Versão 1.0 </center>
   <center> Curso: Introdução à Ciência de Dados </center>
   <center> Professor: Leonardo Nascimento </center>
@@ -112,6 +112,7 @@ data_string <- "08-02-2024"
 class(data_string)
 
 data_date <- date(data_string)
+data_date
 class(data_date)
 ```
 
@@ -124,6 +125,7 @@ class(data_date)
 ```{r}
 data_string <- "15-02-2024"
 data_new = lubridate::dmy(data_string)
+data_new 
 class(data_new)
 ```
 
@@ -251,6 +253,8 @@ tab_new
 ```
 
 # Referências
+
+-   [lubridate](https://lubridate.tidyverse.org/)
 
 -   [R for Data Science](https://r4ds.hadley.nz/)
 
