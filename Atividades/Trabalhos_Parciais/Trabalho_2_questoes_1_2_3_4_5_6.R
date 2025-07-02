@@ -10,6 +10,7 @@ d2 = tibble(
   y = month.abb %>% factor(levels = month.abb),
   z2 = rnorm(n)
 )
+dplyr::full_join(d1,d2,by = c("x","y"))
 
 purrr::reduce(
   list(d1,d2),

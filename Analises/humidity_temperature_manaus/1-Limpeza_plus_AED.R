@@ -18,12 +18,12 @@ head(dados_brutos)
 unique(dados_brutos$year) |> length()
 
 # Manipulação -------------------------------------------------------------
-month = rep(month.abb,12) |> factor(levels = month.abb)
+month_name = rep(month.abb,12) |> factor(levels = month.abb)
 
 
 dados  = dados_brutos |>
   dplyr::rename(month_number = month) |>
-  dplyr::mutate( month = month) |>
+  dplyr::mutate( month = month_name) |>
   dplyr::relocate(year,month,month_number, dplyr::everything()) |>
   tidyr::unite("ano_mes",year,month_number,sep="/",remove = F) |>
   dplyr::mutate(ano_mes = zoo::as.yearmon(ano_mes, format = "%Y / %m"))
@@ -45,7 +45,8 @@ dados$rh |> summary()
 apply(dados[,c(5,6,7)],2, summary)
 apply(dados[,c(5,6,7)],2, skimr::skim)
 
-descritivas = dados_pivot |> group_by(variavel) |>
+descritivas = dados_pivot |> 
+  group_by(variavel) |>
   summarise(
     n = n(),
     media = mean(valores, na.rm = TRUE),
@@ -69,7 +70,7 @@ cor(dados[,c("rh","dbt","wbt")])
 
 #' Gráfico de linhas
 
-plot(dados$rh,type="o",ylab="Umidade Relativa",xlab="t")
+plot(dados$rh,type="l",ylab="Umidade Relativa",xlab="t")
 plot.ts(dados$rh)
 plot.ts(dados[,c("rh","dbt","wbt")])
 
@@ -108,3 +109,9 @@ ggplot(dados, mapping = aes(x = month, y = rh)) +  # camada de dados
   ylab("Umidade") +                                  # rótulo do eixo Y
   xlab("Data") +                                     # rótulo do eixo X
   theme_bw()   
+
+dados_pivot |>
+  ggplot(mapping = aes(x=month,y=valores)) +
+  geom_boxplot() +                                      # camada geométrica: linha
+  geom_point(pch = 1)+
+  facet_wrap(~variavel,scales="free_y",ncol=1)
