@@ -101,7 +101,7 @@ ggplot(dados, mapping = aes(x = ano_mes, y = rh)) +  # camada de dados
   geom_point(pch = 1) +                              # camada geométrica: pontos com contorno
   ylab("Umidade") +                                  # rótulo do eixo Y
   xlab("Data") +                                     # rótulo do eixo X
-  theme_bw()                                         # tema preto e branco (limpo)
+  theme_dark()                                         # tema preto e branco (limpo)
 
 ggplot(dados, mapping = aes(x = month, y = rh)) +  # camada de dados
   geom_boxplot() +                                      # camada geométrica: linha
@@ -115,3 +115,13 @@ dados_pivot |>
   geom_boxplot() +                                      # camada geométrica: linha
   geom_point(pch = 1)+
   facet_wrap(~variavel,scales="free_y",ncol=1)
+
+
+dados_pivot |>
+  ggplot(mapping = aes(x=month,y=valores)) +
+  geom_boxplot() +                                      # camada geométrica: linha
+  geom_point(pch = 1)+
+  facet_wrap(~variavel,scales="free_y",ncol=1)
+
+
+
