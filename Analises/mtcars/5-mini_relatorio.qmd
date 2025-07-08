@@ -1,0 +1,104 @@
+---
+title: "Regressão Linear Simples e Polinomial com Validação Cruzada"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(caret)
+library(ggplot2)
+```
+
+## 1. Carregamento dos dados e bibliotecas
+
+```{r}
+data(mtcars)
+head(mtcars)
+```
+
+## 2. Controle da Validação Cruzada (k-fold)
+
+```{r}
+set.seed(10)
+
+particao <- createDataPartition(mtcars$mpg, p = 0.7, list = FALSE)
+treino <- mtcars[particao, ] # não precisa usar no método cv
+teste  <- mtcars[-particao, ]
+
+controle_cv <- trainControl(method = "cv", number = 5)
+```
+
+## 3. Modelo Linear Simples
+
+```{r}
+modelo_linear <- train(
+  mpg ~ wt,
+  data = mtcars,
+  method = "lm",
+  trControl = controle_cv
+)
+modelo_linear
+
+```
+
+Calcula as métricas de desempenho no teste
+
+```{r}
+pred_teste_linar <- predict(modelo_linear, newdata = teste)
+resultados.modelo.linear <- postResample(pred_teste_linar, teste$mpg)
+resultados.modelo.linear
+```
+
+## 4. Modelo Polinomial (grau 2)
+
+```{r}
+modelo_polinomial <- train(
+  mpg ~ wt + I(wt^2),
+  data = mtcars,
+  method = "lm",
+  trControl = controle_cv
+)
+modelo_polinomial
+
+
+```
+
+Calcula as métricas de desempenho no teste
+
+```{r}
+pred_teste_poly <- predict(modelo_polinomial, newdata = teste)
+resultados.modelo.poly <- postResample(pred_teste_poly, teste$mpg)
+resultados.modelo.poly
+```
+
+## 5. Comparação entre Modelos
+
+```{r}
+data.frame(
+  Modelo = c("Linear", "Polinomial"),
+  RMSE = c(resultados.modelo.linear["RMSE"], resultados.modelo.poly["RMSE"]),
+  Rsquared = c(resultados.modelo.linear["Rsquared"], resultados.modelo.poly["Rsquared"]),
+  MAE = c(resultados.modelo.linear["MAE"], resultados.modelo.poly["MAE"])
+)
+```
+
+## 6. Gráficos de Resíduos
+
+```{r}
+par(mfrow = c(2, 2))
+plot(modelo_linear$finalModel)
+```
+
+```{r}
+par(mfrow = c(2, 2))
+plot(modelo_polinomial$finalModel)
+```
+
+## 7. Conclusão
+
+-   O modelo polinomial pode melhorar o ajuste, especialmente se os resíduos do modelo linear apresentarem padrão.
+-   A validação cruzada permite comparar os modelos com mais robustez, mesmo com uma **amostra pequena**.
