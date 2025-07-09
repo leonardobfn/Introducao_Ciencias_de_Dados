@@ -94,6 +94,8 @@ plot(modelo_linear$finalModel)
 ```
 
 ```{r}
+
+
 par(mfrow = c(2, 2))
 plot(modelo_polinomial$finalModel)
 ```
@@ -102,3 +104,22 @@ plot(modelo_polinomial$finalModel)
 
 -   O modelo polinomial pode melhorar o ajuste, especialmente se os resíduos do modelo linear apresentarem padrão.
 -   A validação cruzada permite comparar os modelos com mais robustez, mesmo com uma **amostra pequena**.
+
+## 8. Algumas configurações dos chunks
+
+| Opção | Descrição | Valor padrão |
+|----|----|----|
+| `echo` | Mostra o código no documento renderizado | `TRUE` |
+| `eval` | Avalia (executa) o código | `TRUE` |
+| `include` | Inclui código **e** resultados no output final | `TRUE` |
+| `results` | Controla a exibição dos resultados (`"markup"`, `"asis"`, `"hide"` etc.) | `"markup"` |
+| `warning` | Mostra mensagens de warning geradas | `TRUE` |
+| `message` | Mostra mensagens (como de pacotes) | `TRUE` |
+| `error` | Mostra erros sem interromper a execução | `FALSE` |
+| `fig.show` | Exibe gráficos: `"asis"` (inline), `"hold"` (após o chunk) | `"asis"` |
+| `fig.width` | Largura do gráfico (polegadas) | `7` |
+| `fig.height` | Altura do gráfico (polegadas) | `5` |
+| `fig.cap` | Legenda (caption) da figura | `NULL` |
+| `out.width` | Largura do gráfico no output final (ex: `"70%"`, `"300px"`) | `NULL` |
+| `cache` | Usa cache do resultado do chunk | `FALSE` |
+| `collapse` | Junta código e output no mesmo bloco | `FALSE` |

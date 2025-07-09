@@ -20,7 +20,7 @@ dados_brutos
 controle_ts <- trainControl(
   method = "timeslice",
   initialWindow = 5*12,  # usa os 60 primeiros meses como treino inicial
-  horizon = 12,          # prevê 1 mês à frente
+  horizon = 12,          # prevê 12 meses à frente
   fixedWindow = TRUE,
   savePredictions = "final",
   verboseIter = TRUE
