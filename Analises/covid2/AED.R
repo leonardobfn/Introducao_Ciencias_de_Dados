@@ -13,7 +13,7 @@ dados_brutos = readxl::read_xlsx(
   col_types = c("date", "numeric", "numeric")
 )
 
-plot.ts(dados_brutos$obitos |> cumsum())
+plot.ts(dados_brutos$obitos)
 
 dados = dados_brutos |>
   dplyr::mutate(

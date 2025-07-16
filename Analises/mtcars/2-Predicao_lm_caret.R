@@ -72,6 +72,7 @@ write.table(metricas, "Analises/mtcars/metricas_linear_model.txt")
 
 # Secção 8 - Diagnóstico dos Resíduos -----------------------
 # Gera os gráficos diagnósticos clássicos de regressão linear
+x11()
 par(mfrow = c(2, 2))
 plot(modelo_linear_ajuste)
 

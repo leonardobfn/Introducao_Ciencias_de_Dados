@@ -79,6 +79,7 @@ write.table(metricas, "Analises/mtcars/metricas_linear_poly_model.txt")
 # Secção 8 - Diagnóstico de Resíduos ------------------------
 # Gera os gráficos diagnósticos clássicos para modelos lineares (função plot.lm)
 # Inclui: resíduos vs valores ajustados, escala dos resíduos, etc.
+x11()
 par(mfrow = c(2, 2))
 plot(modelo_poly_ajuste)
 

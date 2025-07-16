@@ -37,7 +37,7 @@ segments(mtcars$wt, mtcars$mpg, mtcars$wt, pred, col = "gray")
 #' Essas linhas mostram o "erro" da previsão (resíduo)
 
 pred_mean_wt <- predict(modelo,newdata = data.frame(wt=mean(mtcars$wt)))
-predict(modelo,newdata = data.frame(wt=2.5))
+predict(modelo,newdata = data.frame(wt=2.5),interval = "prediction")
 
 #' Gráfico dos resíduos # --------------------------
 
@@ -59,7 +59,7 @@ plot(mtcars$wt, modelo$residuals,
      pch = 19, col = "darkgreen")
 abline(h = 0, col = "red", lty = 2)
 
-
+x11()
 par(mfrow=c(2,2))
 plot(modelo)
 
