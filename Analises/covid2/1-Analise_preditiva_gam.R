@@ -59,7 +59,7 @@ lm.model.1 = caret::train(
 coef(lm.model.1$finalModel)
 
 plot.ts(treino$obitos)
-lines(predict(lm.model.1),col=2)
+lines(predict(lm.model.1) |> floor(),col=2)
 
 plot.ts(teste$obitos)
 pred_test = predict(lm.model.1,newdata = teste)
@@ -82,7 +82,7 @@ gam.model.1$bestTune
 coef(gam.model.1$finalModel, s = gam.model.1$bestTune)
 
 plot.ts(treino$obitos)
-pred_treino = predict(gam.model.1,s = gam.model.1$bestTune)
+pred_treino = predict(gam.model.1,s = gam.model.1$bestTune)|> floor()
 lines(pred_treino,col=2)
 
 
@@ -109,12 +109,12 @@ gam.model.2$bestTune
 coef(gam.model.2$finalModel, s = gam.model.2$bestTune)
 
 plot.ts(treino$obitos)
-pred_treino = predict(gam.model.2,s = gam.model.1$bestTune)
+pred_treino = predict(gam.model.2,s = gam.model.2$bestTune) |> floor()
 lines(pred_treino,col=2)
 
 
 plot.ts(teste$obitos)
-pred_test = predict(gam.model.1,,newdata = teste,s = gam.model.1$bestTune)
+pred_test = predict(gam.model.2,,newdata = teste,s = gam.model.2$bestTune)
 lines(pred_test,col=2)
 postResample(pred_test,teste$obitos)
 
@@ -123,4 +123,4 @@ plot.ts(dados$obitos)
 lines(c(pred_treino,pred_test),col=c(2,3))
 abline(v = particao[length(particao)])
 
-plot(gam.model.1$finalModel,se = T)
+plot(gam.model.2$finalModel,se = T)
