@@ -1,0 +1,65 @@
+---
+title: "Untitled"
+format: html
+editor: visual
+---
+
+# Pacotes
+```{r}
+#| message: false
+require(tidyverse)
+require(caret)
+require(mgcv) # modelo gam
+```
+
+# Quadro 1: Exploração inicial dos dados
+```{r}
+data(co2) # carregando
+dplyr::glimpse(co2)
+co2
+```
+
+# Quadro 2: Organização e estatísticas básicas
+
+4. Como transformar o objeto `co2` em um data.frame com colunas para concentração, tempo, mês e ano?  
+```{r}
+
+df <- data.frame(
+  co2 = as.numeric(co2),
+  tempo = time(co2) |> floor(),
+  mes = cycle(co2)
+)
+
+```
+
+5. Qual a média geral da concentração de CO₂?  
+
+```{r}
+
+```
+
+6. Qual a média da concentração de CO₂ por mês? 
+
+```{r}
+
+```
+
+7. Qual o desvio padrão da concentração de CO₂ por mês? 
+
+```{r}
+
+```
+
+
+# Quadro 3: Visualização dos dados
+
+8. Criar um gráfico de linha da concentração de CO₂ ao longo do tempo  
+9. Fazer um boxplot da concentração de CO₂ para cada mês  
+10. Construir um histograma da concentração total de CO₂?  
+
+# Quadro 4: Análise de tendência temporal
+
+11. Calcular e plotar a média anual da concentração de CO₂  
+12. Você observa alguma tendência crescente na concentração anual de CO₂?  
+
+# Quadro 5: Ajuste um modelo

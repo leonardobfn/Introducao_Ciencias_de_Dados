@@ -43,7 +43,7 @@ metricas_ridge_model <- postResample(pred_teste, teste$mpg)
 
 lasso_model <- train(
   mpg~ .,
-  mtcars2,
+  treino,
   method = "glmnet",
   trControl = ctrl,
   tuneGrid = expand.grid(alpha = 1,  # Lasso: alpha = 1
@@ -64,7 +64,7 @@ metricas_lasso_model <- postResample(pred_teste, teste$mpg)
 
 enet_model <- train(
   mpg~ .,
-  mtcars2,
+  treino,
   method = "glmnet",
   trControl = ctrl,
   tuneLength = 10  # Varia alpha e lambda automaticamente
