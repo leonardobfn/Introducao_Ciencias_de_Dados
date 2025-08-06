@@ -27,7 +27,7 @@ teste  <- dados[-particao, ]
 
 controle_ts <- trainControl(
   method = "timeslice",
-  initialWindow = 2*12,  # usa os 60 primeiros meses como treino inicial
+  initialWindow = 5*12,  # usa os 60 primeiros meses como treino inicial
   horizon = 12,          # prevê 12 meses à frente
   fixedWindow = TRUE,
   savePredictions = "final",
@@ -62,7 +62,7 @@ plot(gam.model.1$finalModel,se = T)
 
 
 gam.model.2 = train(
-  dbt ~ tempo + rh +  wbt,
+  dbt ~ tempo + rh ,
   data = treino,
   method = "gamSpline",
   trControl = controle_ts,
@@ -81,3 +81,4 @@ lines(pred_test,col=2)
 postResample(pred_test,teste$dbt)
 
 plot(gam.model.2$finalModel,se=T)
+plot(dados$dbt,dados$rh)

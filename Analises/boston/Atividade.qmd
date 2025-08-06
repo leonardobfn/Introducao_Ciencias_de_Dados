@@ -6,28 +6,35 @@ editor: visual
 
 # Quadro 1: Exploração inicial dos dados
 
-1. Carregar a base de dados `Boston`?  
-2. Qual é o tipo e a estrutura dos dados?  
-3. Quantas observações e variáveis existem na base?  
+1.  Carregar a base de dados `Boston`?
+
+```{r}
+require(MASS)
+data(Boston)
+head(Boston)
+```
+
+2.  Qual é o tipo e a estrutura dos dados?\
+3.  Quantas observações e variáveis existem na base?
 
 # Quadro 2: Estatísticas descritivas
 
-5. Qual a média, mediana e desvio padrão do preço médio das casas (`medv`)?  
-6. Qual a média do número de quartos por habitação (`rm`)?  
-7. Qual a distribuição da taxa de criminalidade (`crim`)?  
+5.  Qual a média, mediana e desvio padrão do preço médio das casas (`medv`)?\
+6.  Qual a média do número de quartos por habitação (`rm`)?\
+7.  Qual a distribuição da taxa de criminalidade (`crim`)?
 
 # Quadro 3: Visualizações - Comente os resultados
 
-8. Como fazer um histograma do preço médio das casas (`medv`)?  
-9. Como criar um scatterplot entre número de quartos (`rm`) e preço médio (`medv`)?  
-10. Como criar um boxplot do preço médio (`medv`) agrupado pela variável dummy do rio Charles (`chas`)?  
+8.  Como fazer um histograma do preço médio das casas (`medv`)?\
+9.  Como criar um scatterplot entre número de quartos (`rm`) e preço médio (`medv`)?\
+10. Como criar um boxplot do preço médio (`medv`) agrupado pela variável dummy do rio Charles (`chas`)?
 
 # Quadro 4: Modelagem e seleção de variáveis
 
-11. Como ajustar um modelo de regressão linear para predizer `medv` usando `rm` e `lstat`?  
-12. Como ajustar um modelo GAM para predizer `medv` usando suavização em `lstat`?  
-13. Como interpretar o efeito da variável `lstat` no modelo GAM?  
-14. Qual a diferença entre o ajuste linear e o suavizado para a variável `lstat`?  
-15. Como usar regularização LASSO para identificar variáveis importantes para predizer `medv`?  
+11. Como ajustar um modelo de regressão linear para predizer `medv` usando `rm` e `lstat`?\
+12. Como ajustar um modelo GAM para predizer `medv` usando suavização em `lstat`?\
+13. Como interpretar o efeito da variável `lstat` no modelo GAM?\
+14. Qual a diferença entre o ajuste linear e o suavizado para a variável `lstat`?\
+15. Como usar regularização LASSO para identificar variáveis importantes para predizer `medv`?
 
----
+------------------------------------------------------------------------

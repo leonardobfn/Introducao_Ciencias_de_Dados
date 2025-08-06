@@ -1,0 +1,95 @@
+---
+title: "Matriz de Confusão e Métricas de Classificação"
+format: html
+editor: visual
+---
+
+## Introdução
+
+A **matriz de confusão** é uma tabela que descreve o desempenho de um modelo de classificação, comparando as **previsões feitas pelo modelo** com os **valores reais (verdadeiros)**.
+
+Ela é especialmente útil para avaliar modelos em situações com **classes desbalanceadas**, pois permite calcular métricas mais detalhadas do que apenas a acurácia.
+
+------------------------------------------------------------------------
+
+## Estrutura da Matriz de Confusão (para classificação binária)
+
+|                | Real: Positivo (1)       | Real: Negativo (0)       |
+|----------------|--------------------------|--------------------------|
+| **Predito: 1** | VP (Verdadeiro Positivo) | FP (Falso Positivo)      |
+| **Predito: 0** | FN (Falso Negativo)      | VN (Verdadeiro Negativo) |
+
+-   **VP**: modelo previu 1 e realmente era 1
+-   **VN**: modelo previu 0 e realmente era 0
+-   **FP**: modelo previu 1 mas era 0 (erro tipo I)
+-   **FN**: modelo previu 0 mas era 1 (erro tipo II)
+
+------------------------------------------------------------------------
+
+## Métricas Clássicas de Avaliação
+
+As métricas abaixo são derivadas da **matriz de confusão** e são fundamentais para avaliar modelos de classificação binária. Abaixo, as fórmulas estão escritas como comentários de código R, seguidas por suas explicações em texto.
+
+$$
+Acurácia = \dfrac{(VP + VN)}{Total} 
+$$
+
+**Acurácia** representa a proporção total de acertos do modelo — ou seja, quantas vezes ele acertou ao prever **positivos verdadeiros (VP)** e **negativos verdadeiros (VN)** em relação ao total de observações.
+
+> Exemplo: se o modelo acertou 90 de 100 casos, a acurácia é 90%.
+
+------------------------------------------------------------------------
+
+$$
+Precisão = \dfrac{VP}{(VP + FP)}  
+$$
+
+**Precisão** indica quantas das previsões que o modelo classificou como **positivas** estavam **corretas**.É uma métrica importante quando o custo de um **falso positivo** é alto (por exemplo, diagnosticar erroneamente uma doença que a pessoa não tem).
+
+> Exemplo: se o modelo disse que 10 pessoas tinham uma doença, mas só 8 tinham de fato, a precisão é 80%.
+
+------------------------------------------------------------------------
+
+$$
+Sensibilidade (Recall) = \dfrac{VP}{(VP + FN)} 
+$$
+
+**Sensibilidade**, também chamada de **Recall** ou **Taxa de Verdadeiros Positivos**, mede a capacidade do modelo de **identificar corretamente os positivos**.
+
+É essencial quando o custo de um **falso negativo** é alto (por exemplo, deixar de detectar uma doença grave).
+
+> Exemplo: entre 10 doentes, o modelo detectou 8. Sensibilidade = 80%.
+
+------------------------------------------------------------------------
+
+$$
+Especificidade = \dfrac{VN}{(VN + FP)}
+$$
+
+**Especificidade** mede a capacidade do modelo de **identificar corretamente os negativos**.
+
+É útil quando também queremos evitar **falsos positivos**, como em testes que liberam pessoas saudáveis.
+
+> Exemplo: entre 90 pessoas saudáveis, o modelo identificou corretamente 85. Especificidade = 94.4%.
+
+------------------------------------------------------------------------
+
+$$
+F1-score = \dfrac{2 * (Precisão * Sensibilidade)}{(Precisão + Sensibilidade)} 
+$$
+
+**F1-Score** é a **média harmônica entre precisão e sensibilidade**. Ele é útil especialmente quando há **desbalanceamento entre classes**, pois leva em conta tanto falsos positivos quanto falsos negativos.
+
+> Exemplo: se a precisão e a sensibilidade são ambas 80%, o F1-Score também será 80%.\> Mas se uma for 100% e a outra 0%, o F1-Score será 0%, penalizando o desequilíbrio.
+
+------------------------------------------------------------------------
+
+## Resumo
+
+| Métrica | O que mede | Útil quando... |
+|------------------|--------------------------------|-----------------------|
+| Acurácia | Acertos totais | Classes estão balanceadas |
+| Precisão | Qualidade das previsões positivas | Falsos positivos são críticos |
+| Sensibilidade | Quantos positivos reais foram detectados | Falsos negativos são perigosos |
+| Especificidade | Quantos negativos reais foram identificados | Evitar falsos positivos |
+| F1-Score | Equilíbrio entre precisão e sensibilidade | Classes estão desbalanceadas |

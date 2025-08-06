@@ -29,7 +29,8 @@ dados = dados_brutos |>
 
 dados_brutos
 dados = dados |> mutate(tempo = 1:nrow(dados),
-                        dia_semana = as.numeric(dia_semana) |> as.factor())
+                        dia_semana = as.numeric(dia_semana) 
+                        )
 particao <- 1:(30*15)
 treino <- dados[particao, ]
 teste  <- dados[-particao, ]
@@ -70,7 +71,7 @@ postResample(pred_test,teste$obitos)
 # gam method ----------------------------------------------------------------
 
 gam.model.1 = caret::train(
-  obitos ~ tempo ,
+  obitos ~ tempo +dia_semana,
   data = treino,
   method = "gamSpline",
   trControl = controle_ts,
@@ -87,7 +88,7 @@ lines(pred_treino,col=2)
 
 
 plot.ts(teste$obitos)
-pred_test = predict(gam.model.1,,newdata = teste,s = gam.model.1$bestTune)
+pred_test = predict(gam.model.1,,newdata = teste,s = gam.model.1$bestTune) |> floor()
 lines(pred_test,col=2)
 postResample(pred_test,teste$obitos)
 

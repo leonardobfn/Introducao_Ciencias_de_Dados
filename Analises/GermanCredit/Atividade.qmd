@@ -1,0 +1,49 @@
+---
+title: "Atividade Introdutória: AED e Classificação com GermanCredit"
+format: html
+editor: visual
+---
+
+## Objetivo
+
+Nesta atividade, você irá explorar a base de dados `GermanCredit`, realizar uma análise exploratória inicial e ajustar modelos de classificação com validação cruzada.
+
+---
+
+## Parte 1: Análise Exploratória de Dados (AED)
+
+1. Quantas observações e variáveis há na base?
+2. Quais são os tipos de variáveis presentes (numéricas, categóricas etc.)?
+3. Qual a distribuição da variável resposta `Class`?
+4. Construa um gráfico de barras com a frequência de cada classe.
+5. Escolha três variáveis numéricas e construa boxplots dessas variáveis por classe.
+
+
+---
+
+## Parte 2: Preparação dos dados
+
+1. Separe os dados em treino (70%) e teste (30%). Utilize `set.seed(123)`.
+2. A base está desbalanceada? Como isso pode impactar o modelo?
+
+---
+
+## Parte 3: Ajuste de modelo 
+
+1. Ajuste um modelo de classificação usando o pacote `caret`.
+2. Utilize validação cruzada (5-folds)
+
+---
+
+## Parte 4: Avaliação do modelo
+
+1. Aplique o modelo final aos dados de teste.
+2. Construa a matriz de confusão e calcule:
+   - Acurácia
+   - Sensibilidade (Recall)
+   - Especificidade
+   - F1-Score
+3. Construa a curva ROC para os dados de teste.
+4. Interprete os resultados. O modelo teve bom desempenho? Justifique.
+
+---
